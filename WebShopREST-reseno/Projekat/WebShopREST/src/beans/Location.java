@@ -21,6 +21,11 @@ public class Location {
 		this.place = place;
 		this.zipCode = zipCode;
 	}
+	
+	public Location(int id) {
+		super();
+		this.id = id;
+	}
 
 	public Location() {
 		super();

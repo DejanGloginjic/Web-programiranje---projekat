@@ -33,6 +33,11 @@ public class Membership {
 		this.membershipStatus = membershipStatus;
 		this.numberOfAppointment = numberOfAppointment;
 	}
+	
+	public Membership(int id) {
+		super();
+		this.id = id;
+	}
 
 	
 	public Membership() {

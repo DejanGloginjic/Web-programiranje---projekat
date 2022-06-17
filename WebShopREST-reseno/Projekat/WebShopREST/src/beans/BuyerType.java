@@ -16,6 +16,11 @@ public class BuyerType {
 		this.discount = discount;
 		this.points = points;
 	}
+	
+	public BuyerType(int id) {
+		super();
+		this.id = id;
+	}
 
 	public BuyerType() {
 		super();

@@ -27,11 +27,12 @@ public class User {
 		this.id = id;
 	}
 	
-	public User(String username, String password, String name, String surname, UserGenderEnum userGender,
+	public User(int id, String username, String password, String name, String surname, UserGenderEnum userGender,
 			LocalDate dateOfBirth, UserTypeEnum userType, ArrayList<TrainingHistory> trainingHistory,
 			Membership membership, SportObject sportObject, ArrayList<SportObject> visitedObject, int points,
 			BuyerType buyerType) {
 		super();
+		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.name = name;
