@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import beans.Membership;
 import beans.SportObject;
 import beans.Training;
 import beans.User;
@@ -38,9 +39,9 @@ public class TrainingDAO {
 		loadTrainings(contextPath);
 	}
 	
-	public static TrainingDAO getInstace() {
+	public static TrainingDAO getInstace(String contextPath) {
 		if(instance == null) {
-			instance = new TrainingDAO();
+			instance = new TrainingDAO(contextPath);
 		}
 		
 		return instance;
@@ -119,6 +120,15 @@ public class TrainingDAO {
 				catch (Exception e) { }
 			}
 		}
+	}
+	
+	public Training change(Training training) {
+		trainings.put(training.getId(), training);
+		return training;
+	}
+	
+	public Training delete(int id) {
+		return trainings.remove(id);
 	}
 	
 }

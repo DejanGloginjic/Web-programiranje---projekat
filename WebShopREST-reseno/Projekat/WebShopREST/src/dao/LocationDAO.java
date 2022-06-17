@@ -40,9 +40,9 @@ public class LocationDAO {
 		loadLocations(contextPath);
 	}
 	
-	public static LocationDAO getInstace() {
+	public static LocationDAO getInstace(String contextPath) {
 		if(instance == null) {
-			instance = new LocationDAO();
+			instance = new LocationDAO(contextPath);
 		}
 		
 		return instance;
@@ -62,7 +62,7 @@ public class LocationDAO {
 	 * 
 	 * @return Proizvod sa id-em ako postoji, u suprotnom null
 	 */
-	public Location findLocation(String id) {
+	public Location findLocation(int id) {
 		return locations.containsKey(id) ? locations.get(id) : null;
 	}
 
@@ -134,7 +134,7 @@ public class LocationDAO {
 		return location;
 	}
 
-	public Location delete(String id) {
+	public Location delete(int id) {
 		return locations.remove(id);
 	}
 

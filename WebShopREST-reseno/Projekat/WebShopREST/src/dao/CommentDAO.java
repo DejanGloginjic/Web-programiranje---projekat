@@ -39,9 +39,9 @@ public class CommentDAO {
 		loadComments(contextPath);
 	}
 	
-	public static CommentDAO getInstace() {
+	public static CommentDAO getInstace(String contextPath) {
 		if(instance == null) {
-			instance = new CommentDAO();
+			instance = new CommentDAO(contextPath);
 		}
 		
 		return instance;
@@ -113,6 +113,15 @@ public class CommentDAO {
 				catch (Exception e) { }
 			}
 		}
+	}
+	
+	public Comment change(Comment comment) {
+		comments.put(comment.getId(), comment);
+		return comment;
+	}
+	
+	public Comment delete(int id) {
+		return comments.remove(id);
 	}
 	
 }

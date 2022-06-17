@@ -42,9 +42,9 @@ public class TrainingHistoryDAO {
 		loadTrainingHistory(contextPath);
 	}
 	
-	public static TrainingHistoryDAO getInstace() {
+	public static TrainingHistoryDAO getInstace(String contextPath) {
 		if(instance == null) {
-			instance = new TrainingHistoryDAO();
+			instance = new TrainingHistoryDAO(contextPath);
 		}
 		
 		return instance;
@@ -116,6 +116,15 @@ public class TrainingHistoryDAO {
 				catch (Exception e) { }
 			}
 		}
+	}
+	
+	public TrainingHistory change(TrainingHistory training) {
+		trainings.put(training.getId(), training);
+		return training;
+	}
+	
+	public TrainingHistory delete(int id) {
+		return trainings.remove(id);
 	}
 	
 }
