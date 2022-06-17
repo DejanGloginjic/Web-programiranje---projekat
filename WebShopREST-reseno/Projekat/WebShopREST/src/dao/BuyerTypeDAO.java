@@ -40,9 +40,9 @@ public class BuyerTypeDAO {
 	}
 	
 	
-	public static BuyerTypeDAO getInstance() {
+	public static BuyerTypeDAO getInstance(String contextPath) {
 		if(instance == null) {
-			instance = new BuyerTypeDAO();
+			instance = new BuyerTypeDAO(contextPath);
 		}
 		
 		return instance;
@@ -76,7 +76,7 @@ public class BuyerTypeDAO {
 	 * Kljuè je korisnièko ime korisnika.
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
-	private void loadBuyers(String contextPath) {
+	public void loadBuyers(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/users.txt");

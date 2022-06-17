@@ -48,6 +48,10 @@ public class User {
 		this.buyerType = buyerType;
 	}
 
+	public void addTrainingToTrainingHistory(TrainingHistory trainingHistory) {
+		this.trainingHistory.add(trainingHistory);
+	}
+	
 	public User() {
 		super();
 	}

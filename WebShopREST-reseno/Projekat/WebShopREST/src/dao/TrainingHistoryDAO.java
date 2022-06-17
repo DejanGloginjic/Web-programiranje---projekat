@@ -4,11 +4,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import beans.Membership;
 import beans.SportObject;
 import beans.Training;
 import beans.TrainingHistory;
@@ -28,7 +30,7 @@ public class TrainingHistoryDAO {
 	
 	private static TrainingHistoryDAO instance = null;
 	
-	private Map<Integer, TrainingHistory> trainings = new HashMap<>();
+	private Map<Integer, TrainingHistory> trainings = new HashMap<Integer, TrainingHistory>();
 	
 	
 	private TrainingHistoryDAO() {
@@ -83,7 +85,7 @@ public class TrainingHistoryDAO {
 	 * Kljuè je korisnièko ime korisnika.
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
-	private void loadTrainingHistory(String contextPath) {
+	public void loadTrainingHistory(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/Baza/trainingHistory.txt");
@@ -125,6 +127,53 @@ public class TrainingHistoryDAO {
 	
 	public TrainingHistory delete(int id) {
 		return trainings.remove(id);
+	}
+	
+	public void linkTrainingHistoryAndTraining(String contextPath) {
+		ArrayList<Training> allTrainings = (ArrayList<Training>) TrainingDAO.getInstance(contextPath).findAll();
+		
+		for(TrainingHistory th :  trainings.values()) {
+			int requiredId = th.getTraining().getId();
+			
+			for(Training t : allTrainings) {
+				if(t.getId() == requiredId) {
+					th.setTraining(t);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void linkTrainingHistoryAndBuyer(String contextPath) {
+		ArrayList<User> buyers = (ArrayList<User>) UserDAO.getInstance(contextPath).findAll();
+		
+		for(TrainingHistory th : trainings.values()) {
+			int requiredId = th.getBuyer().getId();
+			
+			for(User u : buyers) {
+				if(u.getId() == requiredId) {
+					th.setBuyer(u);
+					//moja izmisljotina
+					u.addTrainingToTrainingHistory(th);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void linkTrainingHistoryAndCoach(String contextPath) {
+		ArrayList<User> coaches = (ArrayList<User>) UserDAO.getInstance(contextPath).findAll();
+		
+		for(TrainingHistory th : trainings.values()) {
+			int requiredId = th.getCoach().getId();
+			
+			for(User u : coaches) {
+				if(u.getId() == requiredId) {
+					th.setCoach(u);
+					break;
+				}
+			}
+		}
 	}
 	
 }

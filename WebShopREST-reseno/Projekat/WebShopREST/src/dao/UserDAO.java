@@ -47,9 +47,9 @@ public class UserDAO {
 		loadUsers(contextPath);
 	}
 	
-	public static UserDAO getInstance() {
+	public static UserDAO getInstance(String contextPath) {
 		if(userInstance == null) {
-			userInstance = new UserDAO();
+			userInstance = new UserDAO(contextPath);
 		}
 		return userInstance;
 	}
@@ -101,7 +101,7 @@ public class UserDAO {
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
 	
-	private void loadUsers(String contextPath) {
+	public void loadUsers(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/Baza/users.txt");
@@ -171,4 +171,49 @@ public class UserDAO {
 		return users.remove(id);
 	}
 	
+	public void linkUserAndMembership(String contextPath) {
+		ArrayList<Membership> memberships = (ArrayList<Membership>) MembershipDAO.getInstance(contextPath).findAll();
+		
+		for(User user : users.values()) {
+			int requiredId = user.getMembership().getId();
+			
+			for(Membership m : memberships) {
+				if(m.getId() == requiredId) {
+					user.setMembership(m);
+					m.setBuyer(user);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void linkUserAndSportObject(String contextPath) {
+		ArrayList<SportObject> sportObjects = (ArrayList<SportObject>) SportObjectDAO.getInstance(contextPath).findAll();
+		
+		for(User user : users.values()) {
+			int requiredId = user.getSportObject().getId();
+			
+			for(SportObject so : sportObjects) {
+				if(so.getId() == requiredId) {
+					user.setSportObject(so);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void linkUserAndBuyerType(String contextPath) {
+		ArrayList<BuyerType> buyerTypes = (ArrayList<BuyerType>) BuyerTypeDAO.getInstance(contextPath).findAll();
+		
+		for(User user : users.values()) {
+			int requiredId = user.getBuyerType().getId();
+			
+			for(BuyerType bt : buyerTypes) {
+				if(bt.getId() == requiredId) {
+					user.setBuyerType(bt);
+					break;
+				}
+			}
+		}
+	}
 }

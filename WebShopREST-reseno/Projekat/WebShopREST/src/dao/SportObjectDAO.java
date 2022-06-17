@@ -47,9 +47,9 @@ public class SportObjectDAO {
 	}
 	
 	
-	public static SportObjectDAO getInstance() {
+	public static SportObjectDAO getInstance(String contextPath) {
 		if(instance == null) {
-			instance = new SportObjectDAO();
+			instance = new SportObjectDAO(contextPath);
 		}
 		
 		return instance;
@@ -82,7 +82,7 @@ public class SportObjectDAO {
 	 * Kljuè je korisnièko ime korisnika.
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
-	private void loadSportObjects(String contextPath) {
+	public void loadSportObjects(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/users.txt");
@@ -148,5 +148,18 @@ public class SportObjectDAO {
 			return sportObjects.remove(id);
 		}
 		
+	public void linkSportObjectAndLocation(String contextPath) {
+		ArrayList<Location> locations = (ArrayList<Location>) LocationDAO.getInstace(contextPath).findAll();
 		
+		for(SportObject so : sportObjects.values()) {
+			int requiredId = so.getLocation().getId();
+			
+			for(Location l : locations) {
+				if(l.getId() == requiredId) {
+					so.setLocation(l);
+					break;
+				}
+			}
+		}
+	}
 }

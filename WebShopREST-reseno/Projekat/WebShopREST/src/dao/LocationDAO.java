@@ -92,7 +92,7 @@ public class LocationDAO {
 	 * 
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
-	private void loadLocations(String contextPath) {
+	public void loadLocations(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/Baza/locations.txt");

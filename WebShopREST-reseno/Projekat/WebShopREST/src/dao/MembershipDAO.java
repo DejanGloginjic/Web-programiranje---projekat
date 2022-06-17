@@ -42,9 +42,9 @@ public class MembershipDAO {
 	}
 	
 	
-	public static MembershipDAO getInstance() {
+	public static MembershipDAO getInstance(String contextPath) {
 		if(instance == null) {
-			instance = new MembershipDAO();
+			instance = new MembershipDAO(contextPath);
 		}
 		
 		return instance;
@@ -77,7 +77,7 @@ public class MembershipDAO {
 	 * Kljuè je korisnièko ime korisnika.
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
-	private void loadMemberships(String contextPath) {
+	public void loadMemberships(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/users.txt");

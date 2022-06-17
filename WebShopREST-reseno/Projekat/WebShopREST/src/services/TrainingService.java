@@ -35,7 +35,7 @@ public class TrainingService {
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("trainingDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("trainingDAO", TrainingDAO.getInstace(contextPath));
+			ctx.setAttribute("trainingDAO", TrainingDAO.getInstance(contextPath));
 		}
 	}
 	

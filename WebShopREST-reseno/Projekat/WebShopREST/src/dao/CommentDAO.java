@@ -3,6 +3,7 @@ package dao;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -80,7 +81,7 @@ public class CommentDAO {
 	 * Kljuè je korisnièko ime korisnika.
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
-	private void loadComments(String contextPath) {
+	public void loadComments(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/Baza/comments.txt");
@@ -124,4 +125,33 @@ public class CommentDAO {
 		return comments.remove(id);
 	}
 	
+	public void linkCommentAndUser(String contextPath) {
+		ArrayList<User> users = (ArrayList<User>) UserDAO.getInstance(contextPath).findAll();
+		
+		for(Comment c : comments.values()) {
+			int requiredId = c.getBuyerComment().getId();
+			
+			for(User u : users) {
+				if(u.getId() == requiredId) {
+					c.setBuyerComment(u);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void linkCommentAndSportObject(String contextPath) {
+		ArrayList<SportObject> objects = (ArrayList<SportObject>) SportObjectDAO.getInstance(contextPath).findAll();
+		
+		for(Comment c : comments.values()) {
+			int requiredId = c.getSportObjectComment().getId();
+			
+			for(SportObject so : objects) {
+				if(requiredId == so.getId()) {
+					c.setSportObjectComment(so);
+					break;
+				}
+			}
+		}
+	}
 }

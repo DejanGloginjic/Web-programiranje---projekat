@@ -3,6 +3,7 @@ package dao;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -39,7 +40,7 @@ public class TrainingDAO {
 		loadTrainings(contextPath);
 	}
 	
-	public static TrainingDAO getInstace(String contextPath) {
+	public static TrainingDAO getInstance(String contextPath) {
 		if(instance == null) {
 			instance = new TrainingDAO(contextPath);
 		}
@@ -80,7 +81,7 @@ public class TrainingDAO {
 	 * Kljuè je korisnièko ime korisnika.
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
-	private void loadTrainings(String contextPath) {
+	public void loadTrainings(String contextPath) {
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/users.txt");
@@ -131,4 +132,33 @@ public class TrainingDAO {
 		return trainings.remove(id);
 	}
 	
+	public void linkTrainingAndCoach(String contextPath) {
+		ArrayList<User> coaches = (ArrayList<User>) UserDAO.getInstance(contextPath).findAll();
+		
+		for(Training t : trainings.values()) {
+			int requiredId = t.getCoach().getId();
+			
+			for(User u : coaches) {
+				if(u.getId() == requiredId) {
+					t.setCoach(u);
+					break;
+				}
+			}
+		}
+	}
+	
+	public void linkTrainingAndSportObject(String contextPath) {
+		ArrayList<SportObject> objects = (ArrayList<SportObject>) SportObjectDAO.getInstance(contextPath).findAll();
+		
+		for(Training t : trainings.values()) {
+			int requiredId = t.getSportObject().getId();
+			
+			for(SportObject so : objects) {
+				if(so.getId() == requiredId) {
+					t.setSportObject(so);
+					break;
+				}
+			}
+		}
+	}
 }
