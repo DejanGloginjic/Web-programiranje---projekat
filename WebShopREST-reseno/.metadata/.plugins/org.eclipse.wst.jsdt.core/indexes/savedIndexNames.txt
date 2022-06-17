@@ -1,5 +1,0 @@
-INDEX VERSION 1.4+C:\Users\dejana\Desktop\WebProjekat\WebShopREST-reseno\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-1167677129.index
-3420284435.index
-11846697.index
-3745499084.index

@@ -1,9 +1,0 @@
-package beans.Enums;
-
-public enum CommentMark {
-	ONE,
-	TWO,
-	THREE,
-	FOUR,
-	FIVE
-}

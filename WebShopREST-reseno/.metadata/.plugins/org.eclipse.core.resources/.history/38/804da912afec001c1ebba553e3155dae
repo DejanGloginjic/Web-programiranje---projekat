@@ -1,6 +1,0 @@
-package beans.Enums;
-
-public enum UserGender {
-	MALE,
-	FEMALE
-}
