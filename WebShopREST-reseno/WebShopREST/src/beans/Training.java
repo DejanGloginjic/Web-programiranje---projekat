@@ -29,6 +29,13 @@ public class Training {
 	public Training(int id) {
 		this.id = id;
 	}
+<<<<<<< HEAD
+=======
+	
+	public Training() {
+		super();
+	}
+>>>>>>> 02ff9393f13340d54ece7ee3ed788c8bf8b5bacb
 
 	public int getId() {
 		return id;
@@ -57,11 +64,19 @@ public class Training {
 	public SportObject getSportObject() {
 		return sportObject;
 	}
+<<<<<<< HEAD
 
 	public void setSportObject(SportObject sportObject) {
 		this.sportObject = sportObject;
 	}
 
+=======
+
+	public void setSportObject(SportObject sportObject) {
+		this.sportObject = sportObject;
+	}
+
+>>>>>>> 02ff9393f13340d54ece7ee3ed788c8bf8b5bacb
 	public int getDuration() {
 		return duration;
 	}

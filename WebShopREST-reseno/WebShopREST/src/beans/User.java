@@ -23,12 +23,23 @@ public class User {
 	private int points;
 	private BuyerType buyerType;
 	
+<<<<<<< HEAD
 	public User(int id,String username, String password, String name, String surname, UserGenderEnum userGender,
+=======
+	public User(int id) {
+		this.id = id;
+	}
+	
+	public User(String username, String password, String name, String surname, UserGenderEnum userGender,
+>>>>>>> 02ff9393f13340d54ece7ee3ed788c8bf8b5bacb
 			LocalDate dateOfBirth, UserTypeEnum userType, ArrayList<TrainingHistory> trainingHistory,
 			Membership membership, SportObject sportObject, ArrayList<SportObject> visitedObject, int points,
 			BuyerType buyerType) {
 		super();
+<<<<<<< HEAD
 		this.id = id;
+=======
+>>>>>>> 02ff9393f13340d54ece7ee3ed788c8bf8b5bacb
 		this.username = username;
 		this.password = password;
 		this.name = name;
@@ -43,11 +54,14 @@ public class User {
 		this.points = points;
 		this.buyerType = buyerType;
 	}
+<<<<<<< HEAD
 	
 	public User(int id) {
 		super();
 		this.id = id;
 	}
+=======
+>>>>>>> 02ff9393f13340d54ece7ee3ed788c8bf8b5bacb
 
 	public User() {
 		super();

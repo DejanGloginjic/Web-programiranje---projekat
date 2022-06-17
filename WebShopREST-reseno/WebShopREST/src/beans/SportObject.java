@@ -20,6 +20,7 @@ public class SportObject {
 	private LocalTime startTime;
 	private LocalTime endTime;
 	
+<<<<<<< HEAD
 	public SportObject(int id, String objectName, ObjectTypeEnum objectType, ArrayList<TrainingTypeEnum> content,
 			SportObjectStatusEnum objectStatus, Location location, String logoPicture, double objectMark,
 			LocalTime startTime, LocalTime endTime) {
@@ -39,6 +40,26 @@ public class SportObject {
 	public SportObject(int id) {
 		super();
 		this.id = id;
+=======
+	public SportObject(int id) {
+		this.id = id;
+	}
+	
+	public SportObject(int id, String objectName, ObjectTypeEnum objectType, ArrayList<TrainingTypeEnum> content,
+			SportObjectStatusEnum objectStatus, Location location, String logoPicture, double objectMark,
+			LocalTime startTime, LocalTime endTime) {
+		super();
+		this.id = id;
+		this.objectName = objectName;
+		this.objectType = objectType;
+		this.content = content;
+		this.objectStatus = objectStatus;
+		this.location = location;
+		this.logoPicture = logoPicture;
+		this.objectMark = objectMark;
+		this.startTime = startTime;
+		this.endTime = endTime;
+>>>>>>> 02ff9393f13340d54ece7ee3ed788c8bf8b5bacb
 	}
 
 	public SportObject() {

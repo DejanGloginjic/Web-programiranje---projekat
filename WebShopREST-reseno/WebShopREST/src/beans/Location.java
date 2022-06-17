@@ -25,11 +25,14 @@ public class Location {
 	public Location() {
 		super();
 	}
+<<<<<<< HEAD
 	
 	public Location(int id) {
 		super();
 		this.id = id;
 	}
+=======
+>>>>>>> 02ff9393f13340d54ece7ee3ed788c8bf8b5bacb
 
 	public int getId() {
 		return id;

@@ -16,6 +16,7 @@ public class BuyerType {
 		this.discount = discount;
 		this.points = points;
 	}
+<<<<<<< HEAD
 	
 	public BuyerType(int id) {
 		super();
@@ -42,6 +43,29 @@ public class BuyerType {
 		this.buyerType = buyerType;
 	}
 
+=======
+
+	public BuyerType() {
+		super();
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public BuyerTypeEnum getBuyerType() {
+		return buyerType;
+	}
+
+	public void setBuyerType(BuyerTypeEnum buyerType) {
+		this.buyerType = buyerType;
+	}
+
+>>>>>>> 02ff9393f13340d54ece7ee3ed788c8bf8b5bacb
 	public double getDiscount() {
 		return discount;
 	}
