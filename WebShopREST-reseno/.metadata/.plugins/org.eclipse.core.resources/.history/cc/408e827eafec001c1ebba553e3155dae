@@ -1,0 +1,8 @@
+package beans;
+
+public class Trening {
+	
+	private String treningName;
+	
+
+}

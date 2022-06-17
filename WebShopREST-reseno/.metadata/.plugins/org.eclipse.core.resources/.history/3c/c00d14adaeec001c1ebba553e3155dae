@@ -1,0 +1,10 @@
+package beans.Enums;
+
+public class MembershipStatusEnum {
+	
+	enum MembershipStatus {
+		ACTIVE,
+		INACTIVE
+	}
+
+}

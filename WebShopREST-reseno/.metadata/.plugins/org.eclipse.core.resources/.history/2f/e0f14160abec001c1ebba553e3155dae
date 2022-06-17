@@ -1,0 +1,6 @@
+package beans.Enums;
+
+public class UserGenderEnum {
+
+	private UserGenderEnum userGender;
+}
