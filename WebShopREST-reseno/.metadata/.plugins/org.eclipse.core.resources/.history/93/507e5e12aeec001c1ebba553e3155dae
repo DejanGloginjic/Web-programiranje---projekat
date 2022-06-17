@@ -1,0 +1,12 @@
+package beans;
+
+import java.time.LocalDateTime;
+
+public class TreningHistory {
+	
+	private LocalDateTime treningEntrance;
+	//private Trening trening;
+	private User buyer;
+	private User trainer;
+
+}

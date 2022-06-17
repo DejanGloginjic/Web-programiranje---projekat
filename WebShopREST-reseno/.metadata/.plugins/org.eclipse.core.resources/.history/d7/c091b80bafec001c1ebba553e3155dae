@@ -1,0 +1,8 @@
+package beans.Enums;
+
+public enum MembershipType {
+	DAILY,
+	MONTH,
+	YEAR
+
+}

@@ -1,0 +1,9 @@
+package beans.Enums;
+
+public class CommentMarkEnum {
+
+	enum Mark{
+		
+	}
+
+}
