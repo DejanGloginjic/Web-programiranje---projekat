@@ -26,8 +26,8 @@ public class Training {
 		this.image = image;
 	}
 
-	public Training() {
-		super();
+	public Training(int id) {
+		this.id = id;
 	}
 
 	public int getId() {
