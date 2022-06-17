@@ -3,12 +3,23 @@ package dao;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
-
+import beans.Enums.UserGenderEnum;
+import java.time.LocalDate;
+import beans.Enums.DateHelper;
+import beans.Enums.TrainingTypeEnum;
+import beans.SportObject;
+import beans.TrainingHistory;
 import beans.User;
+import beans.Membership;
+import beans.SportObject;
+import beans.BuyerType;
+import beans.Enums.UserTypeEnum;
+
 
 /***
  * <p>Klasa namenjena da uèita korisnike iz fajla i pruža operacije nad njima (poput pretrage).
@@ -19,18 +30,29 @@ import beans.User;
  *
  */
 public class UserDAO {
-	private Map<String, User> users = new HashMap<>();
+	
+	private static UserDAO instance = null;
+	
+	private Map<Integer, User> users = new HashMap<>();
 	
 	
-	public UserDAO() {
+	private UserDAO() {
 		
 	}
 	
 	/***
 	 * @param contextPath Putanja do aplikacije u Tomcatu. Može se pristupiti samo iz servleta.
 	 */
-	public UserDAO(String contextPath) {
+	private UserDAO(String contextPath) {
 		loadUsers(contextPath);
+	}
+	
+	public static UserDAO getInstance() {
+		if(instance == null) {
+			instance = new UserDAO();
+		}
+		
+		return instance;
 	}
 	
 	/**
@@ -39,7 +61,7 @@ public class UserDAO {
 	 * @param password
 	 * @return
 	 */
-	public User find(String username, String password) {
+	public User validation(String username, String password) {
 		if (!users.containsKey(username)) {
 			return null;
 		}
@@ -50,8 +72,26 @@ public class UserDAO {
 		return user;
 	}
 	
+	public User find(int id) {
+		return users.get(id);
+	}
+	
 	public Collection<User> findAll() {
 		return users.values();
+	}
+	
+	public User save(User user) {
+		Integer maxId = -1;
+		for (int id : users.keySet()) {
+			int idNum = id;
+			if (idNum > maxId) {
+				maxId = idNum;
+			}
+		}
+		maxId++;
+		user.setId(maxId);
+		users.put(user.getId(), user);
+		return user;
 	}
 	
 	/**
@@ -72,12 +112,43 @@ public class UserDAO {
 					continue;
 				st = new StringTokenizer(line, ";");
 				while (st.hasMoreTokens()) {
-					String firstName = st.nextToken().trim();
-					String lastName = st.nextToken().trim();
-					String email = st.nextToken().trim();
+					
+					int id = Integer.parseInt(st.nextToken().trim());
+					
 					String username = st.nextToken().trim();
 					String password = st.nextToken().trim();
-					users.put(username, new User(firstName, lastName, email, username, password));
+					String name = st.nextToken().trim();
+					String surname = st.nextToken().trim();
+					
+					int gender = Integer.parseInt(st.nextToken().trim());
+					UserGenderEnum[] genders = UserGenderEnum.values();
+					UserGenderEnum genderfromFile = genders[gender];
+					
+					LocalDate dateofBirth = DateHelper.stringToDate(st.nextToken().trim());
+					
+					int type = Integer.parseInt(st.nextToken().trim());
+					UserTypeEnum[] types = UserTypeEnum.values();
+					UserTypeEnum typefromFile = types[type];
+					
+					ArrayList<TrainingHistory> trainingHistory = new ArrayList<>();
+					
+					
+					Membership membership = new Membership(Integer.parseInt(st.nextToken().trim()));
+				
+					
+					ArrayList<SportObject> sportObject = new ArrayList<>();
+			    
+				    SportObject visitedObject = new SportObject(Integer.parseInt(st.nextToken().trim()));
+			        
+					int points = Integer.parseInt(st.nextToken().trim());
+					
+					
+					BuyerType buyerType = new BuyerType(Integer.parseInt(st.nextToken().trim()));
+				
+					
+					
+					users.put(id, new User(id, username, password, name, surname, genderfromFile, dateofBirth, typefromFile, trainingHistory,
+						    membership, visitedObject, sportObject, points, buyerType));
 				}
 				
 			}
@@ -92,5 +163,17 @@ public class UserDAO {
 			}
 		}
 	}
-	
+		
+		public User change(User user) {
+			users.put(user.getId(), user);
+			return user;
+		}
+		
+		public User delete(int id) {
+			return users.remove(id);
+		}
+		
+		
 }
+	
+
