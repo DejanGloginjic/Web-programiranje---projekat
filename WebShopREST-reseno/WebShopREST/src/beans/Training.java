@@ -26,6 +26,10 @@ public class Training {
 		this.image = image;
 	}
 
+	public Training(int id) {
+		this.id = id;
+	}
+	
 	public Training() {
 		super();
 	}

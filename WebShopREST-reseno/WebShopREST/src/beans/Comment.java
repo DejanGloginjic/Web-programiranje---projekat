@@ -8,10 +8,10 @@ public class Comment {
 	private User buyerComment;
 	private SportObject sportObjectComment;
 	private String comment;
-	private CommentMarkEnum commentMark;
+	private int commentMark;
 	
 	public Comment(int id, User buyerComment, SportObject sportObjectComment, String comment,
-			CommentMarkEnum commentMark) {
+			int commentMark) {
 		super();
 		this.id = id;
 		this.buyerComment = buyerComment;
@@ -56,11 +56,11 @@ public class Comment {
 		this.comment = comment;
 	}
 
-	public CommentMarkEnum getCommentMark() {
+	public int getCommentMark() {
 		return commentMark;
 	}
 
-	public void setCommentMark(CommentMarkEnum commentMark) {
+	public void setCommentMark(int commentMark) {
 		this.commentMark = commentMark;
 	}
 	

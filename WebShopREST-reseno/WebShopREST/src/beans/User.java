@@ -23,6 +23,10 @@ public class User {
 	private int points;
 	private BuyerType buyerType;
 	
+	public User(int id) {
+		this.id = id;
+	}
+	
 	public User(String username, String password, String name, String surname, UserGenderEnum userGender,
 			LocalDate dateOfBirth, UserTypeEnum userType, ArrayList<TrainingHistory> trainingHistory,
 			Membership membership, SportObject sportObject, ArrayList<SportObject> visitedObject, int points,

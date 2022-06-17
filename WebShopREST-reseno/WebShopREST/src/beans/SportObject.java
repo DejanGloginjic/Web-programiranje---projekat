@@ -20,6 +20,10 @@ public class SportObject {
 	private LocalTime startTime;
 	private LocalTime endTime;
 	
+	public SportObject(int id) {
+		this.id = id;
+	}
+	
 	public SportObject(int id, String objectName, ObjectTypeEnum objectType, ArrayList<TrainingTypeEnum> content,
 			SportObjectStatusEnum objectStatus, Location location, String logoPicture, double objectMark,
 			LocalTime startTime, LocalTime endTime) {
