@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.Location;
 import dao.LocationDAO;
+import dao.StartingProject;
 
 @Path("/trainings")
 public class LocationService {
@@ -35,6 +36,7 @@ public class LocationService {
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("locationDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
+	    	StartingProject.getInstance(contextPath);
 			ctx.setAttribute("locationDAO", LocationDAO.getInstace());
 		}
 	}

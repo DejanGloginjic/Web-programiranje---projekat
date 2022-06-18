@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.Comment;
 import dao.CommentDAO;
+import dao.StartingProject;
 
 @Path("/trainings")
 public class CommentService {
@@ -35,6 +36,7 @@ public class CommentService {
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("commentDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
+	    	StartingProject.getInstance(contextPath);
 			ctx.setAttribute("commentDAO", CommentDAO.getInstace());
 		}
 	}

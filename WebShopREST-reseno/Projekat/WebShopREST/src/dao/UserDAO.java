@@ -169,7 +169,7 @@ public class UserDAO {
 		return users.remove(id);
 	}
 	
-	public void linkUserAndMembership(String contextPath) {
+	public void linkUserAndMembership() {
 		ArrayList<Membership> memberships = (ArrayList<Membership>) MembershipDAO.getInstance().findAll();
 		
 		for(User user : users.values()) {
@@ -185,7 +185,7 @@ public class UserDAO {
 		}
 	}
 	
-	public void linkUserAndSportObject(String contextPath) {
+	public void linkUserAndSportObject() {
 		ArrayList<SportObject> sportObjects = (ArrayList<SportObject>) SportObjectDAO.getInstance().findAll();
 		
 		for(User user : users.values()) {
@@ -200,7 +200,7 @@ public class UserDAO {
 		}
 	}
 	
-	public void linkUserAndBuyerType(String contextPath) {
+	public void linkUserAndBuyerType() {
 		ArrayList<BuyerType> buyerTypes = (ArrayList<BuyerType>) BuyerTypeDAO.getInstance().findAll();
 		
 		for(User user : users.values()) {

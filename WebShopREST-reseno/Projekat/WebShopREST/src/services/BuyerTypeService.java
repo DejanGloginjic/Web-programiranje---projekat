@@ -38,6 +38,7 @@ public class BuyerTypeService {
 		if (ctx.getAttribute("buyerTypeDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
 	    	StartingProject.getInstance(contextPath);
+	    	StartingProject.getInstance(contextPath);
 			ctx.setAttribute("buyerTypeDAO", BuyerTypeDAO.getInstance());
 		}
 	}

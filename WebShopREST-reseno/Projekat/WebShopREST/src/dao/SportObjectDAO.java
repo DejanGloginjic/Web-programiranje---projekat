@@ -148,7 +148,7 @@ public class SportObjectDAO {
 			return sportObjects.remove(id);
 		}
 		
-	public void linkSportObjectAndLocation(String contextPath) {
+	public void linkSportObjectAndLocation() {
 		ArrayList<Location> locations = (ArrayList<Location>) LocationDAO.getInstace().findAll();
 		
 		for(SportObject so : sportObjects.values()) {

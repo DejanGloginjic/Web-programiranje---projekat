@@ -14,22 +14,22 @@ public class StartingProject {
 		TrainingDAO.getInstance().loadTrainings(contextPath);
 		TrainingHistoryDAO.getInstace().loadTrainingHistory(contextPath);
 		
-		UserDAO.getInstance().linkUserAndMembership(contextPath);
-		UserDAO.getInstance().linkUserAndSportObject(contextPath);
-		UserDAO.getInstance().linkUserAndBuyerType(contextPath);
+		UserDAO.getInstance().linkUserAndMembership();
+		UserDAO.getInstance().linkUserAndSportObject();
+		UserDAO.getInstance().linkUserAndBuyerType();
 		UserDAO.getInstance().linkUserAndVisitedObject(contextPath);
 		
-		CommentDAO.getInstace().linkCommentAndSportObject(contextPath);
-		CommentDAO.getInstace().linkCommentAndUser(contextPath);
+		CommentDAO.getInstace().linkCommentAndSportObject();
+		CommentDAO.getInstace().linkCommentAndUser();
 		
-		SportObjectDAO.getInstance().linkSportObjectAndLocation(contextPath);
+		SportObjectDAO.getInstance().linkSportObjectAndLocation();
 		
-		TrainingDAO.getInstance().linkTrainingAndCoach(contextPath);
-		TrainingDAO.getInstance().linkTrainingAndSportObject(contextPath);
+		TrainingDAO.getInstance().linkTrainingAndCoach();
+		TrainingDAO.getInstance().linkTrainingAndSportObject();
 		
-		TrainingHistoryDAO.getInstace().linkTrainingHistoryAndBuyer(contextPath);
-		TrainingHistoryDAO.getInstace().linkTrainingHistoryAndCoach(contextPath);
-		TrainingHistoryDAO.getInstace().linkTrainingHistoryAndTraining(contextPath);
+		TrainingHistoryDAO.getInstace().linkTrainingHistoryAndBuyer();
+		TrainingHistoryDAO.getInstace().linkTrainingHistoryAndCoach();
+		TrainingHistoryDAO.getInstace().linkTrainingHistoryAndTraining();
 	}
 	
 	public static StartingProject getInstance(String contextPath) {
