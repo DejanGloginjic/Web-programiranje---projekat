@@ -34,7 +34,7 @@ public class UserService {
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("userDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("userDAO", UserDAO.getInstance(contextPath));
+			ctx.setAttribute("userDAO", UserDAO.getInstance());
 		}
 	}
 	

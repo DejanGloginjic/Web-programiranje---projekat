@@ -47,9 +47,9 @@ public class SportObjectDAO {
 	}
 	
 	
-	public static SportObjectDAO getInstance(String contextPath) {
+	public static SportObjectDAO getInstance() {
 		if(instance == null) {
-			instance = new SportObjectDAO(contextPath);
+			instance = new SportObjectDAO();
 		}
 		
 		return instance;
@@ -149,7 +149,7 @@ public class SportObjectDAO {
 		}
 		
 	public void linkSportObjectAndLocation(String contextPath) {
-		ArrayList<Location> locations = (ArrayList<Location>) LocationDAO.getInstace(contextPath).findAll();
+		ArrayList<Location> locations = (ArrayList<Location>) LocationDAO.getInstace().findAll();
 		
 		for(SportObject so : sportObjects.values()) {
 			int requiredId = so.getLocation().getId();

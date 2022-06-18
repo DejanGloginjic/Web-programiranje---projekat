@@ -44,9 +44,9 @@ public class TrainingHistoryDAO {
 		loadTrainingHistory(contextPath);
 	}
 	
-	public static TrainingHistoryDAO getInstace(String contextPath) {
+	public static TrainingHistoryDAO getInstace() {
 		if(instance == null) {
-			instance = new TrainingHistoryDAO(contextPath);
+			instance = new TrainingHistoryDAO();
 		}
 		
 		return instance;
@@ -130,7 +130,7 @@ public class TrainingHistoryDAO {
 	}
 	
 	public void linkTrainingHistoryAndTraining(String contextPath) {
-		ArrayList<Training> allTrainings = (ArrayList<Training>) TrainingDAO.getInstance(contextPath).findAll();
+		ArrayList<Training> allTrainings = (ArrayList<Training>) TrainingDAO.getInstance().findAll();
 		
 		for(TrainingHistory th :  trainings.values()) {
 			int requiredId = th.getTraining().getId();
@@ -145,7 +145,7 @@ public class TrainingHistoryDAO {
 	}
 	
 	public void linkTrainingHistoryAndBuyer(String contextPath) {
-		ArrayList<User> buyers = (ArrayList<User>) UserDAO.getInstance(contextPath).findAll();
+		ArrayList<User> buyers = (ArrayList<User>) UserDAO.getInstance().findAll();
 		
 		for(TrainingHistory th : trainings.values()) {
 			int requiredId = th.getBuyer().getId();
@@ -153,7 +153,6 @@ public class TrainingHistoryDAO {
 			for(User u : buyers) {
 				if(u.getId() == requiredId) {
 					th.setBuyer(u);
-					//moja izmisljotina
 					u.addTrainingToTrainingHistory(th);
 					break;
 				}
@@ -162,7 +161,7 @@ public class TrainingHistoryDAO {
 	}
 	
 	public void linkTrainingHistoryAndCoach(String contextPath) {
-		ArrayList<User> coaches = (ArrayList<User>) UserDAO.getInstance(contextPath).findAll();
+		ArrayList<User> coaches = (ArrayList<User>) UserDAO.getInstance().findAll();
 		
 		for(TrainingHistory th : trainings.values()) {
 			int requiredId = th.getCoach().getId();

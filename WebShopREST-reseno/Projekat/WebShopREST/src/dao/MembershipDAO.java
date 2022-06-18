@@ -42,9 +42,9 @@ public class MembershipDAO {
 	}
 	
 	
-	public static MembershipDAO getInstance(String contextPath) {
+	public static MembershipDAO getInstance() {
 		if(instance == null) {
-			instance = new MembershipDAO(contextPath);
+			instance = new MembershipDAO();
 		}
 		
 		return instance;

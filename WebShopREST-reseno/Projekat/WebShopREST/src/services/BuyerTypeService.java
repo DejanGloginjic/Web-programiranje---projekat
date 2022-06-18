@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.BuyerType;
 import dao.BuyerTypeDAO;
+import dao.StartingProject;
 
 
 @Path("/buyerType")
@@ -33,9 +34,11 @@ public class BuyerTypeService {
 	public void init() {
 		// Ovaj objekat se instancira više puta u toku rada aplikacije
 		// Inicijalizacija treba da se obavi samo jednom
+		
 		if (ctx.getAttribute("buyerTypeDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("buyerTypeDAO", BuyerTypeDAO.getInstance(contextPath));
+	    	StartingProject.getInstance(contextPath);
+			ctx.setAttribute("buyerTypeDAO", BuyerTypeDAO.getInstance());
 		}
 	}
 	

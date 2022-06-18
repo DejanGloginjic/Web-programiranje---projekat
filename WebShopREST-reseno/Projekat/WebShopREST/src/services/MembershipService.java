@@ -35,7 +35,7 @@ public class MembershipService {
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("membershipDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("membershipDAO", MembershipDAO.getInstance(contextPath));
+			ctx.setAttribute("membershipDAO", MembershipDAO.getInstance());
 		}
 	}
 	

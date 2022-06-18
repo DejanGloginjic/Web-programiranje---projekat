@@ -35,7 +35,7 @@ public class CommentService {
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("commentDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("commentDAO", CommentDAO.getInstace(contextPath));
+			ctx.setAttribute("commentDAO", CommentDAO.getInstace());
 		}
 	}
 	

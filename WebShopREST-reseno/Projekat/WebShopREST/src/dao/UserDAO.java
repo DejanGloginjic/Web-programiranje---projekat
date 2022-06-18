@@ -43,13 +43,11 @@ public class UserDAO {
 	/*
 	 * @param contextPath Putanja do aplikacije u Tomcatu. Može se pristupiti samo iz servleta.
 	 */
-	private UserDAO(String contextPath) {
-		loadUsers(contextPath);
-	}
 	
-	public static UserDAO getInstance(String contextPath) {
+	
+	public static UserDAO getInstance() {
 		if(userInstance == null) {
-			userInstance = new UserDAO(contextPath);
+			userInstance = new UserDAO();
 		}
 		return userInstance;
 	}
@@ -172,7 +170,7 @@ public class UserDAO {
 	}
 	
 	public void linkUserAndMembership(String contextPath) {
-		ArrayList<Membership> memberships = (ArrayList<Membership>) MembershipDAO.getInstance(contextPath).findAll();
+		ArrayList<Membership> memberships = (ArrayList<Membership>) MembershipDAO.getInstance().findAll();
 		
 		for(User user : users.values()) {
 			int requiredId = user.getMembership().getId();
@@ -188,7 +186,7 @@ public class UserDAO {
 	}
 	
 	public void linkUserAndSportObject(String contextPath) {
-		ArrayList<SportObject> sportObjects = (ArrayList<SportObject>) SportObjectDAO.getInstance(contextPath).findAll();
+		ArrayList<SportObject> sportObjects = (ArrayList<SportObject>) SportObjectDAO.getInstance().findAll();
 		
 		for(User user : users.values()) {
 			int requiredId = user.getSportObject().getId();
@@ -203,7 +201,7 @@ public class UserDAO {
 	}
 	
 	public void linkUserAndBuyerType(String contextPath) {
-		ArrayList<BuyerType> buyerTypes = (ArrayList<BuyerType>) BuyerTypeDAO.getInstance(contextPath).findAll();
+		ArrayList<BuyerType> buyerTypes = (ArrayList<BuyerType>) BuyerTypeDAO.getInstance().findAll();
 		
 		for(User user : users.values()) {
 			int requiredId = user.getBuyerType().getId();
@@ -213,6 +211,40 @@ public class UserDAO {
 					user.setBuyerType(bt);
 					break;
 				}
+			}
+		}
+	}
+	
+	public void linkUserAndVisitedObject(String contextPath) {
+		BufferedReader in = null;
+		try {
+			File file = new File(contextPath + "/Baza/UserVisitedObjectBound.txt");
+			in = new BufferedReader(new FileReader(file));
+			String line;
+			StringTokenizer st;
+			while ((line = in.readLine()) != null) {
+				line = line.trim();
+				if (line.equals("") || line.indexOf('#') == 0)
+					continue;
+				st = new StringTokenizer(line, ";");
+				while (st.hasMoreTokens()) {
+					int userId = Integer.parseInt(st.nextToken().trim());
+					int objectId = Integer.parseInt(st.nextToken().trim());
+					User user = find(userId);
+					SportObject sObject = SportObjectDAO.getInstance().find(objectId);
+					
+					user.getVisitedObject().add(sObject);
+				}
+			
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();             
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				}
+				catch (Exception e) { }
 			}
 		}
 	}

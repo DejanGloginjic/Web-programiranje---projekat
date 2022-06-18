@@ -40,9 +40,9 @@ public class CommentDAO {
 		loadComments(contextPath);
 	}
 	
-	public static CommentDAO getInstace(String contextPath) {
+	public static CommentDAO getInstace() {
 		if(instance == null) {
-			instance = new CommentDAO(contextPath);
+			instance = new CommentDAO();
 		}
 		
 		return instance;
@@ -126,7 +126,7 @@ public class CommentDAO {
 	}
 	
 	public void linkCommentAndUser(String contextPath) {
-		ArrayList<User> users = (ArrayList<User>) UserDAO.getInstance(contextPath).findAll();
+		ArrayList<User> users = (ArrayList<User>) UserDAO.getInstance().findAll();
 		
 		for(Comment c : comments.values()) {
 			int requiredId = c.getBuyerComment().getId();
@@ -141,7 +141,7 @@ public class CommentDAO {
 	}
 	
 	public void linkCommentAndSportObject(String contextPath) {
-		ArrayList<SportObject> objects = (ArrayList<SportObject>) SportObjectDAO.getInstance(contextPath).findAll();
+		ArrayList<SportObject> objects = (ArrayList<SportObject>) SportObjectDAO.getInstance().findAll();
 		
 		for(Comment c : comments.values()) {
 			int requiredId = c.getSportObjectComment().getId();

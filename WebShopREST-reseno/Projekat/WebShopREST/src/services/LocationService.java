@@ -35,7 +35,7 @@ public class LocationService {
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("locationDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("locationDAO", LocationDAO.getInstace(contextPath));
+			ctx.setAttribute("locationDAO", LocationDAO.getInstace());
 		}
 	}
 	

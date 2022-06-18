@@ -20,6 +20,7 @@ public class SportObject {
 	private LocalTime startTime;
 	private LocalTime endTime;
 	
+	
 	public SportObject(int id) {
 		this.id = id;
 	}

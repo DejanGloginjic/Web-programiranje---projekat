@@ -40,9 +40,9 @@ public class LocationDAO {
 		loadLocations(contextPath);
 	}
 	
-	public static LocationDAO getInstace(String contextPath) {
+	public static LocationDAO getInstace() {
 		if(instance == null) {
-			instance = new LocationDAO(contextPath);
+			instance = new LocationDAO();
 		}
 		
 		return instance;

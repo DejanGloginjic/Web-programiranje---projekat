@@ -40,9 +40,9 @@ public class BuyerTypeDAO {
 	}
 	
 	
-	public static BuyerTypeDAO getInstance(String contextPath) {
+	public static BuyerTypeDAO getInstance() {
 		if(instance == null) {
-			instance = new BuyerTypeDAO(contextPath);
+			instance = new BuyerTypeDAO();
 		}
 		
 		return instance;

@@ -40,9 +40,9 @@ public class TrainingDAO {
 		loadTrainings(contextPath);
 	}
 	
-	public static TrainingDAO getInstance(String contextPath) {
+	public static TrainingDAO getInstance() {
 		if(instance == null) {
-			instance = new TrainingDAO(contextPath);
+			instance = new TrainingDAO();
 		}
 		
 		return instance;
@@ -133,7 +133,7 @@ public class TrainingDAO {
 	}
 	
 	public void linkTrainingAndCoach(String contextPath) {
-		ArrayList<User> coaches = (ArrayList<User>) UserDAO.getInstance(contextPath).findAll();
+		ArrayList<User> coaches = (ArrayList<User>) UserDAO.getInstance().findAll();
 		
 		for(Training t : trainings.values()) {
 			int requiredId = t.getCoach().getId();
@@ -148,7 +148,7 @@ public class TrainingDAO {
 	}
 	
 	public void linkTrainingAndSportObject(String contextPath) {
-		ArrayList<SportObject> objects = (ArrayList<SportObject>) SportObjectDAO.getInstance(contextPath).findAll();
+		ArrayList<SportObject> objects = (ArrayList<SportObject>) SportObjectDAO.getInstance().findAll();
 		
 		for(Training t : trainings.values()) {
 			int requiredId = t.getSportObject().getId();
