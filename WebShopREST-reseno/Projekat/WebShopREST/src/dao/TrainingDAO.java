@@ -132,7 +132,7 @@ public class TrainingDAO {
 		return trainings.remove(id);
 	}
 	
-	public void linkTrainingAndCoach(String contextPath) {
+	public void linkTrainingAndCoach() {
 		ArrayList<User> coaches = (ArrayList<User>) UserDAO.getInstance().findAll();
 		
 		for(Training t : trainings.values()) {
@@ -147,7 +147,7 @@ public class TrainingDAO {
 		}
 	}
 	
-	public void linkTrainingAndSportObject(String contextPath) {
+	public void linkTrainingAndSportObject() {
 		ArrayList<SportObject> objects = (ArrayList<SportObject>) SportObjectDAO.getInstance().findAll();
 		
 		for(Training t : trainings.values()) {

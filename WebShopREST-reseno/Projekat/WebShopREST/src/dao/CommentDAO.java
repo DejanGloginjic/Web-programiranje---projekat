@@ -125,7 +125,7 @@ public class CommentDAO {
 		return comments.remove(id);
 	}
 	
-	public void linkCommentAndUser(String contextPath) {
+	public void linkCommentAndUser() {
 		ArrayList<User> users = (ArrayList<User>) UserDAO.getInstance().findAll();
 		
 		for(Comment c : comments.values()) {
@@ -140,7 +140,7 @@ public class CommentDAO {
 		}
 	}
 	
-	public void linkCommentAndSportObject(String contextPath) {
+	public void linkCommentAndSportObject() {
 		ArrayList<SportObject> objects = (ArrayList<SportObject>) SportObjectDAO.getInstance().findAll();
 		
 		for(Comment c : comments.values()) {

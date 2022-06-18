@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.SportObject;
 import dao.SportObjectDAO;
+import dao.StartingProject;
 
 
 @Path("/sportobject")
@@ -36,6 +37,7 @@ public class SportObjectService {
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("sportObjectDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
+	    	StartingProject.getInstance(contextPath);
 			ctx.setAttribute("sportObjectDAO", SportObjectDAO.getInstance());
 		}
 	}

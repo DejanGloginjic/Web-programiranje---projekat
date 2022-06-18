@@ -17,6 +17,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import beans.TrainingHistory;
+import dao.StartingProject;
 import dao.TrainingHistoryDAO;
 
 @Path("/trainingHistory")
@@ -35,6 +36,7 @@ public class TrainingHistoryService {
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("trainingHistoryDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
+	    	StartingProject.getInstance(contextPath);
 			ctx.setAttribute("trainingHistoryDAO", TrainingHistoryDAO.getInstace());
 		}
 	}

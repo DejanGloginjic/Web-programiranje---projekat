@@ -17,7 +17,10 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
 import beans.User;
+import dao.StartingProject;
 import dao.UserDAO;
+
+
 
 @Path("/trainings")
 public class UserService {
@@ -34,6 +37,7 @@ public class UserService {
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("userDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
+	    	StartingProject.getInstance(contextPath);
 			ctx.setAttribute("userDAO", UserDAO.getInstance());
 		}
 	}

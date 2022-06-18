@@ -18,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 
 import beans.Membership;
 import dao.MembershipDAO;
+import dao.StartingProject;
 
 @Path("/memberships")
 public class MembershipService {
@@ -35,6 +36,7 @@ public class MembershipService {
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("membershipDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
+	    	StartingProject.getInstance(contextPath);
 			ctx.setAttribute("membershipDAO", MembershipDAO.getInstance());
 		}
 	}
