@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Web shop</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<script src="jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+	<div id ="sportObjects">
+
+		<table border="1" id="tabela">
+			<thead>
+				<tr bgcolor="lightgrey">
+					<th>ID</th>
+					<th>Name</th>
+					<th>Type</th>
+					<th>Status</th>
+                    <th>Loaction</th>
+				</tr>
+			</thead>
+
+			<tr v-for="sp in sportObjects">
+				<td>{{sp.id }}</td>
+                <td>{{sp.objectName }}</td>
+                <td>{{sp.objectType }}</td>
+                <td>{{sp.objectStatus }}</td>
+                <td>{{sp.location.street}}  {{sp.location.number}} </td>
+
+			</tr>
+		</table>
+
+		
+	</div>
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="app/sportObjects.js"></script>
+</body>
+
+</html>
+
