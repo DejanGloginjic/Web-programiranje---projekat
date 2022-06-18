@@ -1,4 +1,4 @@
-var app = new Vue({
+/*var app = new Vue({
 	el: '#products',
 	data: {
 		products: null,
@@ -56,4 +56,4 @@ var app = new Vue({
 				})
 		}
 	}
-});
+});*/

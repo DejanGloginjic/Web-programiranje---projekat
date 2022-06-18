@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+        <title>Registration form</title>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="styles.css">
+        <script src="jquery-3.3.1.min.js"></script>
+</head>
+
+<body>
+	<form id="registrationFrom" @submit='createUser'>
+			<table>
+				<tr>
+					<td>Name:</td>
+					<td><input type="text" name="name" v-model="newUser.name"></td>
+				</tr>
+				<tr>
+					<td>Surname:</td>
+					<td><input type="text" name="surname" v-model="newUser.surname"></td>
+				</tr>
+                <tr>
+					<td>Date of birth:</td>
+					<td><input type="date" name="dateOfBirth" v-model="newUser.dateOfBirth"></td>
+				</tr>
+                <tr>
+					<td>Gender:</td>
+					<td><input type="radio" id="female" name="gender" value="MALE" v-model="newUser.gender">
+                        <label for="male">Male</label>
+                        <input type="radio" id="female" name="gender" value="FEMALE" v-model="newUser.gender">
+                        <label for="female">Female</label><br> 
+                    </td>
+
+				</tr>
+                <tr>
+					<td>Username:</td>
+					<td><input type="text" name="username" v-model="newUser.username"></td>
+				</tr>
+                <tr>
+					<td>Password:</td>
+					<td><input type="text" name="password" v-model="newUser.password"></td>
+				</tr>
+				<tr>
+					<td><input type="submit" value="Register"></td>
+				</tr>
+			</table>
+
+	</form>
+		
+</body>
+</html>
