@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import beans.User;
 import dao.UserDAO;
 
-@Path("")
+@Path("/login")
 public class LoginService {
 	
 	@Context
@@ -32,7 +32,7 @@ public class LoginService {
 		// Inicijalizacija treba da se obavi samo jednom
 		if (ctx.getAttribute("userDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
-			ctx.setAttribute("userDAO", new UserDAO(contextPath));
+			ctx.setAttribute("userDAO", UserDAO.getInstance(contextPath));
 		}
 	}
 	
@@ -42,7 +42,7 @@ public class LoginService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(User user, @Context HttpServletRequest request) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		User loggedUser = userDao.find(user.getUsername(), user.getPassword());
+		User loggedUser = userDao.find(user.getId());
 		if (loggedUser == null) {
 			return Response.status(400).entity("Invalid username and/or password").build();
 		}
