@@ -128,7 +128,7 @@ public class UserDAO {
 					UserTypeEnum[] roles = UserTypeEnum.values();
 					UserTypeEnum roleFromFile = roles[role];
 							
-					ArrayList<TrainingHistory>history = new ArrayList();
+					ArrayList<TrainingHistory>history = new ArrayList<TrainingHistory>();
 					
 					int membershipID = Integer.parseInt(st.nextToken().trim());
 					Membership membership = new Membership(membershipID);
@@ -136,7 +136,7 @@ public class UserDAO {
 					int sportObjectID = Integer.parseInt(st.nextToken().trim());
 					SportObject sportObject = new SportObject(sportObjectID);
 					
-					ArrayList<SportObject> visitedObjects = new ArrayList();
+					ArrayList<SportObject> visitedObjects = new ArrayList<SportObject>();
 					
 					int collected_points = Integer.parseInt(st.nextToken().trim());
 					
@@ -170,7 +170,7 @@ public class UserDAO {
 	}
 	
 	public void linkUserAndMembership() {
-		ArrayList<Membership> memberships = (ArrayList<Membership>) MembershipDAO.getInstance().findAll();
+		ArrayList<Membership> memberships = new ArrayList<Membership>( MembershipDAO.getInstance().findAll());
 		
 		for(User user : users.values()) {
 			int requiredId = user.getMembership().getId();
@@ -186,7 +186,7 @@ public class UserDAO {
 	}
 	
 	public void linkUserAndSportObject() {
-		ArrayList<SportObject> sportObjects = (ArrayList<SportObject>) SportObjectDAO.getInstance().findAll();
+		ArrayList<SportObject> sportObjects = new ArrayList<SportObject>(SportObjectDAO.getInstance().findAll());
 		
 		for(User user : users.values()) {
 			int requiredId = user.getSportObject().getId();
@@ -201,7 +201,7 @@ public class UserDAO {
 	}
 	
 	public void linkUserAndBuyerType() {
-		ArrayList<BuyerType> buyerTypes = (ArrayList<BuyerType>) BuyerTypeDAO.getInstance().findAll();
+		ArrayList<BuyerType> buyerTypes = new ArrayList<BuyerType>(BuyerTypeDAO.getInstance().findAll());
 		
 		for(User user : users.values()) {
 			int requiredId = user.getBuyerType().getId();

@@ -22,7 +22,7 @@ import dao.UserDAO;
 
 
 
-@Path("/trainings")
+@Path("/users")
 public class UserService {
 	@Context
 	ServletContext ctx;

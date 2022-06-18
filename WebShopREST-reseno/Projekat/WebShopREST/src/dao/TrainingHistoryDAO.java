@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import beans.BuyerType;
 import beans.Membership;
 import beans.SportObject;
 import beans.Training;
@@ -130,7 +131,7 @@ public class TrainingHistoryDAO {
 	}
 	
 	public void linkTrainingHistoryAndTraining() {
-		ArrayList<Training> allTrainings = (ArrayList<Training>) TrainingDAO.getInstance().findAll();
+		ArrayList<Training> allTrainings = new ArrayList<Training>(TrainingDAO.getInstance().findAll());
 		
 		for(TrainingHistory th :  trainings.values()) {
 			int requiredId = th.getTraining().getId();
@@ -145,7 +146,7 @@ public class TrainingHistoryDAO {
 	}
 	
 	public void linkTrainingHistoryAndBuyer() {
-		ArrayList<User> buyers = (ArrayList<User>) UserDAO.getInstance().findAll();
+		ArrayList<User> buyers = new ArrayList<User>(UserDAO.getInstance().findAll());
 		
 		for(TrainingHistory th : trainings.values()) {
 			int requiredId = th.getBuyer().getId();
@@ -161,7 +162,7 @@ public class TrainingHistoryDAO {
 	}
 	
 	public void linkTrainingHistoryAndCoach() {
-		ArrayList<User> coaches = (ArrayList<User>) UserDAO.getInstance().findAll();
+		ArrayList<User> coaches = new ArrayList<User>(UserDAO.getInstance().findAll());
 		
 		for(TrainingHistory th : trainings.values()) {
 			int requiredId = th.getCoach().getId();

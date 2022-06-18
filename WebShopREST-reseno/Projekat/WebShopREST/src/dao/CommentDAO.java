@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import beans.BuyerType;
 import beans.Comment;
 import beans.SportObject;
 import beans.Training;
@@ -126,7 +127,7 @@ public class CommentDAO {
 	}
 	
 	public void linkCommentAndUser() {
-		ArrayList<User> users = (ArrayList<User>) UserDAO.getInstance().findAll();
+		ArrayList<User> users = new ArrayList<User>(UserDAO.getInstance().findAll());
 		
 		for(Comment c : comments.values()) {
 			int requiredId = c.getBuyerComment().getId();
@@ -141,7 +142,7 @@ public class CommentDAO {
 	}
 	
 	public void linkCommentAndSportObject() {
-		ArrayList<SportObject> objects = (ArrayList<SportObject>) SportObjectDAO.getInstance().findAll();
+		ArrayList<SportObject> objects = new ArrayList<SportObject>(SportObjectDAO.getInstance().findAll());
 		
 		for(Comment c : comments.values()) {
 			int requiredId = c.getSportObjectComment().getId();

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import beans.BuyerType;
 import beans.Membership;
 import beans.SportObject;
 import beans.Training;
@@ -84,7 +85,7 @@ public class TrainingDAO {
 	public void loadTrainings(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/users.txt");
+			File file = new File(contextPath + "/Baza/trainings.txt");
 			in = new BufferedReader(new FileReader(file));
 			String line;
 			StringTokenizer st;
@@ -133,7 +134,7 @@ public class TrainingDAO {
 	}
 	
 	public void linkTrainingAndCoach() {
-		ArrayList<User> coaches = (ArrayList<User>) UserDAO.getInstance().findAll();
+		ArrayList<User> coaches = new ArrayList<User>(UserDAO.getInstance().findAll());
 		
 		for(Training t : trainings.values()) {
 			int requiredId = t.getCoach().getId();
@@ -148,7 +149,7 @@ public class TrainingDAO {
 	}
 	
 	public void linkTrainingAndSportObject() {
-		ArrayList<SportObject> objects = (ArrayList<SportObject>) SportObjectDAO.getInstance().findAll();
+		ArrayList<SportObject> objects = new ArrayList<SportObject>(SportObjectDAO.getInstance().findAll());
 		
 		for(Training t : trainings.values()) {
 			int requiredId = t.getSportObject().getId();

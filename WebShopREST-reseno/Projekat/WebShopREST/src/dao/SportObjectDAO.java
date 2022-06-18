@@ -11,6 +11,7 @@ import beans.Enums.ObjectTypeEnum;
 import beans.Enums.SportObjectStatusEnum;
 import java.time.LocalDate;
 import beans.Enums.DateHelper;
+import beans.BuyerType;
 import beans.Location;
 import java.time.LocalTime;
 import beans.Enums.LocalTimeHelper;
@@ -85,7 +86,7 @@ public class SportObjectDAO {
 	public void loadSportObjects(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/users.txt");
+			File file = new File(contextPath + "/Baza/objects.txt");
 			in = new BufferedReader(new FileReader(file));
 			String line;
 			StringTokenizer st;
@@ -149,7 +150,7 @@ public class SportObjectDAO {
 		}
 		
 	public void linkSportObjectAndLocation() {
-		ArrayList<Location> locations = (ArrayList<Location>) LocationDAO.getInstace().findAll();
+		ArrayList<Location> locations = new ArrayList<Location>(LocationDAO.getInstace().findAll());
 		
 		for(SportObject so : sportObjects.values()) {
 			int requiredId = so.getLocation().getId();

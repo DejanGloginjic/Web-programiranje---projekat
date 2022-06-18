@@ -79,7 +79,7 @@ public class BuyerTypeDAO {
 	public void loadBuyers(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/users.txt");
+			File file = new File(contextPath + "/Baza/buyers.txt");
 			in = new BufferedReader(new FileReader(file));
 			String line;
 			StringTokenizer st;

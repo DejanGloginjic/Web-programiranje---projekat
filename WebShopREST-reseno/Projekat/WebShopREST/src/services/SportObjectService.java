@@ -21,7 +21,7 @@ import dao.SportObjectDAO;
 import dao.StartingProject;
 
 
-@Path("/sportobject")
+@Path("/sportobjects")
 public class SportObjectService {
 	
 	@Context

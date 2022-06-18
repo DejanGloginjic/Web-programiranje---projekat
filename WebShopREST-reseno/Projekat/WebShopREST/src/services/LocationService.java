@@ -20,7 +20,7 @@ import beans.Location;
 import dao.LocationDAO;
 import dao.StartingProject;
 
-@Path("/trainings")
+@Path("/locations")
 public class LocationService {
 	
 	@Context

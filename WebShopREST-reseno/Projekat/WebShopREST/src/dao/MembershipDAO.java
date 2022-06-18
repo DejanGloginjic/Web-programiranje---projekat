@@ -80,7 +80,7 @@ public class MembershipDAO {
 	public void loadMemberships(String contextPath) {
 		BufferedReader in = null;
 		try {
-			File file = new File(contextPath + "/users.txt");
+			File file = new File(contextPath + "/Baza/memberships.txt");
 			in = new BufferedReader(new FileReader(file));
 			String line;
 			StringTokenizer st;

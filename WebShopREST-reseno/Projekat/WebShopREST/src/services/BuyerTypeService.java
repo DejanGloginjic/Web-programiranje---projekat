@@ -21,7 +21,7 @@ import dao.BuyerTypeDAO;
 import dao.StartingProject;
 
 
-@Path("/buyerType")
+@Path("/buyerTypes")
 public class BuyerTypeService {
 	@Context
 	ServletContext ctx;
@@ -37,7 +37,6 @@ public class BuyerTypeService {
 		
 		if (ctx.getAttribute("buyerTypeDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
-	    	StartingProject.getInstance(contextPath);
 	    	StartingProject.getInstance(contextPath);
 			ctx.setAttribute("buyerTypeDAO", BuyerTypeDAO.getInstance());
 		}
