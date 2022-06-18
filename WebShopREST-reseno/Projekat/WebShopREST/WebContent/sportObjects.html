@@ -18,7 +18,9 @@
 					<th>Name</th>
 					<th>Type</th>
 					<th>Status</th>
-                    <th>Loaction</th>
+					<th>Mark</th>
+					<th>Working hours</th>
+                    <th>Location</th>
 				</tr>
 			</thead>
 
@@ -27,7 +29,9 @@
                 <td>{{sp.objectName }}</td>
                 <td>{{sp.objectType }}</td>
                 <td>{{sp.objectStatus }}</td>
-                <td>{{sp.location.street}}  {{sp.location.number}} </td>
+				<td>{{sp.objectMark }}</td>
+				<td>{{sp.startTime.hour}}:{{sp.startTime.minute}} - {{sp.endTime.hour}}:{{sp.endTime.minute}}</td>
+                <td>{{sp.location.place}}, {{sp.location.street}}  {{sp.location.number}}  </td>
 
 			</tr>
 		</table>
