@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import beans.User;
 import dao.UserDAO;
 
-@Path("/login")
+@Path("")
 public class LoginService {
 	
 	@Context
