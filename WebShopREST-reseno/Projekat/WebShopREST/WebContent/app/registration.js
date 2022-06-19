@@ -15,30 +15,26 @@ var app = new Vue({
 			this.error = ""
 			this.errorName = ""
 			this.errorSurname = ""
+			this.errorUsername = ""
 
 			if(!this.newUser.name){
 				this.errorName = "This field can not be empty!"
-				event.preventDefault();
 			}
 
 			if(this.newUser.name && /\d/.test(this.newUser.name)){
 				this.errorName = "This field can not contain numbers!"
-				event.preventDefault();
 			}
 
 			if(!this.newUser.surname){
 				this.errorSurname = "This field can not be empty!"
-				event.preventDefault();
 			}
 
 			if(this.newUser.surname && /\d/.test(this.newUser.surname)){
 				this.errorSurname = "This field can not contain numbers!"
-				event.preventDefault();
 			}
 
 			if(this.newUser.username.length < 6){
 				this.errorUsername = "Username must contain at least 6 characters!"
-				event.preventDefault();
 			}
 
 

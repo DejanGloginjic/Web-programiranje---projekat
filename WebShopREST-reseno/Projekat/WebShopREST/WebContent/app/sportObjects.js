@@ -3,11 +3,13 @@ var app = new Vue({
 	data: {
 		sportObjects: null,
 		filter: "",
-		criterium: ""
+		criterium: "",
+		loggedUser: {}
 	},
 	mounted() {
 		axios.get('rest/sportobjects')
 			.then(response => (this.sportObjects = response.data))
+		axios.get('rest/currentUser').then(response=>(this.loggedUser = response.data))
 	},
 	methods: {
 		searchObject: function(){
