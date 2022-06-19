@@ -5,17 +5,20 @@ var app = new Vue({
 		error: ''
 	},
 	mounted() {
-		this.newUser = { id: '', name: null, surname: null, dateOfBirth: null, gender: null, username: null, password: null }
+		this.newUser = { id: '', name: null, surname: null, dateOfBirth: null, userGender: null, username: null, password: null }
 	},
 	methods: {
 		createUser: function (event) {
 			this.error = ""
-			if (!this.newUser.name || !this.newUser.surname || !this.newUser.dateOfBirth || !this.newUser.gender || !this.newUser.username || !this.newUser.password) {
+			if (!this.newUser.name || !this.newUser.surname || !this.newUser.dateOfBirth || !this.newUser.userGender || !this.newUser.username || !this.newUser.password) {
 				this.error = "You did not complete the entire form.";
 				event.preventDefault();
 				return;
 			}
-			axios.post('rest/users', this.newUser)
+
+
+			
+			axios.post('rest/users/', this.newUser)
 				.then((response) => {
 					alert('User created successfully')
                 })

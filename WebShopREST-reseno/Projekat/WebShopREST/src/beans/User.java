@@ -3,6 +3,9 @@ package beans;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+import beans.Enums.DateHelper;
 import beans.Enums.UserGenderEnum;
 import beans.Enums.UserTypeEnum;
 
@@ -22,11 +25,16 @@ public class User {
 	private ArrayList<SportObject> visitedObject;
 	private int points;
 	private BuyerType buyerType;
-	
+
+	public User() {
+		this.trainingHistory = new ArrayList<TrainingHistory>();
+	}
+
 	public User(int id) {
 		this.id = id;
+		this.trainingHistory = new ArrayList<TrainingHistory>();
 	}
-	
+
 	public User(int id, String username, String password, String name, String surname, UserGenderEnum userGender,
 			LocalDate dateOfBirth, UserTypeEnum userType, ArrayList<TrainingHistory> trainingHistory,
 			Membership membership, SportObject sportObject, ArrayList<SportObject> visitedObject, int points,
@@ -50,10 +58,6 @@ public class User {
 
 	public void addTrainingToTrainingHistory(TrainingHistory trainingHistory) {
 		this.trainingHistory.add(trainingHistory);
-	}
-	
-	public User() {
-		super();
 	}
 
 	public int getId() {
@@ -104,12 +108,16 @@ public class User {
 		this.userGender = userGender;
 	}
 
-	public LocalDate getDateOfBirth() {
-		return dateOfBirth;
+	public String getDateOfBirth() {
+		return DateHelper.dateToString(dateOfBirth);
 	}
 
-	public void setDateOfBirth(LocalDate dateOfBirth) {
+	public void setDateOfBirth1(LocalDate dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
+	}
+
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = DateHelper.stringToDate(dateOfBirth);
 	}
 
 	public UserTypeEnum getUserType() {
@@ -125,7 +133,11 @@ public class User {
 	}
 
 	public void setTrainingHistory(ArrayList<TrainingHistory> trainingHistory) {
-		this.trainingHistory = trainingHistory;
+		if (trainingHistory == null) {
+			this.trainingHistory = new ArrayList<TrainingHistory>();
+		} else {
+			this.trainingHistory = trainingHistory;
+		}
 	}
 
 	public Membership getMembership() {
@@ -167,6 +179,11 @@ public class User {
 	public void setBuyerType(BuyerType buyerType) {
 		this.buyerType = buyerType;
 	}
-	
-	
+
+	public String fileLine() {
+		return id + ";" + username + ";" + password + ";" + name + ";" + surname + ";" + ((userGender == null)?-1:userGender.ordinal()) + ";"
+				+ DateHelper.dateToString(dateOfBirth) + ";" + ((userType == null)?-1:userType.ordinal()) + ";" + ((membership == null)?-1:membership.getId()) + ";"
+				+ ((sportObject == null)?-1:sportObject.getId()) + ";" + points + ";" + ((buyerType == null)?-1:buyerType.getId());
+	}
 }
+

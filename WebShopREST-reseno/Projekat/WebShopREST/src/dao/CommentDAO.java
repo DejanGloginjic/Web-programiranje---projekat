@@ -146,12 +146,16 @@ public class CommentDAO {
 		
 		for(Comment c : comments.values()) {
 			int requiredId = c.getSportObjectComment().getId();
-			
+			boolean nasao = false;
 			for(SportObject so : objects) {
 				if(requiredId == so.getId()) {
 					c.setSportObjectComment(so);
+					nasao = true;
 					break;
 				}
+			}
+			if(nasao == false) {
+				c.setSportObjectComment(null);			//ovo ce trebati za posle kontrolne
 			}
 		}
 	}

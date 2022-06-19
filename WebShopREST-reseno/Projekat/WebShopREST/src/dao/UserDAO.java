@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -32,6 +34,7 @@ import beans.Enums.UserTypeEnum;
 public class UserDAO {
 	
 	private static UserDAO userInstance = null;
+	private static String contextPath = "";
 	
 	private Map<Integer, User> users = new HashMap<>();
 	
@@ -90,6 +93,7 @@ public class UserDAO {
 		maxId++;
 		user.setId(maxId);
 		users.put(user.getId(), user);
+		saveToFile();
 		return user;
 	}
 	
@@ -100,6 +104,7 @@ public class UserDAO {
 	 */
 	
 	public void loadUsers(String contextPath) {
+		this.contextPath = contextPath;
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/Baza/users.txt");
@@ -113,6 +118,7 @@ public class UserDAO {
 				st = new StringTokenizer(line, ";");
 				while (st.hasMoreTokens()) {
 
+					int id = Integer.parseInt(st.nextToken().trim());
 					String username = st.nextToken().trim();
 					String password = st.nextToken().trim();
 					String name = st.nextToken().trim();
@@ -125,8 +131,12 @@ public class UserDAO {
 					LocalDate birthday = DateHelper.stringToDate(st.nextToken().trim());
 					
 					int role = Integer.parseInt(st.nextToken().trim());
-					UserTypeEnum[] roles = UserTypeEnum.values();
-					UserTypeEnum roleFromFile = roles[role];
+					UserTypeEnum roleFromFile = null;
+					if(role != -1) {
+						UserTypeEnum[] roles = UserTypeEnum.values();
+						roleFromFile = roles[role];
+					}
+					
 							
 					ArrayList<TrainingHistory>history = new ArrayList<TrainingHistory>();
 					
@@ -143,7 +153,6 @@ public class UserDAO {
 					int buyerTypeID = Integer.parseInt(st.nextToken().trim());
 					BuyerType buyerType = new BuyerType(buyerTypeID);
 					
-					int id = Integer.parseInt(st.nextToken().trim());
 					users.put(id, new User(id,username,password,name,surname,genderFromFile,birthday,roleFromFile,history,membership,sportObject,visitedObjects,collected_points,buyerType));
 
 				}
@@ -155,6 +164,30 @@ public class UserDAO {
 			if (in != null) {
 				try {
 					in.close();
+				}
+				catch (Exception e) { }
+			}
+		}
+	}
+	
+	public void saveToFile() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/Baza/users.txt");
+			out = new BufferedWriter(new FileWriter(file));
+			String line;
+			StringTokenizer st;
+			for(User user : users.values()) {
+				out.write(user.fileLine() + '\n');
+			}
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();             
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
 				}
 				catch (Exception e) { }
 			}

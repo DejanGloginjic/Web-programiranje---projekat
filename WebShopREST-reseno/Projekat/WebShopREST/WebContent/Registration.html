@@ -4,7 +4,6 @@
         <title>Registration form</title>
         <meta charset="UTF-8">
         <link rel="stylesheet" type="text/css" href="styles.css">
-        <script src="jquery-3.3.1.min.js"></script>
 </head>
 
 <body>
@@ -24,9 +23,9 @@
 				</tr>
                 <tr>
 					<td>Gender:</td>
-					<td><input type="radio" id="female" name="gender" value="MALE" v-model="newUser.gender">
+					<td><input type="radio" id="female" name="gender" value="MALE" v-model="newUser.userGender">
                         <label for="male">Male</label>
-                        <input type="radio" id="female" name="gender" value="FEMALE" v-model="newUser.gender">
+                        <input type="radio" id="female" name="gender" value="FEMALE" v-model="newUser.userGender">
                         <label for="female">Female</label><br> 
                     </td>
 
@@ -37,14 +36,18 @@
 				</tr>
                 <tr>
 					<td>Password:</td>
-					<td><input type="text" name="password" v-model="newUser.password"></td>
+					<td><input type="password" name="password" v-model="newUser.password"></td>
 				</tr>
 				<tr>
 					<td><input type="submit" value="Register"></td>
 				</tr>
 			</table>
+			<p id="error" >{{error}}</p>
 
 	</form>
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="app/registration.js"></script>
 		
 </body>
 </html>
