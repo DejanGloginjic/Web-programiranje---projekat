@@ -8,10 +8,81 @@
 	<script src="jquery-3.3.1.min.js"></script>
 </head>
 
+<style>
+
+body{
+	margin: 0; padding: 0; background: linear-gradient(120deg,#58a3d4, #93bfcb);  height: 100vh; overflow: hidden;
+  }
+
+
+.content-table {
+	position: absolute;	top: 50%;left: 50%;	transform: translate(-50%, -50%); width: 700px;	background: white;
+	border-radius: 3px; box-shadow: 10px 10px 15px rgba(0,0,0,0.05); height: 350px;
+}
+
+.content-table thead tr {
+  background-color: #2691d9;
+  color: #ffffff;
+  text-align: left;
+  font-weight: bold;
+  border-radius: 10px;
+}
+
+.content-table th,
+.content-table td {
+  padding: 12px 15px;
+}
+
+.content-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.content-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.content-table tbody tr:last-of-type {
+  border-bottom: 2px solid #2691d9;
+  border-radius: 10px;
+}
+
+div.a {
+	position: absolute;
+    top: 170px;
+	left: 770px;
+}
+
+div.b {
+	position: absolute;
+    top: 130px;
+	left: 1000px;
+    color: rgb(255, 255, 255);
+	font-size: 22px;
+    
+}
+
+.signup_link{
+	margin-top: 10px;
+	text-align: center;
+	font-size: 20px;
+	margin-left: 1300px;
+	color: rgb(255, 255, 255);
+  }
+  .signup_link a{
+	color: rgb(44, 44, 188);
+	text-decoration: none;
+  }
+  .signup_link a:hover{
+	text-decoration: underline;
+  }
+
+</style>
+
 <body>
 	<div id ="sportObjects">
 
-		<label>Search</label>
+
+		<div class="a">
         <input type="text" placeholder="Search" v-model="filter">
 		<select name="criteruim" id="criteruim" v-model="criterium">
 			<option value="Name">Name</option>
@@ -20,35 +91,43 @@
 			<option value="Object type">Object type</option>
 		</select>
 		<button value="search" v-on:click="searchObject">Search</button>
+	    </div>
 
-		<table border="1" id="tabela">
+		<table id="tabela" class="content-table">
 			<thead>
-				<tr bgcolor="lightgrey">
-					<th>ID</th>
+				<tr>
+					<th>Logo</th>
 					<th>Name</th>
 					<th>Type</th>
 					<th>Location</th>
-					<th>Logo</th>
-					<th>Mark</th>
 					<th>Working hours</th>
-                    
+					<th>Mark</th>
+					
 				</tr>
 			</thead>
 
 			<tr v-for="sp in sportObjects">
-				<td>{{sp.id }}</td>
+				<td>{{sp.logoPicture }}</td>
                 <td>{{sp.objectName }}</td>
                 <td>{{sp.objectType }}</td>
 				<td>{{sp.location.place}}, {{sp.location.street}}  {{sp.location.number}}  </td>
-				<td>{{sp.logoPicture }}</td>
-				<td>{{sp.objectMark }}</td>
 				<td>{{sp.startTime.hour}}:{{sp.startTime.minute}} - {{sp.endTime.hour}}:{{sp.endTime.minute}}</td>
+				<td>{{sp.objectMark }}</td>
+				
                 
 
 			</tr>
 		</table>
 		
+		<div class="b">
+		<label>User:</label>
 		<label v-bind:hidden="loggedUser=='{}'">{{loggedUser.username}}</label>
+	    </div>
+
+		<div class="signup_link">
+			Already have account? <a href="http://localhost:8080/WebShopREST/login.html"><br/>Log in</a><br/>
+			Not a member? <a href="http://localhost:8080/WebShopREST/Registration.html"><br/>Register</a>
+		</div>
 
 		
 	</div>
