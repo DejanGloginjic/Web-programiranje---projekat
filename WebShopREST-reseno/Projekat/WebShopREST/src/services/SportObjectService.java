@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -70,12 +71,9 @@ public class SportObjectService {
 	@GET
 	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
-	public SportObject search(@QueryParam("name") String name) {
+	public ArrayList<SportObject> search(@QueryParam("searchValue") String searchValue, @QueryParam("criterion") String criterion) {
 		SportObjectDAO dao = (SportObjectDAO) ctx.getAttribute("sportObjectDAO");
-		return dao.findAll().stream()
-				.filter(sportobject -> sportobject.getObjectName().equals(name))
-				.findFirst()
-				.orElse(null);
+		return dao.search(searchValue, criterion);
 	}
 	
 	@PUT

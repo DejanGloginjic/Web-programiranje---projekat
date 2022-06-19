@@ -72,9 +72,6 @@
 	color: #a6a6a6;
 	cursor: pointer;
   }
-  .pass:hover{
-	text-decoration: underline;
-  }
   input[type="submit"]{
 	width: 100%;
 	height: 50px;
@@ -101,7 +98,7 @@
 
 	h1{text-align: center; color: #2691d9; font-weight: normal; margin-bottom: 60px;}
 
-	
+	.error{color:red}
 
 </style>
 
@@ -115,11 +112,13 @@
 
 				<div class="txt_field">
 					<input type="text" placeholder="Name" v-model="newUser.name">
+					<p id="errorName" class="error">{{errorName}}</p>
 					<span></span>	
 				</div>
 
 				<div class="txt_field">
 					<input type="text" placeholder="Surname" v-model="newUser.surname">
+					<p id="errorSurname" class="error">{{errorSurname}}</p>
 					<span></span>	
 				</div>
 
@@ -140,6 +139,7 @@
 
 				<div class="txt_field">
 					<input type="text" placeholder="Username" v-model="newUser.username">
+					<p id="errorUsername" class="error">{{errorUsername}}</p>
 					<span></span>	
 				</div>
 

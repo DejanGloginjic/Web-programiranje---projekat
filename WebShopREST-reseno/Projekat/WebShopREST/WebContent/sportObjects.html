@@ -11,7 +11,15 @@
 <body>
 	<div id ="sportObjects">
 
+		<label>Search</label>
         <input type="text" placeholder="Search" v-model="filter">
+		<select name="criteruim" id="criteruim" v-model="criterium">
+			<option value="Name">Name</option>
+			<option value="Location">Location</option>
+			<option value="Average grade">Average grade</option>
+			<option value="Object type">Object type</option>
+		</select>
+		<button value="search" v-on:click="searchObject">Search</button>
 
 		<table border="1" id="tabela">
 			<thead>

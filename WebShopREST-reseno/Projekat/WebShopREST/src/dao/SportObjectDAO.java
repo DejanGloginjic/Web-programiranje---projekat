@@ -64,6 +64,36 @@ public class SportObjectDAO {
 		return sportObjects.values();
 	}
 	
+	public ArrayList<SportObject> search(String filter, String criterium){
+		ArrayList<SportObject> sportObjects = new ArrayList<SportObject>();
+		for(SportObject sObject : findAll()) {
+			if(criterium.equals("Name")){
+				if(sObject.getObjectName().toLowerCase().contains(filter.toLowerCase())) {
+					sportObjects.add(sObject);
+				}
+			}
+			
+			if(criterium.equals("Location")) {
+				if(sObject.getLocation().getPlace().toLowerCase().contains(filter.toLowerCase())) {
+					sportObjects.add(sObject);
+				}
+			}
+			
+			if(criterium.equals("Average grade")) {
+				if(sObject.getObjectMark() == Double.parseDouble(filter)) {
+					sportObjects.add(sObject);
+				}
+			}
+			
+			if(criterium.equals("Object type")) {
+				if(sObject.getObjectType().toString().contains(filter)){
+					sportObjects.add(sObject);
+				}
+			}
+		}
+		return sportObjects;
+	}
+	
 	public SportObject save(SportObject sportobject) {
 		Integer maxId = -1;
 		for (int id : sportObjects.keySet()) {
