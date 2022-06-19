@@ -1,7 +1,7 @@
 package beans.Enums;
 
 public enum TrainingTypeEnum {
-	GROUP,
-	PERSONAL,
-	GYM
+	Group,
+	Personal,
+	Gym
 }

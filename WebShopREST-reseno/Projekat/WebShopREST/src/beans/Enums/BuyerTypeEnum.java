@@ -1,8 +1,8 @@
 package beans.Enums;
 
 public enum BuyerTypeEnum {
-	GOLD,
-	SILVER,
-	BRONZE
+	Gold,
+	Silver,
+	Bronze
 
 }

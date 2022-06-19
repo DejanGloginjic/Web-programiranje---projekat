@@ -2,7 +2,7 @@ package beans.Enums;
 
 public enum MembershipStatusEnum {
 	
-	ACTIVE,
-	INACTIVE
+	Active,
+	Inactive
 
 }

@@ -1,6 +1,6 @@
 package beans.Enums;
 
 public enum SportObjectStatusEnum {
-	ACTIVE,
-	INACTIVE
+	Open,
+	Close
 }

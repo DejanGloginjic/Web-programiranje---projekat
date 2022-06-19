@@ -1,8 +1,8 @@
 package beans.Enums;
 
 public enum UserTypeEnum {
-	ADMINISTRATOR,
-	MANAGER,
-	COACH,
-	BUYER
+	Administrator,
+	Manager,
+	Coach,
+	Buyer
 }
