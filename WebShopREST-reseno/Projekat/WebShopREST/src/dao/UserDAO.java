@@ -62,14 +62,14 @@ public class UserDAO {
 	 * @return
 	 */
 	public User check(String username, String password) {
-		if (!users.containsKey(username)) {
-			return null;
+		for(User user : users.values()) {
+			if(user.getUsername().equals(username)) {
+				if(user.getPassword().equals(password)) {
+					return user;
+				}
+			}
 		}
-		User user = users.get(username);
-		if (!user.getPassword().equals(password)) {
-			return null;
-		}
-		return user;
+		return null;
 	}
 	
 

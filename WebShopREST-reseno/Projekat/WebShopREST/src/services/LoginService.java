@@ -44,7 +44,8 @@ public class LoginService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(User user, @Context HttpServletRequest request) {
 		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		User loggedUser = userDao.find(user.getId());		//popraviti na username i password
+		User loggedUser = userDao.check(user.getUsername(), user.getPassword());
+		
 		if (loggedUser == null) {
 			return Response.status(400).entity("Invalid username and/or password").build();
 		}
