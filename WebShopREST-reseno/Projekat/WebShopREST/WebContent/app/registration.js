@@ -44,6 +44,11 @@ var app = new Vue({
 				return;
 			}
 
+			if(/\d/.test(this.newUser.name) || /\d/.test(this.newUser.surname) || this.newUser.username.length < 6){
+				event.preventDefault();
+				return;
+			}
+
 
 			
 			axios.post('rest/users/', this.newUser)
