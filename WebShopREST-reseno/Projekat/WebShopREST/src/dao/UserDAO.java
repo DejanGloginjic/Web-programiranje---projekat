@@ -141,10 +141,18 @@ public class UserDAO {
 					ArrayList<TrainingHistory>history = new ArrayList<TrainingHistory>();
 					
 					int membershipID = Integer.parseInt(st.nextToken().trim());
-					Membership membership = new Membership(membershipID);
+					Membership membership = null;
+					if(membershipID != -1) {
+						membership = new Membership(membershipID);						
+					}
 					
 					int sportObjectID = Integer.parseInt(st.nextToken().trim());
-					SportObject sportObject = new SportObject(sportObjectID);
+					SportObject sportObject = null;
+					
+					if (sportObjectID != -1) {
+						sportObject = new SportObject(sportObjectID);
+					}
+					
 					
 					ArrayList<SportObject> visitedObjects = new ArrayList<SportObject>();
 					
@@ -193,6 +201,7 @@ public class UserDAO {
 			}
 		}
 	}
+	
 	public User change(User user) {
 		users.put(user.getId(), user);
 		return user;
@@ -206,6 +215,9 @@ public class UserDAO {
 		ArrayList<Membership> memberships = new ArrayList<Membership>( MembershipDAO.getInstance().findAll());
 		
 		for(User user : users.values()) {
+			if(user.getMembership() == null) {
+				continue;
+			}
 			int requiredId = user.getMembership().getId();
 			
 			for(Membership m : memberships) {
@@ -222,6 +234,9 @@ public class UserDAO {
 		ArrayList<SportObject> sportObjects = new ArrayList<SportObject>(SportObjectDAO.getInstance().findAll());
 		
 		for(User user : users.values()) {
+			if (user.getSportObject() == null) {
+				continue;
+			}
 			int requiredId = user.getSportObject().getId();
 			
 			for(SportObject so : sportObjects) {

@@ -63,6 +63,12 @@ public class Comment {
 	public void setCommentMark(int commentMark) {
 		this.commentMark = commentMark;
 	}
+
+	public String fileLine() {
+		return id + ";" + buyerComment + ";" + sportObjectComment + ";" + comment + ";" + commentMark;
+	}
+	
+	
 	
 	
 }

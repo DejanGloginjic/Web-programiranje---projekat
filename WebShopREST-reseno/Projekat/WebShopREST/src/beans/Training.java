@@ -9,7 +9,7 @@ public class Training {
 	private TrainingTypeEnum trainingType;
 	private SportObject sportObject;
 	private int duration;
-	private User coach;
+	private User coach;		//moze da bude prazno
 	private String description;
 	private String image;
 	
@@ -97,6 +97,15 @@ public class Training {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+
+	public String fileLine() {
+		return  id + ";" + trainingName + ";" + trainingType
+				+ ";" + sportObject + ";" + duration + ";" + ((coach == null) ? -1 : coach.getId()) + ";"
+				+ description + ";" + image;
+	}
+	
+	
 
 	
 }

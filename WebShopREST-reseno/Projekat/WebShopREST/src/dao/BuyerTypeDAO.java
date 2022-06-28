@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -12,6 +14,7 @@ import java.time.LocalDate;
 import beans.Enums.DateHelper;
 
 import beans.BuyerType;
+import beans.User;
 
 /***
  * <p>Klasa namenjena da uèita korisnike iz fajla i pruža operacije nad njima (poput pretrage).
@@ -24,6 +27,7 @@ import beans.BuyerType;
 public class BuyerTypeDAO {
 	
 	private static BuyerTypeDAO instance = null;
+	private static String contextPath = "";
 	
 	private Map<Integer, BuyerType> buyers = new HashMap<>();
 	
@@ -117,6 +121,33 @@ public class BuyerTypeDAO {
 			}
 		}
 	}
+	
+	
+	public void saveToFile() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/Baza/buyers.txt");
+			out = new BufferedWriter(new FileWriter(file));
+			String line;
+			StringTokenizer st;
+			for(BuyerType buyer : buyers.values()) {
+				out.write(buyer.fileLine() + '\n');
+			}
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();             
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				}
+				catch (Exception e) { }
+			}
+		}
+	}
+	
+	
 		
 		public BuyerType change(BuyerType buyer) {
 			buyers.put(buyer.getId(), buyer);

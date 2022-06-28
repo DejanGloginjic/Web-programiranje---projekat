@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,6 +28,7 @@ import beans.Membership;
 public class MembershipDAO {
 	
 	private static MembershipDAO instance = null;
+	private static String contextPath = "";
 	
 	private Map<Integer, Membership> memberships = new HashMap<>();
 	
@@ -126,6 +129,30 @@ public class MembershipDAO {
 			if (in != null) {
 				try {
 					in.close();
+				}
+				catch (Exception e) { }
+			}
+		}
+	}
+	
+	public void saveToFile() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/Baza/memberships.txt");
+			out = new BufferedWriter(new FileWriter(file));
+			String line;
+			StringTokenizer st;
+			for(Membership membership : memberships.values()) {
+				out.write(membership.fileLine() + '\n');
+			}
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();             
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
 				}
 				catch (Exception e) { }
 			}

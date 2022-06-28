@@ -8,7 +8,7 @@ public class TrainingHistory {
 	private LocalDateTime treningEntrance;
 	private Training training;
 	private User buyer;
-	private User coach;
+	private User coach;		
 	
 	public TrainingHistory(int id, LocalDateTime treningEntrance, Training training, User buyer, User coach) {
 		super();
@@ -62,6 +62,12 @@ public class TrainingHistory {
 	public void setCoach(User coach) {
 		this.coach = coach;
 	}
+
+	public String fileLine() {
+		return id + ";" + treningEntrance + ";" + training + ";" + buyer + ";" + ((coach == null) ? -1 : coach.getId()) ;
+	}
+	
+	
 
 	
 }

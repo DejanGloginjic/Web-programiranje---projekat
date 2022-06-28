@@ -124,6 +124,13 @@ public class Membership {
 	public void setNumberOfAppointment(int numberOfAppointment) {
 		this.numberOfAppointment = numberOfAppointment;
 	}
+
+	public String fileLine() {
+		return id + ";" + MembershipId + ";" + membershipType + ";" + paymentDay + ";" + startDay + ";" + expirationDay + ";"
+				+ price + ";" + buyer + ";" + membershipStatus + ";" + numberOfAppointment;
+	}
+	
+	
 	
 	
 }

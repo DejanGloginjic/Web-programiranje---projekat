@@ -20,8 +20,8 @@ public class User {
 	private LocalDate dateOfBirth;
 	private UserTypeEnum userType;
 	private ArrayList<TrainingHistory> trainingHistory;
-	private Membership membership;
-	private SportObject sportObject;
+	private Membership membership;		//moze da bude prazan
+	private SportObject sportObject;	// moze da bude prazan
 	private ArrayList<SportObject> visitedObject;
 	private int points;
 	private BuyerType buyerType;

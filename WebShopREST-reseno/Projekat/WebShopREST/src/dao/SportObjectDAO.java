@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,6 +34,7 @@ import beans.User;
 public class SportObjectDAO {
 	
 	private static SportObjectDAO instance = null;
+	private static String contextPath = "";
 	
 	private Map<Integer, SportObject> sportObjects = new HashMap<>();
 	
@@ -164,6 +167,31 @@ public class SportObjectDAO {
 			if (in != null) {
 				try {
 					in.close();
+				}
+				catch (Exception e) { }
+			}
+		}
+	}
+	
+	
+	public void saveToFile() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/Baza/objects.txt");
+			out = new BufferedWriter(new FileWriter(file));
+			String line;
+			StringTokenizer st;
+			for(SportObject object : sportObjects.values()) {
+				out.write(object.fileLine() + '\n');
+			}
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();             
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
 				}
 				catch (Exception e) { }
 			}

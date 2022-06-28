@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -30,6 +32,7 @@ import beans.Enums.TrainingTypeEnum;
 public class TrainingHistoryDAO {
 	
 	private static TrainingHistoryDAO instance = null;
+	private static String contextPath = "";
 	
 	private Map<Integer, TrainingHistory> trainings = new HashMap<Integer, TrainingHistory>();
 	
@@ -103,7 +106,12 @@ public class TrainingHistoryDAO {
 					LocalDateTime treningEntrance = LocalDateTimeHelper.stringToDate(st.nextToken().trim());
 					Training training = new Training(Integer.parseInt(st.nextToken().trim()));
 					User buyer = new User(Integer.parseInt(st.nextToken().trim()));
-					User coach = new User(Integer.parseInt(st.nextToken().trim()));
+					
+					int coachId = Integer.parseInt(st.nextToken().trim());
+					User coach = null;
+					if (coachId != -1) {
+						coach = new User(Integer.parseInt(st.nextToken().trim()));
+					}
 					
 					trainings.put(id, new TrainingHistory(id, treningEntrance, training, buyer, coach));
 				}
@@ -115,6 +123,30 @@ public class TrainingHistoryDAO {
 			if (in != null) {
 				try {
 					in.close();
+				}
+				catch (Exception e) { }
+			}
+		}
+	}
+	
+	public void saveToFile() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/Baza/trainingHistory.txt");
+			out = new BufferedWriter(new FileWriter(file));
+			String line;
+			StringTokenizer st;
+			for(TrainingHistory th : trainings.values()) {
+				out.write(th.fileLine() + '\n');
+			}
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();             
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
 				}
 				catch (Exception e) { }
 			}
@@ -165,6 +197,9 @@ public class TrainingHistoryDAO {
 		ArrayList<User> coaches = new ArrayList<User>(UserDAO.getInstance().findAll());
 		
 		for(TrainingHistory th : trainings.values()) {
+			if (th.getCoach() == null) {
+				continue;
+			}
 			int requiredId = th.getCoach().getId();
 			
 			for(User u : coaches) {

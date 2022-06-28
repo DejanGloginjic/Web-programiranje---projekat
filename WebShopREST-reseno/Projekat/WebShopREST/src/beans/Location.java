@@ -86,6 +86,14 @@ public class Location {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+
+
+	public String fileLine() {
+		return id + ";" + longitude + ";" + latitude + ";" + street + ";" + number + ";" +
+	           place + ";" + zipCode;
+	}
+	
+	
 	
 	
 }

@@ -57,6 +57,12 @@ public class BuyerType {
 	public void setPoints(int points) {
 		this.points = points;
 	}
+
+	public String fileLine() {
+		return id + ";" + buyerType + ";" + discount + ";" + points;
+	}
+	
+	
 	
 	
 	

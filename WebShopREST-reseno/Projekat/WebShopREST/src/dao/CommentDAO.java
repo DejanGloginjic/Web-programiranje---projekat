@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -27,6 +29,7 @@ import beans.Enums.TrainingTypeEnum;
 public class CommentDAO {
 	
 	private static CommentDAO instance = null;
+	private static String contextPath = "";
 	
 	private Map<Integer, Comment> comments = new HashMap<>();
 	
@@ -140,6 +143,32 @@ public class CommentDAO {
 			}
 		}
 	}
+	
+	public void saveToFile() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/Baza/comments.txt");
+			out = new BufferedWriter(new FileWriter(file));
+			String line;
+			StringTokenizer st;
+			for(Comment comment : comments.values()) {
+				out.write(comment.fileLine() + '\n');
+			}
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();             
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				}
+				catch (Exception e) { }
+			}
+		}
+	}
+	
+	
 	
 	public void linkCommentAndSportObject() {
 		ArrayList<SportObject> objects = new ArrayList<SportObject>(SportObjectDAO.getInstance().findAll());

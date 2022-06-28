@@ -124,6 +124,13 @@ public class SportObject {
 	public void setEndTime(LocalTime endTime) {
 		this.endTime = endTime;
 	}
+
+	public String fileLine() {
+		return id + ";" + objectName + ";" + objectType + ";" + content + ";" + objectStatus + ";" + location + ";" + logoPicture +
+				";" + objectMark + ";" + startTime + ";" + endTime;
+	}
+	
+	
 	
 	
 	

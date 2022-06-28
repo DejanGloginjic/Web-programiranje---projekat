@@ -1,8 +1,10 @@
 package dao;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.StringTokenizer;
@@ -25,6 +27,7 @@ import beans.Enums.TrainingTypeEnum;
 public class LocationDAO {
 	
 	private static LocationDAO instance = null;
+	private static String contextPath = "";
 
 	private HashMap<Integer, Location> locations = new HashMap<Integer, Location>();
 
@@ -128,6 +131,34 @@ public class LocationDAO {
 			}
 		}
 	}
+	
+	public void saveToFile() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/Baza/locations.txt");
+			out = new BufferedWriter(new FileWriter(file));
+			String line;
+			StringTokenizer st;
+			for(Location location : locations.values()) {
+				out.write(location.fileLine() + '\n');
+			}
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();             
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				}
+				catch (Exception e) { }
+			}
+		}
+	}
+	
+	
+	
+	
 
 	public Location change(Location location) {
 		locations.put(location.getId(), location);
