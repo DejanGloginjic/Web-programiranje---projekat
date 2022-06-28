@@ -126,7 +126,7 @@ public class SportObject {
 	}
 
 	public String fileLine() {
-		return id + ";" + objectName + ";" + objectType + ";" + content + ";" + objectStatus + ";" + location + ";" + logoPicture +
+		return id + ";" + objectName + ";" + objectType + ";" + objectStatus + ";" + location + ";" + logoPicture +
 				";" + objectMark + ";" + startTime + ";" + endTime;
 	}
 	

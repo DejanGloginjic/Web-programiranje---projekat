@@ -202,6 +202,15 @@ public class UserDAO {
 		}
 	}
 	
+	public boolean existsUsername(String username) {
+		for(User user : users.values()) {
+			if(user.getUsername().equals(username)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	public User change(User user) {
 		users.put(user.getId(), user);
 		return user;

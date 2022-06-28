@@ -1,5 +1,5 @@
 var app = new Vue({
-	el: '#registrationFrom',
+	el: '#LoginForm',
 	data: {
 		username: '',
         password: '',
@@ -9,10 +9,16 @@ var app = new Vue({
 	mounted() {},
 	methods:{
 		loginUser: function (event) {
-			axios.post('rest/login', this.username, this.password)
-				.then((response) => {
-					alert('User created successfully')
-                })
+			axios.post('rest/login', {username:this.username, password: this.password})
+			.then((response) => {
+				alert('User logged in successfully.')
+			}).catch(() =>{
+				alert('not valid username and/or password')
+				event.preventDefault();
+				return;
+			})
+			event.preventDefault();
+			return;
 		}
 	}
 });

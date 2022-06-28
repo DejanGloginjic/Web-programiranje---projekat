@@ -2,8 +2,6 @@
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" type="text/css" href="styles.css">
-	<script src="jquery-3.3.1.min.js"></script>
-	<script src="login.js"></script>
 </head>
 <style>
 *{
@@ -115,7 +113,7 @@
 	
 </style>
 <body>
-	<div class="form-wrap">
+	<div class="form-wrap" id="LoginForm">
 	<form id="forma" @submit="loginUser">
 		<h1>Login</h1>
 
@@ -139,5 +137,12 @@
 		<p id="success" hidden="true"></p>
 	</form>
     </div>
+		<script src="jquery-3.3.1.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+	    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+		<script src="js/vue.js"></script>
+		<script src="js/axios.js"></script>
+		<script src="app/login.js"></script>
+
 </body>
 </html>

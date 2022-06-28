@@ -43,15 +43,16 @@ public class LoginService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response login(User user, @Context HttpServletRequest request) {
-		UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
-		User loggedUser = userDao.check(user.getUsername(), user.getPassword());
-		
-		if (loggedUser == null) {
-			return Response.status(400).entity("Invalid username and/or password").build();
+			UserDAO userDao = (UserDAO) ctx.getAttribute("userDAO");
+			User loggedUser = userDao.check(user.getUsername(), user.getPassword());
+			
+			if (loggedUser == null) {
+				return Response.status(400).entity("Invalid username and/or password").build();
+			}
+			request.getSession().setAttribute("user", loggedUser);
+			return Response.status(200).build();
 		}
-		request.getSession().setAttribute("user", loggedUser);
-		return Response.status(200).build();
-	}
+	
 	
 	
 	@POST
@@ -66,5 +67,20 @@ public class LoginService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public User login(@Context HttpServletRequest request) {
 		return (User) request.getSession().getAttribute("user");
+	}
+	
+	@POST
+	@Path("/")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response newObject(User user) {
+		UserDAO dao = (UserDAO) ctx.getAttribute("userDAO");
+		boolean retVal = dao.existsUsername(user.getUsername());
+		if(retVal) {
+			return Response.status(400).entity("Invalid username and/or password").build();			
+		}
+		dao.save(user);
+		return Response.status(200).build();
+		
 	}
 }
