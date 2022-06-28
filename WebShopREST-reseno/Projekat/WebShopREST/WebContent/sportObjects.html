@@ -76,9 +76,58 @@ div.b {
 	text-decoration: underline;
   }
 
+  .navbar {width:100%;
+         background-color:#014b84;
+         padding:0;
+         height: 75px;
+         left:0;
+         top:0;
+         position:absolute;
+         min-width: 1200px;
+   
+	}
+	
+	.navbar ul{float:right;
+    list-style-type:none;
+    margin-top: 30px;
+    margin-right: 20px;
+           text-transform: uppercase;
+           font-size: 1.1em;
+    font-family: 'HelveticaNeueLT Std', 'Helvetica Neue', Helvetica, sans-serif; 
+  }
+
+  .navbar input{margin:0;
+  }
+  .navbar li{display:inline-block;
+           color:#FF9405;
+           margin-right: 15px;}
+  .navbar a{text-decoration:none;}
+  .navbar a:link{color:#fff;}
+  .navbar a:visited{color:#fff;}
+  .navbar a:hover{text-decoration:underline;}
+  .navbar .logout{min-width: 0;
+                  font-size: 1.0em;
+                  background-color: #FF9405;
+                  min-width: 138px;
+                  padding: 7px;
+                  text-align: center;
+                  border: none;
+                  border-radius: 3px;  
+}
+
 </style>
 
 <body>
+    <nav class = "navbar">
+		<ul>
+		  <li>Sport Objects</li><li>|</li>
+		  <li><a href="http://localhost:8080/WebShopREST/profile.html">Profile</a></li>
+		  <li><a href="http://localhost:8080/WebShopREST/login.html">Log in</a></li>
+		  <li><a href="http://localhost:8080/WebShopREST/Registration.html">Create account</a></li>
+		  <li><a href="" class ="logout">Log Out</a></li>
+		</ul>
+	  </nav>
+
 	<div id ="sportObjects">
 
 
@@ -124,11 +173,6 @@ div.b {
 		<label v-bind:hidden="loggedUser=='{}'">{{loggedUser.username}}</label>
 	    </div>
 
-		<div class="signup_link">
-			Already have account? <a href="http://localhost:8080/WebShopREST/login.html"><br/>Log in</a><br/>
-			Not a member? <a href="http://localhost:8080/WebShopREST/Registration.html"><br/>Register</a>
-			View account <a href="http://localhost:8080/WebShopREST/Registration.html"><br/>Account</a>
-		</div>
 
 		
 	</div>
