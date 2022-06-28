@@ -82,7 +82,12 @@ public class UserDAO {
 	}
 	
 	
-	public User save(User user) {
+	public boolean save(User user) {
+		
+		if(existsUsername(user.getUsername())) {
+			return false;
+		}
+		
 		Integer maxId = -1;
 		for (int id : users.keySet()) {
 			int idNum = id;
@@ -94,7 +99,7 @@ public class UserDAO {
 		user.setId(maxId);
 		users.put(user.getId(), user);
 		saveToFile();
-		return user;
+		return true;
 	}
 	
 	/**

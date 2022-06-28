@@ -54,7 +54,7 @@ public class UserService {
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public User newUser(User user) {
+	public boolean newUser(User user) {
 		UserDAO dao = (UserDAO) ctx.getAttribute("userDAO");
 		return dao.save(user);
 	}
