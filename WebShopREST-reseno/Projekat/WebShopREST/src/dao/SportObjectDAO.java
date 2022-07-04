@@ -108,6 +108,7 @@ public class SportObjectDAO {
 		maxId++;
 		sportobject.setId(maxId);
 		sportObjects.put(sportobject.getId(), sportobject);
+		saveToFile();
 		return sportobject;
 	}
 	
@@ -117,6 +118,7 @@ public class SportObjectDAO {
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
 	public void loadSportObjects(String contextPath) {
+		SportObjectDAO.contextPath = contextPath;
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/Baza/objects.txt");

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>CreateSportObject form</title>
+<meta charset="UTF-8">
+
+<style>
+	html { overflow-y: scroll; }
+</style>
+</head>
+
+<body>
+	<div class="container" id="createSOForm">
+		<h1 class="title">Create new sport object</h1>
+		<form @submit='createNewSportObject'>
+			
+			<div class="input-box">
+				<span class="details">Name</span> <input type="text" name="name"
+					placeholder="Enter object name" required v-model="newSO.objectName">
+			</div>
+
+			<div class="input-box">
+				<span class="details">Object type</span> 
+				<select id="type" required v-model="newSO.objectType">
+					<option>Gym</option>
+					<option>Pool</option>
+					<option>SportCenter</option>
+					<option>DanceStudio</option>
+				</select>
+			</div>
+
+						
+			<div class="input-box">
+				<span class="details">Logo</span> <input type="text"
+					name="birthday" placeholder="Enter your birthday" required
+					v-model="newSO.logoPicture">
+			</div>
+
+			<div class="column2">
+				<div class="input-box">
+					<span class="details">Geo Length</span> <input type="text"
+						name="birthday" placeholder="Entergeo length" required
+						v-model="newLocation.longitude">
+			</div>
+						
+			<div class="input-box">
+				<span class="details">Geo Width</span> <input type="text"
+					name="birthday" placeholder="Enter geo width" required
+					v-model="newLocation.latitude">
+			</div>
+						
+			<div class="input-box">
+				<span class="details">Street</span> <input type="text"
+					name="birthday" placeholder="Enter your birthday" required
+					v-model="newLocation.street">
+			</div>
+						
+			<div class="input-box">
+				<span class="details">No</span> <input type="text"
+					name="birthday" placeholder="Enter your birthday" required
+					v-model="newLocation.number">
+			</div>
+						
+			<div class="input-box">
+				<span class="details">City</span> <input type="text"
+					name="birthday" placeholder="Enter your birthday" required
+					v-model="newLocation.place">
+			</div>
+						
+			<div class="input-box">
+				<span class="details">Zip code</span> <input type="text"
+					name="birthday" placeholder="Enter your birthday" required
+					v-model="newLocation.zipCode">
+			</div>
+
+			<select v-bind:hidden="freeManagers === null || freeManagers.length === 0">
+				<option v-for="fm in freeManagers" v-on:click="selectManager(fm)">
+					{{fm.name}} {{fm.surname}} {{fm.user_name}} 
+				</option>
+			</select>
+						
+			<button v-bind:hidden="freeManagers !== null && freeManagers.length != 0 || newManagerExist == true" v-on:click="showForm()"> Register manager</button>
+
+			<div class="button">
+				<input type="submit" value="Confirm">
+			</div>
+			
+		</form>
+
+		<div >
+			<form id="registrationFrom" @submit='createUser' v-bind:hidden="showRegisterForm != true">
+				<h1 > Manager registration </h1>
+		
+						<div class="txt_field">
+							<span class="details">Name: </span>
+							<input type="text" placeholder="Name" v-model="newManager.name">	
+						</div>
+		
+						<div class="txt_field">
+							<span class="details">Surname: </span>
+							<input type="text" placeholder="Surname" v-model="newManager.surname">	
+						</div>
+		
+						<div class="txt_field">
+							<span class="details">Date of birth: </span>
+							<input type="text" placeholder="Date of birth" v-model="newManager.dateOfBirth" onfocus="(this.type='date')"
+							onblur="(this.type='text')">	
+						</div>
+		
+						<div style="white-space:nowrap;">
+						<label>Gender</label>
+						<input type="radio" id="male" name="gender" value="Male" v-model="newManager.userGender">
+							<label for="male">Male</label>
+							<input type="radio" id="female" name="gender" value="Female" v-model="newManager.userGender">
+		                       <label for="female">Female</label><br/>
+						</div>
+		
+						<div class="txt_field">
+							<span class="details">Username: </span>
+							<input type="text" placeholder="Username" v-model="newManager.username">	
+						</div>
+		
+						<div class="txt_field">
+							<span class="details">Password: </span>
+							<input type="password" placeholder="Password" v-model="newManager.password">
+						</div>
+		
+		
+						<input type="submit" value="Register">
+			</form>
+		</div>
+
+	</div>
+
+
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="app/createObject.js"></script>
+
+</body>
+</html>

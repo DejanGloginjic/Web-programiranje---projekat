@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Web shop</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+
+    <div id ="users">
+
+		<table id="tabela" class="content-table">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Surmane</th>
+					<th>Username</th>
+					<th>Gender</th>
+					<th>Date of birth</th>
+					<th>Type</th>
+					
+				</tr>
+			</thead>
+
+			<tr v-for="u in users">
+				<td>{{u.name}}</td>
+                <td>{{u.surname}}</td>
+                <td>{{u.username}}</td>
+				<td>{{u.userGender}}</td>
+				<td>{{u.dateOfBirth}}</td>
+				<td>{{u.userType}}</td>
+			</tr>
+		</table>
+
+        <script src="js/vue.js"></script>
+	    <script src="js/axios.js"></script>
+	    <script src="app/users.js"></script>
+
+</body>
+
+</html>

@@ -53,7 +53,7 @@ var app = new Vue({
 			
 			axios.post('rest/users/', this.newUser)
 				.then((response) => {
-					if(response.data){
+					if(response.data != null){
 						alert('User created successfully!')
 					}else{
 						alert('Username already exists!')

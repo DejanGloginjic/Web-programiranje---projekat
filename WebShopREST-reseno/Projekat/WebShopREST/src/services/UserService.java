@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -16,6 +17,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.SportObject;
 import beans.User;
 import dao.StartingProject;
 import dao.UserDAO;
@@ -54,7 +56,7 @@ public class UserService {
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public boolean newUser(User user) {
+	public User newUser(User user) {
 		UserDAO dao = (UserDAO) ctx.getAttribute("userDAO");
 		return dao.save(user);
 	}
@@ -76,6 +78,33 @@ public class UserService {
 				.filter(user -> user.getName().equals(name))
 				.findFirst()
 				.orElse(null);
+	}
+	
+	@GET
+	@Path("/freeManagers")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getFreeManagers() {
+		UserDAO dao = (UserDAO) ctx.getAttribute("userDAO");
+		return dao.getAllFreeManagers();
+	}
+	
+	@GET
+	@Path("/getTrainers/{objectId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getTrainersForSportObject(@PathParam("objectId") int objectId){
+		UserDAO dao = (UserDAO) ctx.getAttribute("userDAO");
+		return dao.getTrainersForSportObject(objectId);
+	}
+	
+	@GET
+	@Path("/getBuyers/{objectId}")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<User> getBuyersForSportObject(@PathParam("objectId") int objectId){
+		UserDAO dao = (UserDAO) ctx.getAttribute("userDAO");
+		return dao.getBuyersForSportObject(objectId);
 	}
 	
 	@PUT

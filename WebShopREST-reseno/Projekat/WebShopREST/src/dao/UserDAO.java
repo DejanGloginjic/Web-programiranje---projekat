@@ -18,7 +18,7 @@ import beans.SportObject;
 import beans.TrainingHistory;
 import beans.User;
 import beans.Enums.UserGenderEnum;
-
+import beans.Enums.BuyerTypeEnum;
 import beans.Enums.DateHelper;
 import beans.Enums.UserGenderEnum;
 import beans.Enums.UserTypeEnum;
@@ -82,10 +82,19 @@ public class UserDAO {
 	}
 	
 	
-	public boolean save(User user) {
+	public User save(User user) {
+		
+		if(user.getUserType() == UserTypeEnum.Buyer) {
+			BuyerType type = new BuyerType(0);
+			type.setBuyerType(BuyerTypeEnum.Bronze);
+			type.setDiscount(0);
+			type.setPoints(0);
+			type = BuyerTypeDAO.getInstance().save(type);
+			user.setBuyerType(type);
+		}
 		
 		if(existsUsername(user.getUsername())) {
-			return false;
+			return null;
 		}
 		
 		Integer maxId = -1;
@@ -99,7 +108,7 @@ public class UserDAO {
 		user.setId(maxId);
 		users.put(user.getId(), user);
 		saveToFile();
-		return true;
+		return user;
 	}
 	
 	/**
@@ -218,6 +227,17 @@ public class UserDAO {
 	
 	public User change(User user) {
 		users.put(user.getId(), user);
+		if(user.getSportObject() != null) {
+			int id = user.getSportObject().getId();
+			SportObject object = SportObjectDAO.getInstance().find(id);
+			user.setSportObject(object);
+		}
+		if(user.getMembership() != null) {
+			int id = user.getMembership().getId();
+			Membership mem = MembershipDAO.getInstance().find(id);
+			user.setMembership(mem);
+		}
+		saveToFile();
 		return user;
 	}
 	
@@ -309,5 +329,51 @@ public class UserDAO {
 				catch (Exception e) { }
 			}
 		}
+	}
+	
+	public ArrayList<User> getAllFreeManagers(){
+		ArrayList<User> freeManagers = new ArrayList<User>();
+		
+		for(User user : users.values()) {
+			if(user.getUserType() == UserTypeEnum.Manager) {
+				if(user.getSportObject() == null) {
+					freeManagers.add(user);
+				}
+			}
+		}
+		return freeManagers;
+		
+	}
+	
+	public ArrayList<User> getTrainersForSportObject(int objectId){
+		ArrayList<User> trainers = new ArrayList<>();
+		
+		for(User u : users.values()) {
+			for(TrainingHistory th : u.getTrainingHistory()) {
+				if(th.getTraining().getSportObject().getId() == objectId) {
+					if(!trainers.contains(u)) {
+						trainers.add(u);
+					}
+				}
+			}
+		}
+		
+		return trainers;
+	}
+	
+	public ArrayList<User> getBuyersForSportObject(int objectId){
+		ArrayList<User> trainers = new ArrayList<>();
+		
+		for(User u : users.values()) {
+			for(SportObject so : u.getVisitedObject()) {
+				if(so.getId() == objectId) {
+					if(!trainers.contains(u)) {
+						trainers.add(u);
+					}
+				}
+			}
+		}
+		
+		return trainers;
 	}
 }

@@ -1,12 +1,11 @@
 var app = new Vue({
-	el: '#Profile',
+	el: '#users',
 	data: {
-		newUser: {},
-		error: ''
+		users: {}
 	},
 	mounted() {
-		axios.get('rest/currentUser')
-		.then((response) => {this.newUser = response.data})
+		axios.get('rest/users/')
+		    .then((response) => {this.users = response.data})
 		},
 	methods: {
 		editUser: function (event) {

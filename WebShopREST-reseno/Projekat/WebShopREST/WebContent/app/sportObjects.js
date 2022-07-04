@@ -2,8 +2,8 @@ var app = new Vue({
 	el: '#sportObjects',
 	data: {
 		sportObjects: null,
-		filter: "",
-		criterium: "",
+		filter: '',
+		criterium: '',
 		loggedUser: {}
 	},
 	mounted() {

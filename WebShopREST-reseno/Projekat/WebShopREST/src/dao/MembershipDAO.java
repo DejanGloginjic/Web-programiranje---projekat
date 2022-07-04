@@ -81,6 +81,7 @@ public class MembershipDAO {
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
 	public void loadMemberships(String contextPath) {
+		this.contextPath = contextPath;
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/Baza/memberships.txt");

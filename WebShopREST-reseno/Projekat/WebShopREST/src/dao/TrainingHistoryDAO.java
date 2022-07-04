@@ -90,6 +90,7 @@ public class TrainingHistoryDAO {
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
 	public void loadTrainingHistory(String contextPath) {
+		this.contextPath = contextPath;
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/Baza/trainingHistory.txt");

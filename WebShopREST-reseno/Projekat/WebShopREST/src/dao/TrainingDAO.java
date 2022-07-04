@@ -97,6 +97,7 @@ public class TrainingDAO {
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
 	public void loadTrainings(String contextPath) {
+		this.contextPath = contextPath;
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/Baza/trainings.txt");

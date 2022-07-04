@@ -67,7 +67,8 @@ public class LoginService {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public User login(@Context HttpServletRequest request) {
-		return (User) request.getSession().getAttribute("user");
+		User u = (User) request.getSession().getAttribute("user");
+		return u;
 	}
 	
 	@POST

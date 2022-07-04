@@ -86,6 +86,7 @@ public class LocationDAO {
 		maxId++;
 		location.setId(maxId);
 		locations.put(location.getId(), location);
+		saveToFile();
 		return location;
 	}
 
@@ -96,6 +97,7 @@ public class LocationDAO {
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
 	public void loadLocations(String contextPath) {
+		this.contextPath = contextPath;
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/Baza/locations.txt");

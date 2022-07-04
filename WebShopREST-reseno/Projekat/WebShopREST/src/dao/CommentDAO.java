@@ -86,6 +86,7 @@ public class CommentDAO {
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
 	public void loadComments(String contextPath) {
+		this.contextPath = contextPath;
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/Baza/comments.txt");

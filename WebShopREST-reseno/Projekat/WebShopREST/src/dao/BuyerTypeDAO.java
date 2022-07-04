@@ -72,6 +72,7 @@ public class BuyerTypeDAO {
 		maxId++;
 		buyer.setId(maxId);
 		buyers.put(buyer.getId(), buyer);
+		saveToFile();
 		return buyer;
 	}
 	
@@ -81,6 +82,7 @@ public class BuyerTypeDAO {
 	 * @param contextPath Putanja do aplikacije u Tomcatu
 	 */
 	public void loadBuyers(String contextPath) {
+		this.contextPath = contextPath;
 		BufferedReader in = null;
 		try {
 			File file = new File(contextPath + "/Baza/buyers.txt");

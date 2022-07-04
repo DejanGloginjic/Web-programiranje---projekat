@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Web shop</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+
+<body>
+
+    <div id="managerObject">
+        <h1>Sportski objekat</h1>
+
+        <div class="b">
+            <label>Name:</label>
+            <label>{{loggedUser.sportObject.objectName}}</label>
+        </div>
+
+        <div class="b">
+            <label>Type:</label>
+            <label>{{loggedUser.sportObject.objectType}}</label>
+        </div>
+
+        <div class="b">
+            <label>Status:</label>
+            <label>{{loggedUser.sportObject.objectStatus}}</label>
+        </div>
+
+        <div class="b">
+            <label>Location:</label>
+            <label>{{loggedUser.sportObject.location.place}}, {{loggedUser.sportObject.location.street}}  {{loggedUser.sportObject.location.number}}</label>
+        </div>
+
+        <div class="b">
+            <label>Working hours:</label>
+            <label>{{loggedUser.sportObject.startTime.hour}}:{{loggedUser.sportObject.startTime.minute}} - {{loggedUser.sportObject.endTime.hour}}:{{loggedUser.sportObject.endTime.minute}}</label>
+        </div>
+
+        <div class="b">
+            <label>Mark:</label>
+            <label>{{loggedUser.sportObject.objectMark}}</label>
+        </div>
+
+        <div class="b">
+            <button v-on:click="showTrainersForm()">Show trainers</button>
+        </div>
+
+        <div class="b">
+            <button v-on:click="showBuyersForm()">Show buyers</button>
+        </div>
+
+        <div id ="trainers" v-if="showTrainers == true">
+
+            <h2>Coaches</h2>
+
+            <table id="trainers" class="content-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surmane</th>
+                        <th>Username</th>
+                        <th>Gender</th>
+                        <th>Date of birth</th>
+                        <th>Type</th>
+                        
+                    </tr>
+                </thead>
+    
+                <tr v-for="u in trainers">
+                    <td>{{u.name}}</td>
+                    <td>{{u.surname}}</td>
+                    <td>{{u.username}}</td>
+                    <td>{{u.userGender}}</td>
+                    <td>{{u.dateOfBirth}}</td>
+                    <td>{{u.userType}}</td>
+                </tr>
+            </table>
+
+        </div>
+
+        <div id ="buyers" v-if="showBuyers == true">
+
+            <h2>Buyers</h2>
+
+            <table id="buyers" class="content-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Surmane</th>
+                        <th>Username</th>
+                        <th>Gender</th>
+                        <th>Date of birth</th>
+                        <th>Type</th>
+                        
+                    </tr>
+                </thead>
+    
+                <tr v-for="u in buyers">
+                    <td>{{u.name}}</td>
+                    <td>{{u.surname}}</td>
+                    <td>{{u.username}}</td>
+                    <td>{{u.userGender}}</td>
+                    <td>{{u.dateOfBirth}}</td>
+                    <td>{{u.userType}}</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="app/managerObject.js"></script>
+</body>
+</html>

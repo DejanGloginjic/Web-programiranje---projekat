@@ -171,6 +171,8 @@ div.b {
 		<div class="b">
 		<label>User:</label>
 		<label v-bind:hidden="loggedUser=='{}'">{{loggedUser.username}}</label>
+		<a href="http://localhost:8080/WebShopREST/users.html" v-if="loggedUser.userType === 'Administrator'">All users</a>
+		<a href="http://localhost:8080/WebShopREST/createObject.html" v-if="loggedUser.userType === 'Administrator'">Create object</a>
 	    </div>
 
 
