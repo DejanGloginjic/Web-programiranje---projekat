@@ -107,6 +107,17 @@ public class SportObjectDAO {
 		}
 		maxId++;
 		sportobject.setId(maxId);
+		
+		LocationDAO.getInstace().save(sportobject.getLocation());
+		if(sportobject.getLocation() != null) {
+			Collection<Location> loc = LocationDAO.getInstace().findAll();
+			ArrayList<Location> loc1 = new ArrayList<Location>();
+			for(Location l : loc) {
+				loc1.add(l);
+			}
+			sportobject.setLocation(loc1.get(loc1.size()-1));
+		}
+		
 		sportObjects.put(sportobject.getId(), sportobject);
 		saveToFile();
 		return sportobject;

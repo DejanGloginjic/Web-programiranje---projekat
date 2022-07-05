@@ -2,7 +2,8 @@ var app = new Vue({
 	el: '#Profile',
 	data: {
 		newUser: {},
-		error: ''
+		error: '',
+		historyTraining: null
 	},
 	mounted() {
 		axios.get('rest/currentUser')
@@ -15,6 +16,12 @@ var app = new Vue({
 					alert('User profile edit successfully.')
 				})
 			event.preventDefault();
-		}
+		},
+		getTreninzi: function() {
+			axios.get('rest/trainingHistory/getITforUser', { params: { idKorisnika: this.newUser.id } }).
+				then((response) => {
+					this.historyTraining = response.data;
+				})
+		},
 	}
 });

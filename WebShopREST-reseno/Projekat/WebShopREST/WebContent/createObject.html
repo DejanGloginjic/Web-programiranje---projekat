@@ -6,6 +6,10 @@
 
 <style>
 	html { overflow-y: scroll; }
+
+
+
+	
 </style>
 </head>
 
@@ -32,15 +36,16 @@
 						
 			<div class="input-box">
 				<span class="details">Logo</span> <input type="text"
-					name="birthday" placeholder="Enter your birthday" required
+					name="birthday" placeholder="Enter object logo" required
 					v-model="newSO.logoPicture">
 			</div>
 
 			<div class="column2">
 				<div class="input-box">
 					<span class="details">Geo Length</span> <input type="text"
-						name="birthday" placeholder="Entergeo length" required
+						name="birthday" placeholder="Enter geo length" required
 						v-model="newLocation.longitude">
+				</div>
 			</div>
 						
 			<div class="input-box">
@@ -51,31 +56,41 @@
 						
 			<div class="input-box">
 				<span class="details">Street</span> <input type="text"
-					name="birthday" placeholder="Enter your birthday" required
+					name="birthday" placeholder="Enter street" required
 					v-model="newLocation.street">
 			</div>
 						
 			<div class="input-box">
 				<span class="details">No</span> <input type="text"
-					name="birthday" placeholder="Enter your birthday" required
+					name="birthday" placeholder="Enter no" required
 					v-model="newLocation.number">
 			</div>
 						
 			<div class="input-box">
 				<span class="details">City</span> <input type="text"
-					name="birthday" placeholder="Enter your birthday" required
+					name="birthday" placeholder="Enter city" required
 					v-model="newLocation.place">
 			</div>
 						
 			<div class="input-box">
 				<span class="details">Zip code</span> <input type="text"
-					name="birthday" placeholder="Enter your birthday" required
+					name="birthday" placeholder="Enter zip code" required
 					v-model="newLocation.zipCode">
 			</div>
 
-			<select v-bind:hidden="freeManagers === null || freeManagers.length === 0">
-				<option v-for="fm in freeManagers" v-on:click="selectManager(fm)">
-					{{fm.name}} {{fm.surname}} {{fm.user_name}} 
+			<div class="input-box">
+				<span class="details">Start time:</span> <input type="time" name="name"
+					placeholder="Enter object name" required v-model="newSO.startTime">
+			</div>
+
+			<div class="input-box">
+				<span class="details">End time:</span> <input type="time" name="name"
+					placeholder="Enter object name" required v-model="newSO.endTime">
+			</div>
+
+			<select v-model="selectedManager" v-bind:hidden="freeManagers === null || freeManagers.length == 0"  v-on:change="selectManager($event.target.value)">
+				<option v-for="fm in freeManagers" :value="fm">
+					{{fm.name}} {{fm.surname}} {{fm.username}} 
 				</option>
 			</select>
 						

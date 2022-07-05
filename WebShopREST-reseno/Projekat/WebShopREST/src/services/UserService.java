@@ -108,10 +108,10 @@ public class UserService {
 	}
 	
 	@PUT
-	@Path("/{id}")
+	@Path("/")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public User changeOne(User user, @PathParam("id") int id) {
+	public User changeOne(User user) {
 		UserDAO dao = (UserDAO) ctx.getAttribute("userDAO");
 		return dao.change(user);
 	}

@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+
+<style>
+    *{
+	margin: 0; 	padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif;
+  }
+  body{
+	margin: 0; padding: 0; background: linear-gradient(120deg,#58a3d4, #93bfcb);  height: 100vh; overflow: hidden;
+  }
+
+  .center{ 	position: absolute;	top: 50%;left: 50%;	transform: translate(-50%, -50%); width: 400px;	background: white;
+	border-radius: 10px; box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
+  }
+
+  .center form{
+	padding: 0 40px; box-sizing: border-box;
+  }
+
+  form .txt_field{
+	position: relative;
+	border-bottom: 2px solid #adadad;
+	margin: 20px 0;
+  }
+
+  .txt_field input{
+	width: 100%;
+	padding: 0 5px;
+	height: 40px;
+	font-size: 16px;
+	border: none;
+	background: none;
+	outline: none;
+  }
+  .txt_field label{
+	position: absolute;
+	top: 50%;
+	left: 5px;
+	color: #adadad;
+	transform: translateY(-50%);
+	font-size: 16px;
+	pointer-events: none;
+	transition: .5s;
+  }
+  .txt_field span::before{
+	content: '';
+	position: absolute;
+	top: 20px;
+	left: 0;
+	width: 0%;
+	height: 2px;
+	background: #2691d9;
+	transition: .5s;
+  }
+  .txt_field input:focus ~ label,
+  .txt_field input:valid ~ label{
+	top: -5px;
+	color: #2691d9;
+  }
+  .txt_field input:focus ~ span::before,
+  .txt_field input:valid ~ span::before{
+	width: 100%;
+  }
+  .pass{
+	margin: -5px 0 20px 5px;
+	color: #a6a6a6;
+	cursor: pointer;
+  }
+
+  label{ color:#1a7cbd; margin-left: 5px; margin-right: 40px; font-size: 18px;	}
+  
+   
+	
+	 .form-wrap{ width: 480px; background: #e7edf2; padding: 40px 20px; box-sizing: border-box; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); height: 640px;}
+
+	h1{text-align: center; color: #2691d9; font-weight: normal; margin-bottom: 60px;}
+
+	.error{color:red}
+
+</style>
+
+<body>
+    
+        <div class="form-wrap" id="viewSO">
+            <form>
+                <div class="user-details">
+    
+    
+                    <div class="input-box">
+                        <span class="details"></span>
+    
+                    </div>
+                    
+    
+                    <div class="txt_field">
+    
+                        <span class="details">Name</span> <input type="text" name="name"
+                            v-model="so.objectName"
+                            pattern="[A-Za-z]{1,32}" disabled>
+                    </div>
+    
+                    <div class="txt_field">
+                        <span class="details">Type</span> <input type="text"
+                            name="surname" 
+                            v-model="so.objectType" pattern="[A-Za-z]{1,32}" disabled>
+                    </div>
+    
+                    <div class="txt_field">
+                        <span class="details">Working status</span> <input type="text"
+                            name="birthday"
+                            v-model="so.objectStatus" disabled>
+                    </div>
+    
+    
+                    <div class="txt_field">
+                        <span class="details">Street</span> <input type="text"
+                            v-model="so.location.street" width="15" disabled>
+    
+                    </div>
+                    <div class="txt_field">
+                        <span class="details">Number</span> <input type="text"
+                            v-model="so.location.number" width="15" disabled>
+    
+                    </div>
+                    <div class="txt_field">
+                        <span class="details">City</span> <input type="text"
+                            v-model="so.location.place" width="15" disabled>
+    
+                    </div>
+    
+                    <div class="txt_field">
+                        <span class="details">Average grade</span> <input type="text"
+                            name="grade" 
+                            v-model="so.objectMark" disabled>
+                    </div>
+    
+                    
+                </div>
+            </form>
+    
+        </div>
+    
+    
+        <script src="js/vue.js"></script>
+        <script src="js/axios.js"></script>
+        <script src="app/ObjectView.js"></script>
+    
+    
+
+</body>
+</html>

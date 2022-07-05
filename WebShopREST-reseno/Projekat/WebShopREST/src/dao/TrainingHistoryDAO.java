@@ -194,6 +194,16 @@ public class TrainingHistoryDAO {
 		}
 	}
 	
+	public Collection<TrainingHistory> getTrainingHistoryforUser(int idKorisnika){
+		ArrayList<TrainingHistory> found = new ArrayList<TrainingHistory>();
+		for(TrainingHistory historyTraining : trainings.values()) {
+			if(historyTraining.getBuyer().getId() == idKorisnika) {
+				found.add(historyTraining);
+			}
+		}
+		return found;
+	}
+	
 	public void linkTrainingHistoryAndCoach() {
 		ArrayList<User> coaches = new ArrayList<User>(UserDAO.getInstance().findAll());
 		

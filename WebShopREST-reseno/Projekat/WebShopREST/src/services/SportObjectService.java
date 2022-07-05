@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -16,6 +17,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import beans.SportObject;
 import dao.SportObjectDAO;
@@ -66,6 +68,25 @@ public class SportObjectService {
 	public SportObject findOne(@PathParam("id") int id) {
 		SportObjectDAO dao = (SportObjectDAO) ctx.getAttribute("sportObjectDAO");
 		return dao.find(id);
+	}
+	
+	@POST
+	@Path("/setSelected")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response setSelected(SportObject object, @Context HttpServletRequest request) {
+		object = SportObjectDAO.getInstance().find(object.getId());
+		request.getSession().setAttribute("selected", object);
+		return Response.status(200).build();
+	}
+	
+	@GET
+	@Path("/getSelected")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public SportObject getSelected( @Context HttpServletRequest request) {
+		SportObject object = (SportObject)request.getSession().getAttribute("selected");
+		return object;
 	}
 	
 	@GET

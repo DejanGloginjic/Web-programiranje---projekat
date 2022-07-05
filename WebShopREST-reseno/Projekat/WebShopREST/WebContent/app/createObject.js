@@ -21,7 +21,7 @@ var app = new Vue({
 				this.freeManagers = response.data
 			})
 		this.newSO = { id: '', objectName: null, objectType: null, content: null, objectStatus: 'Close', location: {}, logoPicture: null, objectMark: null, startTime: null, endTime: null };
-		this.newLocation = { id: '', longitude: '', latitude: '', street: '', number: '', place: '', zipCode: '' };
+		this.newLocation = { id: '', longitude: '', latitude: '', street: null, number: null, place: null, zipCode: null };
 		//this.newManager = {id: '', username: '', password: '', name: '', surname: '', userGender: null, dateOfBirth: null, userType: 'Manager', trainingHistory: null, membership: null, sportObject: null, visitedObject: null, points: 0, buyerType: null}
 
 
@@ -68,8 +68,8 @@ var app = new Vue({
 					return;
 				})
 
-			this.newManager.sportObject = this.newSO;
-			axios.put('rest/users/' + this.newManager.id, this.newManager)
+			this.selectedManager.sportObject = this.newSO;
+			axios.put('rest/users/', this.selectedManager)
 				.then((response) => {
 					alert('Manager updated succesfuly')
 				}).catch(() => {

@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import beans.TrainingHistory;
 import dao.StartingProject;
 import dao.TrainingHistoryDAO;
+import dto.TrainingHistoryDTO;
 
 @Path("/trainingHistory")
 public class TrainingHistoryService {
@@ -76,6 +78,23 @@ public class TrainingHistoryService {
 				.findFirst()
 				.orElse(null);
 	}*/
+	
+	@GET
+	@Path("/getITforUser")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<TrainingHistoryDTO> getTrainingHistoryforUser(@QueryParam("idKorisnika") int idKorisnika) {
+		TrainingHistoryDAO dao = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
+		ArrayList<TrainingHistory> treninzi = (ArrayList<TrainingHistory>) dao.getTrainingHistoryforUser(idKorisnika);
+		ArrayList<TrainingHistoryDTO> treninziDTO = new ArrayList<TrainingHistoryDTO>();
+		for(TrainingHistory istorija : treninzi) {
+			treninziDTO.add(new TrainingHistoryDTO(istorija));
+		}
+		return treninziDTO;
+	} 
+	
+	
+	
+	
 	
 	@PUT
 	@Path("/{id}")

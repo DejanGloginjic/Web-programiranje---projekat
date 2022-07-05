@@ -7,11 +7,12 @@
 
 <style>
 
+
     *{
         margin: 0; 	padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif;
       }
       body{
-        margin: 0; padding: 0; background: linear-gradient(120deg,#58a3d4, #93bfcb);  height: 100vh; overflow: hidden;
+        margin: 0; padding: 0; background: linear-gradient(120deg,#58a3d4, #93bfcb);  height: 100vh; overflow: hidden ; display:inherit;
       }
     
       .center{ 	position: absolute;	top: 50%;left: 50%;	transform: translate(-50%, -50%); width: 400px;	background: white;
@@ -148,12 +149,30 @@
 				</div>
 
 
-                <input type="submit" value="Save changes">
-
-
 			<p id="error" >{{error}}</p>
 
 	</form>
+
+  <input type="submit" value="Save changes">
+
+  <table border="1" id="tabela">
+    <thead>
+      <tr bgcolor="lightgrey">
+        <th>Naziv</th>
+        <th>Sportski objekat</th>
+        <th>Datum i vreme</th>
+      </tr>
+    </thead>
+
+    <tr v-for="ht in historyTraining">
+      <td>{{ht.training.trainingName }}</td>
+      <td>{{ht.training.sportObject.objectName }}</td>
+      <td>{{ht.treningEntrance.dayOfMonth }}. {{ht.treningEntrance.monthValue}}. {{ht.treningEntrance.year}}. {{ht.treningEntrance.hour}}:{{ht.datumVremePrijave.minute}}</td>
+    </tr>
+  </table>
+
+ 
+
 </div>
 	<script src="js/vue.js"></script>
 	<script src="js/axios.js"></script>

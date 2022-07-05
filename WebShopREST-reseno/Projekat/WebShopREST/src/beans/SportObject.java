@@ -3,6 +3,7 @@ package beans;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import beans.Enums.LocalTimeHelper;
 import beans.Enums.ObjectTypeEnum;
 import beans.Enums.SportObjectStatusEnum;
 import beans.Enums.TrainingTypeEnum;
@@ -113,16 +114,16 @@ public class SportObject {
 		return startTime;
 	}
 
-	public void setStartTime(LocalTime startTime) {
-		this.startTime = startTime;
+	public void setStartTime(String startTime) {
+		this.startTime = LocalTimeHelper.stringToDate(startTime);
 	}
 
 	public LocalTime getEndTime() {
 		return endTime;
 	}
 
-	public void setEndTime(LocalTime endTime) {
-		this.endTime = endTime;
+	public void setEndTime(String endTime) {
+		this.endTime = LocalTimeHelper.stringToDate(endTime);
 	}
 
 	public String fileLine() {
