@@ -23,7 +23,7 @@ var app = new Vue({
 		findUsers: function() {
 			this.searchedUser = []
 			for(let user of this.users){
-				if(user.name.includes(this.searchName)){
+				if(user.name.includes(this.searchName) && user.surname.includes(this.searchSurname) && user.username.includes(this.searchUsername)){
 					this.searchedUser.push(user)
 				}
 			}
