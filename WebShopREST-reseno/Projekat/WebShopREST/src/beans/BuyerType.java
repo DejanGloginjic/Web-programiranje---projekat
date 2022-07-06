@@ -59,7 +59,7 @@ public class BuyerType {
 	}
 
 	public String fileLine() {
-		return id + ";" + buyerType + ";" + discount + ";" + points;
+		return id + ";" + buyerType.ordinal() + ";" + discount + ";" + points;
 	}
 	
 	

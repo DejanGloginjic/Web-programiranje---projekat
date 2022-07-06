@@ -187,6 +187,26 @@ public class TrainingHistoryDAO {
 			for(User u : buyers) {
 				if(u.getId() == requiredId) {
 					th.setBuyer(u);
+					//u.addTrainingToTrainingHistory(th);
+					break;
+				}
+			}
+		}
+	}
+	
+	
+	public void linkTrainingHistoryAndCoach() {
+		ArrayList<User> coaches = new ArrayList<User>(UserDAO.getInstance().findAll());
+		
+		for(TrainingHistory th : trainings.values()) {
+			if (th.getCoach() == null) {
+				continue;
+			}
+			int requiredId = th.getCoach().getId();
+			
+			for(User u : coaches) {
+				if(u.getId() == requiredId) {
+					th.setCoach(u);
 					u.addTrainingToTrainingHistory(th);
 					break;
 				}
@@ -203,23 +223,4 @@ public class TrainingHistoryDAO {
 		}
 		return found;
 	}
-	
-	public void linkTrainingHistoryAndCoach() {
-		ArrayList<User> coaches = new ArrayList<User>(UserDAO.getInstance().findAll());
-		
-		for(TrainingHistory th : trainings.values()) {
-			if (th.getCoach() == null) {
-				continue;
-			}
-			int requiredId = th.getCoach().getId();
-			
-			for(User u : coaches) {
-				if(u.getId() == requiredId) {
-					th.setCoach(u);
-					break;
-				}
-			}
-		}
-	}
-	
 }

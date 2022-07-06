@@ -1,36 +1,46 @@
-package beans;
+package dto;
 
+import beans.SportObject;
+import beans.Training;
 import beans.Enums.TrainingTypeEnum;
 
-public class Training {
-	
+public class TrainingDTO {
 	private int id;
 	private String trainingName;
 	private TrainingTypeEnum trainingType;
 	private SportObject sportObject;
 	private int duration;
-	private User coach;		//moze da bude prazno
 	private String description;
 	private String image;
 	
-	public Training(int id, String trainingName, TrainingTypeEnum trainingType, SportObject sportObject, int duration,
-			User coach, String description, String image) {
+	public TrainingDTO(Training training) {
+		this.id = training.getId();
+		this.trainingName = training.getTrainingName();
+		this.trainingType = training.getTrainingType();
+		this.sportObject = training.getSportObject();
+		this.duration = training.getDuration();
+		this.description = training.getDescription();
+		this.image = training.getImage();
+	}
+	
+	
+	public TrainingDTO(int id, String trainingName, TrainingTypeEnum trainingType, SportObject sportObject,
+			int duration, String description, String image) {
 		super();
 		this.id = id;
 		this.trainingName = trainingName;
 		this.trainingType = trainingType;
 		this.sportObject = sportObject;
 		this.duration = duration;
-		this.coach = coach;
 		this.description = description;
 		this.image = image;
 	}
 
-	public Training(int id) {
+	public TrainingDTO(int id) {
 		this.id = id;
 	}
-	
-	public Training() {
+
+	public TrainingDTO() {
 		super();
 	}
 
@@ -74,14 +84,6 @@ public class Training {
 		this.duration = duration;
 	}
 
-	public User getCoach() {
-		return coach;
-	}
-
-	public void setCoach(User coach) {
-		this.coach = coach;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -98,14 +100,4 @@ public class Training {
 		this.image = image;
 	}
 
-
-	public String fileLine() {
-		return  id + ";" + trainingName + ";" + trainingType.ordinal()
-				+ ";" + sportObject.getId() + ";" + duration + ";" + ((coach == null) ? -1 : coach.getId()) + ";"
-				+ description + ";" + image;
-	}
-	
-	
-
-	
 }

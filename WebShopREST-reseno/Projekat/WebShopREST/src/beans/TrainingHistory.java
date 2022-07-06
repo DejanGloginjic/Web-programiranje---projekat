@@ -64,7 +64,7 @@ public class TrainingHistory {
 	}
 
 	public String fileLine() {
-		return id + ";" + treningEntrance + ";" + training + ";" + buyer + ";" + ((coach == null) ? -1 : coach.getId()) ;
+		return id + ";" + treningEntrance + ";" + training.getId() + ";" + buyer.getId() + ";" + ((coach == null) ? -1 : coach.getId()) ;
 	}
 	
 	

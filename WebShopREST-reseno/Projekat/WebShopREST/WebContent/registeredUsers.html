@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Registered users</title>
+</head>
+<body>
+    
+        <div id="rUsers">
+    
+               
+            <p>
+                <input type="text" name="searchName" placeholder="Name" v-model="searchName">
+                <input type="text" name="searchSurname" placeholder="Surname" v-model="searchSurname">
+                <input type="text" name="searchUsername" placeholders="Username" v-model="searchUsername">
+                <button value="Search" v-on:click="findUsers">Search</button>
+            </p>
+    
+    
+    
+            <table border="1" id="tabela">
+                <thead>
+                    <tr bgcolor="lightgrey">
+                        <th>Username</th>
+                        <th>Name</th>
+                        <th>Surname</th>
+                        <th>Gender</th>
+                        <th>Date of birth</th>
+                        <th>User type</th>
+                    </tr>
+                </thead>
+    
+                <tr v-for="u in users">
+                    <td>{{u.username }}</td>
+                    <td>{{u.name }}</td>
+                    <td>{{u.surname }}</td>
+                    <td>{{u.userGender }}</td>
+                    <td>{{u.dateOfBirth}} </td>
+                    <td>{{u.userType}}</td>
+                </tr>
+            </table>
+    
+    
+        </div>
+        <script src="js/vue.js"></script>
+        <script src="js/axios.js"></script>
+        <script src="js/registeredUsers.js"></script>
+    
+
+</body>
+</html>

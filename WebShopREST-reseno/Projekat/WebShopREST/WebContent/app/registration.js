@@ -8,7 +8,7 @@ var app = new Vue({
 		error: ''
 	},
 	mounted() {
-		this.newUser = { id: '', name: null, surname: null, dateOfBirth: null, userGender: null, username: null, password: null }
+		this.newUser = { id: '', name: null, surname: null, dateOfBirth: null, userGender: null, username: null, password: null, userType: 'Buyer' }
 	},
 	methods:{
 		createUser: function (event) {
