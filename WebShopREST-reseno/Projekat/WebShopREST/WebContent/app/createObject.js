@@ -3,16 +3,11 @@ var app = new Vue({
 	data: {
 		newSO: {},
 		newLocation: {},
+		error: '',
 		freeManagers: null,
 		haveManagers: 'true',
-		selectedManager: null,
-		newManager: {},
-		newManagerExist: false,
-		showRegisterForm: false,
-		errorName: '',
-		errorSurname: '',
-		errorUsername: '',
-		error: ''
+		selectedManager: {},
+		showRegisterForm: false
 	},
 	mounted() {
 		axios.get('rest/users/freeManagers')
@@ -20,16 +15,15 @@ var app = new Vue({
 				console.log(response.data)
 				this.freeManagers = response.data
 			})
-		this.newSO = { id: '', objectName: null, objectType: null, content: null, objectStatus: 'Close', location: {}, logoPicture: null, objectMark: null, startTime: null, endTime: null };
-		this.newLocation = { id: '', longitude: '', latitude: '', street: null, number: null, place: null, zipCode: null };
-		//this.newManager = {id: '', username: '', password: '', name: '', surname: '', userGender: null, dateOfBirth: null, userType: 'Manager', trainingHistory: null, membership: null, sportObject: null, visitedObject: null, points: 0, buyerType: null}
+		this.newSO = { id: '', objectName: null, objectType: null, content: null, objectStatus: 'Close', location: null, logoPicture: null, objectMark: null, startTime: null, endTime: null };
+		this.newLocation = { id: '', longitude: null, latitude: null, street: null, number: null, zipCode: null };
 
 
 	},
 	methods: {
 		createNewSportObject: function(event) {
 			this.error = ""
-			if (!this.newSO.objectName || !this.newSO.objectType || !this.newSO.logoPicture) {
+			if (!this.newSO.objectName || !this.newSO.objectType || !this.newSO.logoPicture || !this.newSO.startTime || !this.newSO.endTime) {
 				this.error = "Fill all input fields.";
 				event.preventDefault();
 				return;
@@ -39,65 +33,60 @@ var app = new Vue({
 				event.preventDefault();
 				return;
 			}
-			if(this.selectedManager === null){
-			   this.selectedManager = this.freeManagers[0]
-		   }
-
-		   axios.post('rest/locations/', this.newLocation)
-				.then((response) => {
-					this.newLocation = response.data;
-					alert('New location created.')
-				})
-				.catch(() => {
-					alert('This location already exists.')
-					this.error = "This location already exists.";
-					event.preventDefault();
-					return;
-				})
+			if (this.selectedManager === null) {
+				this.selectedManager = this.freeManagers[0]
+			}
 
 			this.newSO.location = this.newLocation
 			axios.post('rest/sportobjects/', this.newSO)
 				.then((response) => {
+					alert('New sport object created.');
 					this.newSO = response.data;
-					alert('New sport object created.')
+					this.selectedManager.sportObject = this.newSO;
+					axios.put('rest/users/', this.selectedManager)
+						.then((response) => {
+							alert('Sport object added to manager')
+						}).catch(() => {
+							alert('This sport object already exists.USER');
+							this.error = "This sport object already exists.";
+							event.preventDefault();
+							return;
+						})
 				})
 				.catch(() => {
-					alert('This sport object already exists.')
+					alert('This sport object already exists.');
 					this.error = "This sport object already exists.";
 					event.preventDefault();
 					return;
 				})
 
-			this.selectedManager.sportObject = this.newSO;
-			axios.put('rest/users/', this.selectedManager)
-				.then((response) => {
-					alert('Manager updated succesfuly')
-				}).catch(() => {
-					alert('Manager is not updated');
-					event.preventDefault();
-					return;
-				})
+
 			event.preventDefault();
 		},
 		selectManager: function(manager) {
-			this.newManager = manager;
+			this.selectedManager = manager;
 		},
-		showForm: function(){
-		   this.showRegisterForm = true;
-	   },
-	   createUser: function (event) {
-			this.newManager.userType = 'Manager'
-			axios.post('rest/users/', this.newManager)
+		showForm: function() {
+			this.showRegisterForm = true;
+		},
+		createUser: function(event) {
+			if (!this.selectedManager.name || !this.selectedManager.surname || !this.selectedManager.dateOfBirth || !this.selectedManager.userGender || !this.selectedManager.username || !this.selectedManager.password) {
+				this.error = "Fill all input fields.";
+				event.preventDefault();
+				return;
+			}
+		   this.selectedManager.userType = 'Manager';
+			axios.post('rest/users/', this.selectedManager)
 				.then((response) => {
-					this.newManager = response.data;
-					alert('Manager created succesfuly!')
-				}).catch(() => {
-					alert('This username already exists.')
+					alert('New user registered.')
+					this.selectedManager = response.data
+				})
+				.catch(() => {
+					alert('username already exists.')
+					this.error = "username already exists.";
 					event.preventDefault();
 					return;
 				})
-			this.newManagerExist = true;
-			this.showRegisterForm = false;
 			event.preventDefault();
 		}
 	}

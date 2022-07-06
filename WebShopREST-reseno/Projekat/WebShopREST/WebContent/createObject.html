@@ -5,145 +5,313 @@
 <meta charset="UTF-8">
 
 <style>
-	html { overflow-y: scroll; }
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: "Poppins", sans-serif;
+}
 
+body {
+	margin: 0;
+	padding: 0;
+	background: linear-gradient(120deg, #58a3d4, #93bfcb);
+	height: 100vh;
+	overflow: hidden;
+	display: inherit;
+}
 
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 400px;
+	background: white;
+	border-radius: 10px;
+	box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+}
 
-	
+.center form {
+	padding: 0 40px;
+	box-sizing: border-box;
+}
+
+form .input-box {
+	position: relative;
+	border-bottom: 2px solid #adadad;
+	margin: 20px 0;
+}
+
+.input-box input {
+	width: 100%;
+	padding: 0 5px;
+	height: 30px;
+	font-size: 16px;
+	border: none;
+	background: none;
+	outline: none;
+}
+
+.input-box label {
+	position: absolute;
+	top: 50%;
+	left: 5px;
+	color: #adadad;
+	transform: translateY(-50%);
+	font-size: 16px;
+	pointer-events: none;
+	transition: .5s;
+}
+
+.input-box span::before {
+	content: '';
+	position: absolute;
+	top: 40px;
+	left: 0;
+	width: 0%;
+	height: 2px;
+	background: #2691d9;
+	transition: .5s;
+}
+
+.input-box input:focus ~ label, .txt_field input:valid ~ label {
+	top: -5px;
+	color: #2691d9;
+}
+
+.input-box input:focus ~ span::before, .txt_field input:valid ~ span::before
+	{
+	width: 100%;
+}
+
+.pass {
+	margin: -5px 0 20px 5px;
+	color: #a6a6a6;
+	cursor: pointer;
+}
+
+input[type="submit"] {
+	width: 100%;
+	height: 50px;
+	border: 1px solid;
+	background: #2691d9;
+	border-radius: 25px;
+	font-size: 18px;
+	color: #e9f4fb;
+	font-weight: 700;
+	cursor: pointer;
+	outline: none;
+	margin-top: 20px;
+}
+
+input[type="submit"]:hover {
+	border-color: #2691d9;
+	transition: .5s;
+}
+
+label {
+	color: #1a7cbd;
+	margin-left: 5px;
+	margin-right: 40px;
+	font-size: 18px;
+}
+
+.form-wrap {
+	width: 480px;
+	background: #e7edf2;
+	padding: 40px 20px;
+	box-sizing: border-box;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	height: 640px;
+}
+
+h1 {
+	text-align: center;
+	color: #2691d9;
+	font-weight: normal;
+	margin-bottom: 60px;
+}
+
+.error {
+	color: red
+}
 </style>
 </head>
 
 <body>
-	<div class="container" id="createSOForm">
-		<h1 class="title">Create new sport object</h1>
+	<div class="form-wrap" id="createSOForm" style="overflow-y:scroll;height:700px;">
+		<div class="title">Create new sport object</div>
 		<form @submit='createNewSportObject'>
+			<div class="user-details">
+
+				<div class="row">
+					<div class="column1">
+						<div class="input-box">
+							<span class="details"></span>
+						</div>
+				
+
+						<div class="input-box">
+							<span class="details">Name</span> <input type="text" name="name"
+								placeholder="Enter object name" required v-model="newSO.objectName">
+						</div>
+
+
+						<div class="input-box">
+							<span class="details">Object type</span> <select type="combobox"
+								class="combobox" width="15" required v-model="newSO.objectType"
+								size=1
+								style="width: 170px; height: 40px; border-radius: 5px; font-size: 16px">
+								<option value="Gym">Gym</option>
+								<option value="Pool">SwimmingPool</option>
+								<option value="SportCenter">SportsCenter</option>
+								<option value="DanceStudio">DanceStudio</option>
+							</select>
+						</div>
+
+
+						<div class="input-box">
+							<span class="details">Logo</span> <input type="text" name="logo"
+								placeholder="Insert logo" required v-model="newSO.logoPicture">
+						</div>
+
+						<div class="input-box">
+							<span class="details">Begin work</span> <input type="time"
+								name="begin" placeholder="Insert work hours" required
+								v-model="newSO.startTime">
+						</div>
+
+						<div class="input-box">
+							<span class="details">End work</span> <input type="time"
+								name="end" placeholder="Insert work hours" required
+								v-model="newSO.endTime">
+						</div>
+
+
+
+					</div>
+
+					<div class="column2">
+						<div class="input-box">
+							<span class="details">Geo Length</span> <input type="text"
+								name="geol" placeholder="Enter geo length" required
+								v-model="newLocation.longitude">
+						</div>
+
+						<div class="input-box">
+							<span class="details">Geo Width</span> <input type="text"
+								name="geow" placeholder="Enter geo width" required
+								v-model="newLocation.latitude">
+						</div>
+
+						<div class="input-box">
+							<span class="details">Street</span> <input type="text"
+								name="street" placeholder="Enter street" required
+								v-model="newLocation.street">
+						</div>
+
+						<div class="input-box">
+							<span class="details">No</span> <input type="text"
+								name="streetno" placeholder="Enter street number" required
+								v-model="newLocation.number">
+						</div>
+
+						<div class="input-box">
+							<span class="details">City</span> <input type="text" name="city"
+								placeholder="Enter city" required v-model="newLocation.place">
+						</div>
+
+						<div class="input-box">
+							<span class="details">City Number</span> <input type="text"
+								name="cityno" placeholder="Enter city  number" required
+								v-model="newLocation.zipCode">
+						</div>
+
+
+						<select v-model="selectedManager"
+							v-bind:hidden="freeManagers === null || freeManagers.length == 0">
+							<option v-for="fm in freeManagers" :value="fm">
+								{{fm.name}} {{fm.surname}} {{fm.username}}</option>
+						</select>
+
+
+						<div class="button1"
+							v-bind:hidden="freeManagers !== null && freeManagers.length != 0"
+							v-on:click="showForm()">
+							<button type="button">Register manager</button>
+						</div>
+		
+					</div>
+
+					
+							
 			
-			<div class="input-box">
-				<span class="details">Name</span> <input type="text" name="name"
-					placeholder="Enter object name" required v-model="newSO.objectName">
-			</div>
 
-			<div class="input-box">
-				<span class="details">Object type</span> 
-				<select id="type" required v-model="newSO.objectType">
-					<option>Gym</option>
-					<option>Pool</option>
-					<option>SportCenter</option>
-					<option>DanceStudio</option>
-				</select>
-			</div>
 
-						
-			<div class="input-box">
-				<span class="details">Logo</span> <input type="text"
-					name="birthday" placeholder="Enter object logo" required
-					v-model="newSO.logoPicture">
-			</div>
+				
+ 			<div class="column3">
+ 
+					<div class="input-box" v-bind:hidden="showRegisterForm == false">
 
-			<div class="column2">
-				<div class="input-box">
-					<span class="details">Geo Length</span> <input type="text"
-						name="birthday" placeholder="Enter geo length" required
-						v-model="newLocation.longitude">
+						<div class="input-box">
+							<span class="details">Name</span> <input v-model="selectedManager.name" type="text" name="name"
+								placeholder="Enter your name" pattern="[A-Za-z]{1,32}">
+						</div>
+
+						<div class="input-box">
+							<span class="details">Surname</span> <input v-model="selectedManager.surname" type="text"
+								name="surname" placeholder="Enter your surname"
+								pattern="[A-Za-z]{1,32}">
+						</div>
+
+						<div class="input-box">
+							<span class="details">Birthday</span> <input v-model="selectedManager.dateOfBirth" type="date"
+								name="birthday" placeholder="Enter your birthday">
+						</div>
+
+
+						<div class="input-box">
+							<span class="details">Gender</span> <select v-model="selectedManager.userGender" type="combobox"
+								class="combobox" width="15" required size=1
+								style="width: 300px; height: 40px; border-radius: 5px; font-size: 16px">
+								<option value="Female">Female</option>
+								<option value="Male">Male</option>
+							</select>
+						</div>
+
+						<div class="input-box">
+							<span class="details">Username</span> <input v-model="selectedManager.username" type="text"
+								name="username" placeholder="Enter your username">
+						</div>
+
+						<div class="input-box">
+							<span class="details">Password</span> <input v-model="selectedManager.password" type="password"
+								name="password" placeholder="Enter your password">
+						</div>
+
+						<div class="button">
+							<button type="button" v-on:click="createUser">Register new Menager</button>
+						</div>
+
+
+					</div>
+
 				</div>
-			</div>
-						
-			<div class="input-box">
-				<span class="details">Geo Width</span> <input type="text"
-					name="birthday" placeholder="Enter geo width" required
-					v-model="newLocation.latitude">
-			</div>
-						
-			<div class="input-box">
-				<span class="details">Street</span> <input type="text"
-					name="birthday" placeholder="Enter street" required
-					v-model="newLocation.street">
-			</div>
-						
-			<div class="input-box">
-				<span class="details">No</span> <input type="text"
-					name="birthday" placeholder="Enter no" required
-					v-model="newLocation.number">
-			</div>
-						
-			<div class="input-box">
-				<span class="details">City</span> <input type="text"
-					name="birthday" placeholder="Enter city" required
-					v-model="newLocation.place">
-			</div>
-						
-			<div class="input-box">
-				<span class="details">Zip code</span> <input type="text"
-					name="birthday" placeholder="Enter zip code" required
-					v-model="newLocation.zipCode">
+				
+				<div class="button1">
+						<input type="submit" value="Confirm">
+				</div>
+
 			</div>
 
-			<div class="input-box">
-				<span class="details">Start time:</span> <input type="time" name="name"
-					placeholder="Enter object name" required v-model="newSO.startTime">
-			</div>
 
-			<div class="input-box">
-				<span class="details">End time:</span> <input type="time" name="name"
-					placeholder="Enter object name" required v-model="newSO.endTime">
-			</div>
 
-			<select v-model="selectedManager" v-bind:hidden="freeManagers === null || freeManagers.length == 0"  v-on:change="selectManager($event.target.value)">
-				<option v-for="fm in freeManagers" :value="fm">
-					{{fm.name}} {{fm.surname}} {{fm.username}} 
-				</option>
-			</select>
-						
-			<button v-bind:hidden="freeManagers !== null && freeManagers.length != 0 || newManagerExist == true" v-on:click="showForm()"> Register manager</button>
-
-			<div class="button">
-				<input type="submit" value="Confirm">
 			</div>
-			
 		</form>
-
-		<div >
-			<form id="registrationFrom" @submit='createUser' v-bind:hidden="showRegisterForm != true">
-				<h1 > Manager registration </h1>
-		
-						<div class="txt_field">
-							<span class="details">Name: </span>
-							<input type="text" placeholder="Name" v-model="newManager.name">	
-						</div>
-		
-						<div class="txt_field">
-							<span class="details">Surname: </span>
-							<input type="text" placeholder="Surname" v-model="newManager.surname">	
-						</div>
-		
-						<div class="txt_field">
-							<span class="details">Date of birth: </span>
-							<input type="text" placeholder="Date of birth" v-model="newManager.dateOfBirth" onfocus="(this.type='date')"
-							onblur="(this.type='text')">	
-						</div>
-		
-						<div style="white-space:nowrap;">
-						<label>Gender</label>
-						<input type="radio" id="male" name="gender" value="Male" v-model="newManager.userGender">
-							<label for="male">Male</label>
-							<input type="radio" id="female" name="gender" value="Female" v-model="newManager.userGender">
-		                       <label for="female">Female</label><br/>
-						</div>
-		
-						<div class="txt_field">
-							<span class="details">Username: </span>
-							<input type="text" placeholder="Username" v-model="newManager.username">	
-						</div>
-		
-						<div class="txt_field">
-							<span class="details">Password: </span>
-							<input type="password" placeholder="Password" v-model="newManager.password">
-						</div>
-		
-		
-						<input type="submit" value="Register">
-			</form>
-		</div>
 
 	</div>
 

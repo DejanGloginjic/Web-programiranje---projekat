@@ -110,16 +110,16 @@ public class SportObject {
 		this.objectMark = objectMark;
 	}
 
-	public LocalTime getStartTime() {
-		return startTime;
+	public String getStartTime() {
+		return LocalTimeHelper.timeToString(startTime);
 	}
 
 	public void setStartTime(String startTime) {
 		this.startTime = LocalTimeHelper.stringToDate(startTime);
 	}
 
-	public LocalTime getEndTime() {
-		return endTime;
+	public String getEndTime() {
+		return LocalTimeHelper.timeToString(endTime);
 	}
 
 	public void setEndTime(String endTime) {
