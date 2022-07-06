@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import beans.User;
 import dao.StartingProject;
 import dao.UserDAO;
+import dto.UserDTO;
 
 @Path("")
 public class LoginService {
@@ -66,9 +67,10 @@ public class LoginService {
 	@Path("/currentUser")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public User login(@Context HttpServletRequest request) {
-		User u = (User) request.getSession().getAttribute("user");
-		return u;
+	public UserDTO login(@Context HttpServletRequest request) {
+		User logged = (User) request.getSession().getAttribute("user");
+		UserDTO loggedDTO = new UserDTO(logged);
+		return loggedDTO;
 	}
 	
 	@POST

@@ -21,6 +21,7 @@ import beans.SportObject;
 import beans.User;
 import dao.StartingProject;
 import dao.UserDAO;
+import dto.UserDTO;
 
 
 
@@ -47,10 +48,16 @@ public class UserService {
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<User> getUsers() {
+	public Collection<UserDTO> getUsers() {
 		UserDAO dao = (UserDAO) ctx.getAttribute("userDAO");
-		return dao.findAll();
+		Collection<User> users = dao.findAll();
+		ArrayList<UserDTO> usersDTO = new ArrayList<UserDTO>();
+		for(User u: users) {
+			usersDTO.add(new UserDTO(u));
+		}
+		return usersDTO;
 	}
+
 	
 	@POST
 	@Path("/")

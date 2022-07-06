@@ -30,7 +30,7 @@
                     </tr>
                 </thead>
     
-                <tr v-for="u in users">
+                <tr v-for="u in searchedUser">
                     <td>{{u.username }}</td>
                     <td>{{u.name }}</td>
                     <td>{{u.surname }}</td>
@@ -44,7 +44,7 @@
         </div>
         <script src="js/vue.js"></script>
         <script src="js/axios.js"></script>
-        <script src="js/registeredUsers.js"></script>
+        <script src="app/registeredUsers.js"></script>
     
 
 </body>
