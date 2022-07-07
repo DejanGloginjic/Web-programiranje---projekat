@@ -9,7 +9,7 @@ import beans.Enums.MembershipTypeEnum;
 public class Membership {
 
 	private int id;
-	private String MembershipId;
+	private String membershipId;
 	private MembershipTypeEnum membershipType;
 	private LocalDate paymentDay;
 	private LocalDate startDay;
@@ -24,7 +24,7 @@ public class Membership {
 			MembershipStatusEnum membershipStatus, int numberOfAppointment) {
 		super();
 		this.id = id;
-		MembershipId = membershipId;
+		this.membershipId = membershipId;
 		this.membershipType = membershipType;
 		this.paymentDay = paymentDay;
 		this.startDay = startDay;
@@ -55,11 +55,11 @@ public class Membership {
 	}
 
 	public String getMembershipId() {
-		return MembershipId;
+		return membershipId;
 	}
 
 	public void setMembershipId(String membershipId) {
-		MembershipId = membershipId;
+		this.membershipId = membershipId;
 	}
 
 	public MembershipTypeEnum getMembershipType() {
@@ -137,7 +137,7 @@ public class Membership {
 	}
 
 	public String fileLine() {
-		return id + ";" + MembershipId + ";" + membershipType.ordinal() + ";" + DateHelper.dateToString(paymentDay) + ";" + DateHelper.dateToString(startDay) 
+		return id + ";" + membershipId + ";" + membershipType.ordinal() + ";" + DateHelper.dateToString(paymentDay) + ";" + DateHelper.dateToString(startDay) 
 		+ ";" + DateHelper.dateToString(expirationDay) + ";" + price + ";" + buyer.getId() + ";" + membershipStatus.ordinal() + ";" + numberOfAppointment;
 	}
 	

@@ -9,7 +9,7 @@ var app = new Vue({
 	mounted() {
 		axios.get('rest/memberships/getSelected')
 			.then((response) => {
-				this.membership = response.data;
+				this.memberShip = response.data;
 			})
 			this.minDate = new Date().toISOString().split("T")[0];
 	},
