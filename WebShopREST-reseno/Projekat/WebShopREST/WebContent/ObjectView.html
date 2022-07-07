@@ -10,8 +10,8 @@
 	margin: 0; 	padding: 0; box-sizing: border-box; font-family: "Poppins", sans-serif;
   }
   body{
-	margin: 0; padding: 0; background: linear-gradient(120deg,#58a3d4, #93bfcb);  height: 100vh; overflow: hidden;
-  }
+	margin: 0; padding: 0; background: linear-gradient(120deg,#58a3d4, #93bfcb);  height:100pt; overflow-y: scroll;
+  } 
 
   .center{ 	position: absolute;	top: 50%;left: 50%;	transform: translate(-50%, -50%); width: 400px;	background: white;
 	border-radius: 10px; box-shadow: 10px 10px 15px rgba(0,0,0,0.05);
@@ -75,16 +75,18 @@
   
    
 	
-	 .form-wrap{ width: 480px; background: #e7edf2; padding: 40px 20px; box-sizing: border-box; position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); height: 640px;}
+	 .form-wrap{ width: 480px; background: #e7edf2; padding: 40px 20px; box-sizing: border-box;  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); height: 640px;}
 
 	h1{text-align: center; color: #2691d9; font-weight: normal; margin-bottom: 60px;}
 
 	.error{color:red}
 
+
 </style>
 
 <body>
     
+    <div style="overflow-y:scroll">
         <div class="form-wrap" id="viewSO">
             <form>
                 <div class="user-details">
@@ -141,9 +143,32 @@
                     
                 </div>
             </form>
+            
+            <div class="comment" v-if="">
+              <label>Add comment</label>
+              <textarea placeholder="Add comment here..." v-model="komentar.comment"></textarea>
+              <button v-on:click="addComment()">Add</button>
+            </div>
+
+            <div class="grade">
+              <label>Rate the sport object</label>
+              <form @submit="addGrade()">
+                <input type="radio" name="grade" value="1" v-model="grade">
+                <label for="vehicle1"> 1</label><br>
+                <input type="radio" name="grade" value="2" v-model="grade">
+                <label for="vehicle2"> 2</label><br>
+                <input type="radio" name="grade" value="3" v-model="grade">
+                <label for="vehicle3"> 3</label><br>
+                <input type="radio" name="grade" value="4" v-model="grade">
+                <label for="vehicle3"> 4</label><br>
+                <input type="radio" name="grade" value="5" v-model="grade">
+                <label for="vehicle3"> 5</label><br><br>
+                <input type="submit" value="Submit">
+              </form>
+            </div>
     
         </div>
-    
+    </div>
     
         <script src="js/vue.js"></script>
         <script src="js/axios.js"></script>

@@ -16,6 +16,7 @@ import beans.Comment;
 import beans.SportObject;
 import beans.Training;
 import beans.User;
+import beans.Enums.CommentStatusEnum;
 import beans.Enums.TrainingTypeEnum;
 
 /***
@@ -77,6 +78,7 @@ public class CommentDAO {
 		maxId++;
 		comment.setId(maxId);
 		comments.put(comment.getId(), comment);
+		saveToFile();
 		return comment;
 	}
 	
@@ -105,7 +107,11 @@ public class CommentDAO {
 					String comment = st.nextToken().trim();
 					int commentMark = Integer.parseInt(st.nextToken().trim());
 					
-					comments.put(id, new Comment(id, buyerComment, sportObjectComment, comment, commentMark));
+					int status = Integer.parseInt(st.nextToken().trim());
+					CommentStatusEnum[] statuses = CommentStatusEnum.values();
+					CommentStatusEnum statusfromFile = statuses[status];
+					
+					comments.put(id, new Comment(id, buyerComment, sportObjectComment, comment, commentMark, statusfromFile));
 				}
 				
 			}

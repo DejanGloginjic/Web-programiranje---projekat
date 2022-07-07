@@ -1,6 +1,7 @@
 package beans;
 
 import beans.Enums.CommentMarkEnum;
+import beans.Enums.CommentStatusEnum;
 
 public class Comment {
 	
@@ -9,15 +10,25 @@ public class Comment {
 	private SportObject sportObjectComment;
 	private String comment;
 	private int commentMark;
+	private CommentStatusEnum commentStatus;
 	
 	public Comment(int id, User buyerComment, SportObject sportObjectComment, String comment,
-			int commentMark) {
+			int commentMark, CommentStatusEnum status) {
 		super();
 		this.id = id;
 		this.buyerComment = buyerComment;
 		this.sportObjectComment = sportObjectComment;
 		this.comment = comment;
 		this.commentMark = commentMark;
+		this.commentStatus = status;
+	}
+
+	public CommentStatusEnum getCommentStatus() {
+		return commentStatus;
+	}
+
+	public void setCommentStatus(CommentStatusEnum commentStatus) {
+		this.commentStatus = commentStatus;
 	}
 
 	public Comment() {
@@ -65,7 +76,7 @@ public class Comment {
 	}
 
 	public String fileLine() {
-		return id + ";" + buyerComment + ";" + sportObjectComment + ";" + comment + ";" + commentMark;
+		return id + ";" + buyerComment.getId() + ";" + sportObjectComment.getId() + ";" + comment + ";" + commentMark + ";" + commentStatus.ordinal();
 	}
 	
 	

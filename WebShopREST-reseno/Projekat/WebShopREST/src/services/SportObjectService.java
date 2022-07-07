@@ -61,6 +61,15 @@ public class SportObjectService {
 		SportObjectDAO dao = (SportObjectDAO) ctx.getAttribute("sportObjectDAO");
 		return dao.save(sportobject);
 	}
+	
+	@POST
+	@Path("/calculateGrade")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public double calculateGrade(int grade, SportObject sportobject) {
+		SportObjectDAO dao = (SportObjectDAO) ctx.getAttribute("sportObjectDAO");
+		return dao.calculateGrade(grade, sportobject);
+	}
 
 	@GET
 	@Path("/{id}")

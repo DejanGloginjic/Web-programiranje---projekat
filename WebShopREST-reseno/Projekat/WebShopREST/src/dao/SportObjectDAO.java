@@ -234,4 +234,11 @@ public class SportObjectDAO {
 			}
 		}
 	}
+	
+	public double calculateGrade(int grade, SportObject sportObject) {
+		double totalGrade = (grade + sportObject.getObjectMark())/2;
+		sportObject.setObjectMark(totalGrade);
+		change(sportObject);
+		return totalGrade;
+	}
 }
