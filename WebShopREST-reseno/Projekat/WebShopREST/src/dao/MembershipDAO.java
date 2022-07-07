@@ -61,6 +61,22 @@ public class MembershipDAO {
 		return memberships.values();
 	}
 	
+	public Membership newMembershipAdded(Membership membership) {
+		if(membership.getMembershipType() == MembershipTypeEnum.Day) {
+			membership.setExpirationDay(DateHelper.dateToString( membership.getStartDay().plusDays(1)));
+		}else if(membership.getMembershipType() == MembershipTypeEnum.Month) {
+			membership.setExpirationDay(DateHelper.dateToString( membership.getStartDay().plusMonths(1)));
+		}else {
+			membership.setExpirationDay(DateHelper.dateToString( membership.getStartDay().plusYears(1)));
+		}
+		
+		membership = save(membership);
+		saveToFile();
+		
+		return membership;
+		
+	}
+	
 	public Membership save(Membership membership) {
 		Integer maxId = -1;
 		for (int id : memberships.keySet()) {

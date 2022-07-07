@@ -2,6 +2,7 @@ package beans;
 
 import java.time.LocalDate;
 
+import beans.Enums.DateHelper;
 import beans.Enums.MembershipStatusEnum;
 import beans.Enums.MembershipTypeEnum;
 
@@ -68,30 +69,40 @@ public class Membership {
 	public void setMembershipType(MembershipTypeEnum membershipType) {
 		this.membershipType = membershipType;
 	}
-
+	
 	public LocalDate getPaymentDay() {
 		return paymentDay;
 	}
-
-	public void setPaymentDay(LocalDate paymentDay) {
-		this.paymentDay = paymentDay;
+	public void setPaymentDay(String paymentDay) {
+		if(paymentDay == null || paymentDay.equals("")) {
+			return;
+		}
+		this.paymentDay = DateHelper.stringToDate(paymentDay);
 	}
+	
+	public LocalDate getExpirationDay() {
+		
+		return expirationDay;
+	}
+	public void setExpirationDay(String expirationDay) {
+		if(expirationDay == null || expirationDay.equals("")) {
+			return;
+		}
+		this.expirationDay = DateHelper.stringToDate(expirationDay);
+	}
+
 
 	public LocalDate getStartDay() {
 		return startDay;
 	}
 
-	public void setStartDay(LocalDate startDay) {
-		this.startDay = startDay;
+	public void setStartDay(String startDay) {
+		if(startDay == null || startDay.equals("")) {
+			return;
+		}
+		this.startDay = DateHelper.stringToDate(startDay);
 	}
 
-	public LocalDate getExpirationDay() {
-		return expirationDay;
-	}
-
-	public void setExpirationDay(LocalDate expirationDay) {
-		this.expirationDay = expirationDay;
-	}
 
 	public double getPrice() {
 		return price;
@@ -126,8 +137,8 @@ public class Membership {
 	}
 
 	public String fileLine() {
-		return id + ";" + MembershipId + ";" + membershipType + ";" + paymentDay + ";" + startDay + ";" + expirationDay + ";"
-				+ price + ";" + buyer + ";" + membershipStatus + ";" + numberOfAppointment;
+		return id + ";" + MembershipId + ";" + membershipType.ordinal() + ";" + DateHelper.dateToString(paymentDay) + ";" + DateHelper.dateToString(startDay) 
+		+ ";" + DateHelper.dateToString(expirationDay) + ";" + price + ";" + buyer.getId() + ";" + membershipStatus.ordinal() + ";" + numberOfAppointment;
 	}
 	
 	

@@ -93,15 +93,13 @@ h1 {
             <th>Membership type</th>
             <th>Price</th>
             <th>Number of appointment</th>
-            <th>Sign in</th>
           </tr>
         </thead>
 
-        <tr v-for="m in memberships">
+        <tr v-for="m in memberships" v-on:click="Selected(m)">
           <td>{{m.membershipType }}</td>
           <td>{{m.price }}</td>
           <td>{{m.numberOfAppointment}}</td>
-          <td><button type="button" v-on:click="Membership(m)">Sign in</button></td>
         </tr>
       </table>
 

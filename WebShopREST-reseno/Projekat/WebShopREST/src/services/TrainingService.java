@@ -109,4 +109,30 @@ public class TrainingService {
 		return trainingsDTO;
 	}
 	
+	@GET
+	@Path("/getPersonalTrainings")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<TrainingDTO> getPersonalniTreninziZaTrenera(@QueryParam("idKorisnika") int idKorisnika) {
+		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("treningDAO");
+		ArrayList<Training> personalTrainings = dao.getPesonalTrainingsForCoach(idKorisnika);
+		ArrayList<TrainingDTO> personalTrainingsDTO = new ArrayList<TrainingDTO>();
+		for(Training t : personalTrainings) {
+			personalTrainingsDTO.add(new TrainingDTO(t));
+		}
+		return personalTrainingsDTO;
+	}
+	
+	@GET
+	@Path("/getGroupTrainings")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<TrainingDTO> getGrupniTreninziZaTrenera(@QueryParam("idKorisnika") int idKorisnika) {
+		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("treningDAO");
+		ArrayList<Training> groupTrainings = dao.getGroupTrainingsForCoach(idKorisnika);
+		ArrayList<TrainingDTO> groupTrainingsDTO = new ArrayList<TrainingDTO>();
+		for(Training t : groupTrainings) {
+			groupTrainingsDTO.add(new TrainingDTO(t));
+		}
+		return groupTrainingsDTO;
+	}
+	
 }

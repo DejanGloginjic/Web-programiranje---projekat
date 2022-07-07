@@ -1,9 +1,11 @@
 package services;
 
+import java.time.LocalDate;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -15,10 +17,15 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import beans.Membership;
+import beans.User;
+import beans.Enums.DateHelper;
 import dao.MembershipDAO;
 import dao.StartingProject;
+import dao.UserDAO;
+import dto.MembershipDTO;
 
 @Path("/memberships")
 public class MembershipService {
@@ -53,9 +60,17 @@ public class MembershipService {
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Membership newMembership(Membership membership) {
+	public MembershipDTO newMembership(Membership membership,@Context HttpServletRequest request) {
 		MembershipDAO dao = (MembershipDAO) ctx.getAttribute("membershipDAO");
-		return dao.save(membership);
+		User logged = (User) request.getSession().getAttribute("user");
+		if(logged == null) {
+			return null;
+		}
+		logged.setMembership(membership);
+		membership.setBuyer(logged);
+		membership = dao.newMembershipAdded(membership);
+		UserDAO.getInstance().change(logged);
+		return new MembershipDTO(membership);
 	}
 
 	@GET
@@ -93,5 +108,29 @@ public class MembershipService {
 		MembershipDAO dao = (MembershipDAO) ctx.getAttribute("membershipDAO");
 		return dao.delete(id);
 	}
+	
+	@POST
+	@Path("/setSelected")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response setSelected(Membership membership, @Context HttpServletRequest request) {
+		request.getSession().setAttribute("selectedMembership", membership);
+		return Response.status(200).build();
+	}
+	
+	@GET
+	@Path("/getSelected")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public MembershipDTO getSelected( @Context HttpServletRequest request) {
+		Membership object = (Membership)request.getSession().getAttribute("selectedMembership");
+		if(object == null) {
+			return null;
+		}
+		object.setPaymentDay(DateHelper.dateToString(LocalDate.now()));
+		return new MembershipDTO(object);
+	}
+
+	
 
 }

@@ -178,6 +178,30 @@ public class TrainingDAO {
 	public Training delete(int id) {
 		return trainings.remove(id);
 	}
+	
+	public ArrayList<Training> getPesonalTrainingsForCoach(int idUser){
+		ArrayList<Training> pesonalTrainingsForCoach = new ArrayList<Training>();
+		for(Training training : trainings.values()) {
+			if(training.getCoach() != null) {
+				if((training.getCoach().getId() == idUser) && (training.getTrainingType().equals(TrainingTypeEnum.Personal))) {
+					pesonalTrainingsForCoach.add(training);
+				}
+			}
+		}
+		return pesonalTrainingsForCoach;
+	}
+	
+	public ArrayList<Training> getGroupTrainingsForCoach(int idUser){
+		ArrayList<Training> groupTrainingsForCoach = new ArrayList<Training>();
+		for(Training training : trainings.values()) {
+			if(training.getCoach() != null) {
+				if((training.getCoach().getId() == idUser) && (training.getTrainingType().equals(TrainingTypeEnum.Group))) {
+					groupTrainingsForCoach.add(training);
+				}
+			}
+		}
+		return groupTrainingsForCoach;
+	}
 
 	public void linkTrainingAndCoach() {
 		ArrayList<User> coaches = new ArrayList<User>(UserDAO.getInstance().findAll());
