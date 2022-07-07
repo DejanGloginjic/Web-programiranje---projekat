@@ -12,6 +12,7 @@ public class TrainingDTO {
 	private int duration;
 	private String description;
 	private String image;
+	private String trainerName;
 	
 	public TrainingDTO(Training training) {
 		this.id = training.getId();
@@ -21,7 +22,9 @@ public class TrainingDTO {
 		this.duration = training.getDuration();
 		this.description = training.getDescription();
 		this.image = training.getImage();
+		this.trainerName = (training.getCoach()==null)?null:(training.getCoach().getName() + " " + training.getCoach().getSurname());
 	}
+	
 	
 	
 	public TrainingDTO(int id, String trainingName, TrainingTypeEnum trainingType, SportObject sportObject,
@@ -99,5 +102,19 @@ public class TrainingDTO {
 	public void setImage(String image) {
 		this.image = image;
 	}
+
+
+
+	public String getTrainerName() {
+		return trainerName;
+	}
+
+
+
+	public void setTrainerName(String trainerName) {
+		this.trainerName = trainerName;
+	}
+	
+	
 
 }

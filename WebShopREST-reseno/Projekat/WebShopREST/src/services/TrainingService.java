@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -19,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import beans.Training;
 import dao.StartingProject;
 import dao.TrainingDAO;
+import dto.TrainingDTO;
 
 @Path("/trainings")
 public class TrainingService {
@@ -92,6 +94,19 @@ public class TrainingService {
 	public Training deleteTraining(@PathParam("id") int id) {
 		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
 		return dao.delete(id);
+	}
+	
+	@GET
+	@Path("/getTrainingsForObject/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<TrainingDTO> getTrainingsForObject(@PathParam("id") int id) {
+		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
+		ArrayList<Training> foundTrainings = dao.getInstance().getTrainingForSportObject(id);
+		ArrayList<TrainingDTO> trainingsDTO = new ArrayList<TrainingDTO>();
+		for(Training training : foundTrainings) {
+			trainingsDTO.add(new TrainingDTO(training));
+		}
+		return trainingsDTO;
 	}
 	
 }

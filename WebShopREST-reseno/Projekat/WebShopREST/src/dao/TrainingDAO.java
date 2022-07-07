@@ -196,6 +196,17 @@ public class TrainingDAO {
 			}
 		}
 	}
+	
+	public ArrayList<Training> getTrainingForSportObject(int sportObjectID){
+		ArrayList<Training> foundTrainings = new ArrayList<Training>();
+		
+		for(Training training : trainings.values()) {
+			if(training.getSportObject().getId() == sportObjectID) {
+				foundTrainings.add(training);
+			}
+		}
+		return foundTrainings;
+	}
 
 	public void linkTrainingAndSportObject() {
 		ArrayList<SportObject> objects = new ArrayList<SportObject>(SportObjectDAO.getInstance().findAll());

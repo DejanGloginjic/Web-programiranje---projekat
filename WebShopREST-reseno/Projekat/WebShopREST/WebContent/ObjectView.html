@@ -85,7 +85,7 @@
 
 <body>
     
-        <div class="form-wrap" id="viewSO">
+        <div class="form-wrap" id="viewSO" style="overflow-y:scroll;height:700px;">
             <form>
                 <div class="user-details">
     
@@ -137,6 +137,26 @@
                             name="grade" 
                             v-model="so.objectMark" disabled>
                     </div>
+
+                    <table  id="tabela" table border="1" align="center" width="100%">
+                      <thead>
+                        <tr bgcolor="lightgrey">
+                          <th>Picture</th>
+                          <th>Description</th>
+                          <th>Coach</th>
+                          <th>Price</th>
+                          <th>Sign in</th>
+                        </tr>
+                      </thead>
+              
+                      <tr v-for="t in trainings">
+                        <td>{{t.image }}</td>
+                        <td>{{t.description }}</td>
+                        <td>{{t.trainerName}}</td>
+                        <td>0</td>
+                        <td><button type="button" v-on:click="TrainingEntrance(t)">Sign in</button></td>
+                      </tr>
+                    </table>
     
                     
                 </div>
