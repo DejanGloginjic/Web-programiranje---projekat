@@ -85,11 +85,14 @@
 
   .comment{margin-top: 30px;}
 
+  .comments{margin-top: 30px;}
+
 </style>
 
 <body>
     
         <div class="form-wrap" id="viewSO" style="overflow-y:scroll;height:700px;">
+            <button v-bind:hidden="loggedUser.userType != 'Administrator'" v-on:click="manageComments()">Manage comments</button>
             <form>
                 <div class="user-details">
     
@@ -168,12 +171,50 @@
     
             <div class="comment" v-bind:hidden="loggedUser.userType != 'Buyer'">
               <div v-bind:hidden="isVisited === false || isCommented === true">
-                <label>Add comment</label>
+                <p>Add comment</p>
                 <textarea class="commentBox" placeholder="Add comment here..." v-model="komentar.comment"></textarea>
-                <button v-on:click="addComment()">Add comment</button>
+
+                <p>Rate the sport object</p>
+                <input type="radio" name="grade" value="1" v-model="grade" checked>
+                <label for="vehicle1"> 1</label><br>
+                <input type="radio" name="grade" value="2" v-model="grade">
+                <label for="vehicle2"> 2</label><br>
+                <input type="radio" name="grade" value="3" v-model="grade">
+                <label for="vehicle3"> 3</label><br>
+                <input type="radio" name="grade" value="4" v-model="grade">
+                <label for="vehicle3"> 4</label><br>
+                <input type="radio" name="grade" value="5" v-model="grade">
+                <label for="vehicle3"> 5</label><br><br>
+                <p class="error" v-bind:hidden="isEmpty === false">You have not entered a comment or you have not rated the object!</p>
+                <button v-on:click="addComment()">Finish</button>
               </div>
-              <p v-bind:hidden="isVisited === false || isCommented != true">Ostavili ste komentar na ovaj objekat!</p>
-              <p v-bind:hidden="isVisited != false">Nemate pravo ostaviti komentar sve dok ne posjetite objekat!</p>
+              <p v-bind:hidden="isVisited === false || isCommented != true">You have left a comment on this object!</p>
+              <p v-bind:hidden="isVisited != false">You do not have the right to leave a comment until you visit the object!</p>
+              
+            </div>
+
+            <div>
+              <ul v-for="c in buyerComments" v-bind:hidden="loggedUser.userType != 'Buyer'">
+                <li>
+
+                  <h5>{{c.buyerComment.username}}</h5>
+                  <p>{{c.comment}}</p>
+
+                </li>
+              </ul>
+            </div>
+
+            <div class="comments">
+              <ul v-for="c in allComments" v-bind:hidden="loggedUser.userType === 'Buyer' && loggedUser.userType === 'Coach'">
+                <li>
+
+                  <h5>{{c.buyerComment.username}}</h5>
+                  <p>{{c.comment}}</p>
+
+                </li>
+              </ul>
+            </div>
+
             </div>
         </div>
     

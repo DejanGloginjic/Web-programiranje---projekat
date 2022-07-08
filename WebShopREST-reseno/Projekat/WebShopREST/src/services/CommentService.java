@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.annotation.PostConstruct;
@@ -74,6 +75,30 @@ public class CommentService {
 	public Comment findOne(@PathParam("id") int id) {
 		CommentDAO dao = (CommentDAO) ctx.getAttribute("commentDAO");
 		return dao.find(id);
+	}
+	
+	@GET
+	@Path("/getComments/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Comment> getCommentsForBuyer(@PathParam("id") int id) {
+		CommentDAO dao = (CommentDAO) ctx.getAttribute("commentDAO");
+		return dao.getCommentsForBuyer(id);
+	}
+	
+	@GET
+	@Path("/getCommentsForManagerAndAdministrator/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Comment> getCommentsForManagerAndAdministrator(@PathParam("id") int id) {
+		CommentDAO dao = (CommentDAO) ctx.getAttribute("commentDAO");
+		return dao.getCommentsForManagerAndAdministrator(id);
+	}
+	
+	@GET
+	@Path("/getOnHoldComments/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<Comment> getOnHoldComments(@PathParam("id") int id) {
+		CommentDAO dao = (CommentDAO) ctx.getAttribute("commentDAO");
+		return dao.getOnHoldComments(id);
 	}
 	
 	/*@GET

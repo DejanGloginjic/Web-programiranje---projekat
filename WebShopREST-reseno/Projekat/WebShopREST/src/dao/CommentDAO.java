@@ -206,4 +206,38 @@ public class CommentDAO {
 		}
 		return false;
 	}
+	
+	public ArrayList<Comment> getCommentsForBuyer(int objectId){
+		ArrayList<Comment> retList = new ArrayList<>();
+		
+		for(Comment c : comments.values()) {
+			if(c.getStatus() == CommentStatusEnum.Accepted && c.getSportObjectComment().getId() == objectId) {
+				retList.add(c);
+			}
+		}
+		return retList;
+	}
+	
+	public ArrayList<Comment> getCommentsForManagerAndAdministrator(int objectId){
+		ArrayList<Comment> retList = new ArrayList<>();
+		
+		for(Comment c : comments.values()) {
+			if((c.getStatus() == CommentStatusEnum.Accepted || c.getStatus() == CommentStatusEnum.Rejected) && c.getSportObjectComment().getId() == objectId) {
+				retList.add(c);
+			}
+		}
+		return retList;
+	}
+	
+	public ArrayList<Comment> getOnHoldComments(int objectId){
+		ArrayList<Comment> retList = new ArrayList<>();
+		
+		for(Comment c : comments.values()) {
+			if(c.getStatus() == CommentStatusEnum.OnHold && c.getSportObjectComment().getId() == objectId) {
+				retList.add(c);
+			}
+		}
+		return retList;
+	}
+	
 }
