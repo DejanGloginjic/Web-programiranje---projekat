@@ -13,6 +13,7 @@ public class StartingProject {
 		SportObjectDAO.getInstance().loadSportObjects(contextPath);
 		TrainingDAO.getInstance().loadTrainings(contextPath);
 		TrainingHistoryDAO.getInstace().loadTrainingHistory(contextPath);
+		ScheduledTrainingDAO.getInstance().loadTrainings(contextPath);
 		
 		UserDAO.getInstance().linkUserAndMembership();
 		UserDAO.getInstance().linkUserAndSportObject();
@@ -30,6 +31,9 @@ public class StartingProject {
 		TrainingHistoryDAO.getInstace().linkTrainingHistoryAndBuyer();
 		TrainingHistoryDAO.getInstace().linkTrainingHistoryAndCoach();
 		TrainingHistoryDAO.getInstace().linkTrainingHistoryAndTraining();
+		
+		ScheduledTrainingDAO.getInstance().linkScheduledTrainingAndBuyer();
+		ScheduledTrainingDAO.getInstance().linkScheduledTrainingAndTraining();
 	}
 	
 	public static StartingProject getInstance(String contextPath) {

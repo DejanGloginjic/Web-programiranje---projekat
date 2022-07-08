@@ -1,7 +1,12 @@
 package dto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import beans.ScheduledTraining;
 import beans.SportObject;
 import beans.Training;
+import beans.Enums.ScheduledTrainingStatus;
 import beans.Enums.TrainingTypeEnum;
 
 public class TrainingDTO {
@@ -13,6 +18,10 @@ public class TrainingDTO {
 	private String description;
 	private String image;
 	private String trainerName;
+	private String buyerName;
+	private LocalDateTime trainingDateAndTime;
+	private LocalDate dateOfApplication;
+	private ScheduledTrainingStatus status;
 	
 	public TrainingDTO(Training training) {
 		this.id = training.getId();
@@ -25,7 +34,20 @@ public class TrainingDTO {
 		this.trainerName = (training.getCoach()==null)?null:(training.getCoach().getName() + " " + training.getCoach().getSurname());
 	}
 	
-	
+	public TrainingDTO(ScheduledTraining training) {
+		this.id = training.getId();
+		this.trainingName = training.getTraining().getTrainingName();
+		this.trainingType = training.getTraining().getTrainingType();
+		this.sportObject = training.getTraining().getSportObject();
+		this.duration = training.getTraining().getDuration();
+		this.description = training.getTraining().getDescription();
+		this.image = training.getTraining().getImage();
+		this.trainerName = (training.getTraining().getCoach()==null)?null:(training.getTraining().getCoach().getName() + " " + training.getTraining().getCoach().getSurname());
+		this.buyerName = (training.getBuyer()==null)?null:(training.getBuyer().getName() + " " + training.getBuyer().getSurname());
+		this.trainingDateAndTime = training.getTrainingDateAndTime();
+		this.dateOfApplication = training.getDateOfApplication();
+		this.status = training.getStatus();
+	}
 	
 	public TrainingDTO(int id, String trainingName, TrainingTypeEnum trainingType, SportObject sportObject,
 			int duration, String description, String image) {
@@ -37,6 +59,38 @@ public class TrainingDTO {
 		this.duration = duration;
 		this.description = description;
 		this.image = image;
+	}
+
+	public ScheduledTrainingStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(ScheduledTrainingStatus status) {
+		this.status = status;
+	}
+
+	public String getBuyerName() {
+		return buyerName;
+	}
+
+	public void setBuyerName(String buyerName) {
+		this.buyerName = buyerName;
+	}
+
+	public LocalDateTime getTrainingDateAndTime() {
+		return trainingDateAndTime;
+	}
+
+	public void setTrainingDateAndTime(LocalDateTime trainingDateAndTime) {
+		this.trainingDateAndTime = trainingDateAndTime;
+	}
+
+	public LocalDate getDateOfApplication() {
+		return dateOfApplication;
+	}
+
+	public void setDateOfApplication(LocalDate dateOfApplication) {
+		this.dateOfApplication = dateOfApplication;
 	}
 
 	public TrainingDTO(int id) {

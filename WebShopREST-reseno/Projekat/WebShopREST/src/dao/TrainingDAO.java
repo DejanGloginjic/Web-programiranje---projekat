@@ -123,7 +123,7 @@ public class TrainingDAO {
 					int coachId = Integer.parseInt(st.nextToken().trim());
 					User coach = null;
 					if (coachId != -1) {
-						coach = new User(Integer.parseInt(st.nextToken().trim()));
+						coach = new User(coachId);
 					}
 
 					String description = st.nextToken().trim();
@@ -245,5 +245,17 @@ public class TrainingDAO {
 				}
 			}
 		}
+	}
+	
+	public ArrayList<Training> getTrainingsForCoach(int coachId){
+		ArrayList<Training> retList = new ArrayList<>();
+		
+		for(Training t : trainings.values()) {
+			if(t.getCoach().getId() == coachId) {
+				retList.add(t);
+			}
+		}
+		
+		return retList;
 	}
 }

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Manager trainings</title>
+</head>
+<style>
+    body{
+        margin: 0; padding: 0; background: linear-gradient(120deg,#58a3d4, #93bfcb);  height: 100vh; overflow: hidden;
+      }
+    
+    
+    .content-table {
+        position: absolute;	top: 60%;left: 50%;	transform: translate(-50%, -50%); width: 890px;	background: white;
+        border-radius: 3px; box-shadow: 10px 10px 15px rgba(0,0,0,0.05); height: 450px;
+    }
+    
+    .content-table thead tr {
+      background-color: #2691d9;
+      color: #ffffff;
+      text-align: left;
+      font-weight: bold;
+      border-radius: 10px;
+    }
+    
+    .content-table th,
+    .content-table td {
+      padding: 12px 15px;
+    }
+    
+    .content-table tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+    
+    .content-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+    
+    .content-table tbody tr:last-of-type {
+      border-bottom: 2px solid #2691d9;
+      border-radius: 10px;
+    }
+    
+    div.a {
+        position: absolute;
+        top: 170px;
+        left: 770px;
+    }
+    
+    div.b {
+        position: absolute;
+        top: 130px;
+        left: 1000px;
+        color: rgb(255, 255, 255);
+        font-size: 22px;
+        
+    }
+    
+    .signup_link{
+        margin-top: 10px;
+        text-align: center;
+        font-size: 20px;
+        margin-left: 1300px;
+        color: rgb(255, 255, 255);
+      }
+      .signup_link a{
+        color: rgb(44, 44, 188);
+        text-decoration: none;
+      }
+      .signup_link a:hover{
+        text-decoration: underline;
+      }
+    
+      table {
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+        width: 100%;
+       }
+    
+       table thead {
+        /* head takes the height it requires, 
+        and it's not scaled when table is resized */
+        flex: 0 0 auto;
+        width: calc(100% - 0.9em);
+       }
+    
+       table tbody {
+        /* body takes all the remaining available space */
+        flex: 1 1 auto;
+        display: block;
+        overflow-y: scroll;
+       }
+    
+       table tbody tr {
+        width: 100%;
+       }
+    
+        table thead, table tbody tr {
+        display: table;
+        table-layout: fixed;
+       }
+
+       h1{ text-align: center; }
+</style>
+<body>
+    
+        <div id="managerTrainings">
+            <h1>All trainings</h1>
+            <table id="tabela" class="content-table">
+                <thead>
+                    <tr>
+                        <th>Image</th>
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Sport object</th>
+                        <th>Location</th>
+                        <th>Duration</th>
+                        <th>Coach</th>
+                        <th>Description</th>
+                    
+                    </tr>
+                </thead>
+                <tbody>
+                <tr v-for="pt in trainings">
+                    <td>{{pt.image }}</td>
+                    <td>{{pt.trainingName }}</td>
+                    <td>{{pt.trainingType }}</td>
+                    <td>{{pt.sportObject.objectName }}</td>
+                    <td>{{pt.sportObject.location.place}}, {{pt.sportObject.location.street}}  {{pt.sportObject.location.number}}  </td>
+                    <td>{{pt.duration }}</td>
+                    <td>{{pt.trainerName }}</td>
+                    <td>{{pt.description }}</td>
+    
+                </tr>
+                </tbody>
+            </table>
+    
+    
+        </div>
+        <script src="js/vue.js"></script>
+        <script src="js/axios.js"></script>
+        <script src="app/managerTrainings.js"></script>
+    
+
+</body>
+</html>

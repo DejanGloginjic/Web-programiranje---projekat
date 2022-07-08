@@ -17,18 +17,20 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import beans.ScheduledTraining;
 import beans.Training;
+import dao.ScheduledTrainingDAO;
 import dao.StartingProject;
 import dao.TrainingDAO;
 import dto.TrainingDTO;
 
-@Path("/trainings")
-public class TrainingService {
+@Path("/scheduledTrainings")
+public class ScheduledTrainingService {
 	
 	@Context
 	ServletContext ctx;
 	
-	public TrainingService() {
+	public ScheduledTrainingService() {
 	}
 	
 	@PostConstruct
@@ -36,18 +38,18 @@ public class TrainingService {
 	public void init() {
 		// Ovaj objekat se instancira više puta u toku rada aplikacije
 		// Inicijalizacija treba da se obavi samo jednom
-		if (ctx.getAttribute("trainingDAO") == null) {
+		if (ctx.getAttribute("scheduledTrainingDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
 	    	StartingProject.getInstance(contextPath);
-			ctx.setAttribute("trainingDAO", TrainingDAO.getInstance());
+			ctx.setAttribute("scheduledTrainingDAO", ScheduledTrainingDAO.getInstance());
 		}
 	}
 	
 	@GET
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Collection<Training> getTrainings() {
-		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
+	public Collection<ScheduledTraining> getTrainings() {
+		ScheduledTrainingDAO dao = (ScheduledTrainingDAO) ctx.getAttribute("scheduledTrainingDAO");
 		return dao.findAll();
 	}
 	
@@ -55,76 +57,76 @@ public class TrainingService {
 	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Training newTraining(Training training) {
-		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
+	public ScheduledTraining newTraining(ScheduledTraining training) {
+		ScheduledTrainingDAO dao = (ScheduledTrainingDAO) ctx.getAttribute("scheduledTrainingDAO");
 		return dao.save(training);
 	}
 
 	@GET
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Training findOne(@PathParam("id") int id) {
-		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
+	public ScheduledTraining findOne(@PathParam("id") int id) {
+		ScheduledTrainingDAO dao = (ScheduledTrainingDAO) ctx.getAttribute("scheduledTrainingDAO");
 		return dao.find(id);
 	}
 	
 	@GET
 	@Path("/getTrainingsForCoach/{coachId}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public ArrayList<Training> getTrainingsForCoach(@PathParam("coachId") int coachId) {
-		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
+	public ArrayList<ScheduledTraining> getTrainingsForCoach(@PathParam("coachId") int coachId) {
+		ScheduledTrainingDAO dao = (ScheduledTrainingDAO) ctx.getAttribute("scheduledTrainingDAO");
 		return dao.getTrainingsForCoach(coachId);
 	}
 	
-	@GET
+	/*@GET
 	@Path("/search")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Training search(@QueryParam("name") String name) {
-		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
+		ScheduledTrainingDAO dao = (ScheduledTrainingDAO) ctx.getAttribute("scheduledTrainingDAO");
 		return dao.findAll().stream()
 				.filter(training -> training.getTrainingName().equals(name))
 				.findFirst()
 				.orElse(null);
-	}
+	}*/
 	
 	@PUT
 	@Path("/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Training changeOne(Training training, @PathParam("id") int id) {
-		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
+	public ScheduledTraining changeOne(ScheduledTraining training, @PathParam("id") int id) {
+		ScheduledTrainingDAO dao = (ScheduledTrainingDAO) ctx.getAttribute("scheduledTrainingDAO");
 		return dao.change(training);
 	}
 	
 	@DELETE
 	@Path("/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Training deleteTraining(@PathParam("id") int id) {
-		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
+	public ScheduledTraining deleteTraining(@PathParam("id") int id) {
+		ScheduledTrainingDAO dao = (ScheduledTrainingDAO) ctx.getAttribute("scheduledTrainingDAO");
 		return dao.delete(id);
 	}
 	
-	@GET
+	/*@GET
 	@Path("/getTrainingsForObject/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public ArrayList<TrainingDTO> getTrainingsForObject(@PathParam("id") int id) {
-		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
+		ScheduledTrainingDAO dao = (ScheduledTrainingDAO) ctx.getAttribute("scheduledTrainingDAO");
 		ArrayList<Training> foundTrainings = dao.getInstance().getTrainingForSportObject(id);
 		ArrayList<TrainingDTO> trainingsDTO = new ArrayList<TrainingDTO>();
 		for(Training training : foundTrainings) {
 			trainingsDTO.add(new TrainingDTO(training));
 		}
 		return trainingsDTO;
-	}
+	}*/
 	
 	@GET
 	@Path("/getPersonalTrainings")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<TrainingDTO> getPersonalniTreninziZaTrenera(@QueryParam("idKorisnika") int idKorisnika) {
-		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
-		ArrayList<Training> personalTrainings = dao.getPesonalTrainingsForCoach(idKorisnika);
+		ScheduledTrainingDAO dao = (ScheduledTrainingDAO) ctx.getAttribute("scheduledTrainingDAO");
+		ArrayList<ScheduledTraining> personalTrainings = dao.getPesonalTrainingsForCoach(idKorisnika);
 		ArrayList<TrainingDTO> personalTrainingsDTO = new ArrayList<TrainingDTO>();
-		for(Training t : personalTrainings) {
+		for(ScheduledTraining t : personalTrainings) {
 			personalTrainingsDTO.add(new TrainingDTO(t));
 		}
 		return personalTrainingsDTO;
@@ -134,10 +136,10 @@ public class TrainingService {
 	@Path("/getGroupTrainings")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Collection<TrainingDTO> getGrupniTreninziZaTrenera(@QueryParam("idKorisnika") int idKorisnika) {
-		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
-		ArrayList<Training> groupTrainings = dao.getGroupTrainingsForCoach(idKorisnika);
+		ScheduledTrainingDAO dao = (ScheduledTrainingDAO) ctx.getAttribute("scheduledTrainingDAO");
+		ArrayList<ScheduledTraining> groupTrainings = dao.getGroupTrainingsForCoach(idKorisnika);
 		ArrayList<TrainingDTO> groupTrainingsDTO = new ArrayList<TrainingDTO>();
-		for(Training t : groupTrainings) {
+		for(ScheduledTraining t : groupTrainings) {
 			groupTrainingsDTO.add(new TrainingDTO(t));
 		}
 		return groupTrainingsDTO;
