@@ -19,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import beans.Comment;
 import dao.CommentDAO;
 import dao.StartingProject;
+import dao.TrainingHistoryDAO;
 
 @Path("/comments")
 public class CommentService {
@@ -48,6 +49,15 @@ public class CommentService {
 		CommentDAO dao = (CommentDAO) ctx.getAttribute("commentDAO");
 		return dao.findAll();
 	}
+	
+	@GET
+	@Path("/getIsCommented")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean isUserCommentSportObject(@QueryParam("objectId") int objectId, @QueryParam("userId") int userId) {
+		CommentDAO dao = (CommentDAO) ctx.getAttribute("commentDAO");
+		boolean isVisited = dao.isUserCommentSportObject(objectId, userId);
+		return isVisited;
+	} 
 	
 	@POST
 	@Path("/")

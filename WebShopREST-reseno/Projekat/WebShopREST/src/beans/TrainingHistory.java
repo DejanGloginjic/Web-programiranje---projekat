@@ -2,6 +2,8 @@ package beans;
 
 import java.time.LocalDateTime;
 
+import beans.Enums.LocalDateTimeHelper;
+
 public class TrainingHistory {
 	
 	private int id;
@@ -64,7 +66,7 @@ public class TrainingHistory {
 	}
 
 	public String fileLine() {
-		return id + ";" + treningEntrance + ";" + training.getId() + ";" + buyer.getId() + ";" + ((coach == null) ? -1 : coach.getId()) ;
+		return id + ";" + LocalDateTimeHelper.dateToString(treningEntrance) + ";" + training.getId() + ";" + buyer.getId() + ";" + ((coach == null) ? -1 : coach.getId()) ;
 	}
 	
 	

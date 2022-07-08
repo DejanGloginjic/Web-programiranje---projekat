@@ -81,6 +81,10 @@
 
 	.error{color:red}
 
+  .commentBox {width: 100%;}
+
+  .comment{margin-top: 30px;}
+
 </style>
 
 <body>
@@ -162,6 +166,15 @@
                 </div>
             </form>
     
+            <div class="comment" v-bind:hidden="loggedUser.userType != 'Buyer'">
+              <div v-bind:hidden="isVisited === false || isCommented === true">
+                <label>Add comment</label>
+                <textarea class="commentBox" placeholder="Add comment here..." v-model="komentar.comment"></textarea>
+                <button v-on:click="addComment()">Add comment</button>
+              </div>
+              <p v-bind:hidden="isVisited === false || isCommented != true">Ostavili ste komentar na ovaj objekat!</p>
+              <p v-bind:hidden="isVisited != false">Nemate pravo ostaviti komentar sve dok ne posjetite objekat!</p>
+            </div>
         </div>
     
     

@@ -93,7 +93,14 @@ public class TrainingHistoryService {
 	} 
 	
 	
-	
+	@GET
+	@Path("/getIsVisited")
+	@Produces(MediaType.APPLICATION_JSON)
+	public boolean getTrainingHistoryforSportObjectAndUser(@QueryParam("objectId") int objectId, @QueryParam("userId") int userId) {
+		TrainingHistoryDAO dao = (TrainingHistoryDAO) ctx.getAttribute("trainingHistoryDAO");
+		boolean isVisited = dao.getTrainingHistoryforSportObjectAndUser(objectId, userId);
+		return isVisited;
+	} 
 	
 	
 	@PUT

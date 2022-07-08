@@ -223,4 +223,13 @@ public class TrainingHistoryDAO {
 		}
 		return found;
 	}
+	
+	public boolean getTrainingHistoryforSportObjectAndUser(int objectId, int userId){
+		for(TrainingHistory historyTraining : trainings.values()) {
+			if(historyTraining.getBuyer().getId() == userId && historyTraining.getTraining().getSportObject().getId() == objectId) {
+				return true;
+			}
+		}
+		return false;
+	} 
 }
