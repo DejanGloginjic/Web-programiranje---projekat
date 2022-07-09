@@ -13,7 +13,7 @@ public class StartingProject {
 		SportObjectDAO.getInstance().loadSportObjects(contextPath);
 		TrainingDAO.getInstance().loadTrainings(contextPath);
 		TrainingHistoryDAO.getInstace().loadTrainingHistory(contextPath);
-		ScheduledTrainingDAO.getInstance().loadTrainings(contextPath);
+		//ScheduledTrainingDAO.getInstance().loadTrainings(contextPath);
 		
 		UserDAO.getInstance().linkUserAndMembership();
 		UserDAO.getInstance().linkUserAndSportObject();

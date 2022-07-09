@@ -130,5 +130,21 @@ public class UserService {
 		UserDAO dao = (UserDAO) ctx.getAttribute("userDAO");
 		return dao.delete(id);
 	}
+	
+	@GET
+	@Path("/trainers")
+	@Consumes(MediaType.APPLICATION_JSON)
+	@Produces(MediaType.APPLICATION_JSON)
+	public Collection<UserDTO> getTrainers() {
+		UserDAO dao = (UserDAO) ctx.getAttribute("userDAO");
+		ArrayList<User> coaches = dao.getTCoaches();
+		ArrayList<UserDTO> coachDTOs = new ArrayList<UserDTO>();
+		
+		for(User user : coaches) {
+			coachDTOs.add(new UserDTO(user));
+		}
+		
+		return coachDTOs;
+	}
 
 } 

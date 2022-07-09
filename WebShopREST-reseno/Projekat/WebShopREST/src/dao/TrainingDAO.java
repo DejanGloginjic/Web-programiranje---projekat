@@ -87,6 +87,7 @@ public class TrainingDAO {
 		maxId++;
 		training.setId(maxId);
 		trainings.put(training.getId(), training);
+		saveToFile();
 		return training;
 	}
 

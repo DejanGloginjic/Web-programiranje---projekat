@@ -376,4 +376,15 @@ public class UserDAO {
 		
 		return trainers;
 	}
+	
+	public ArrayList<User> getTCoaches() {
+		ArrayList<User> trainers = new ArrayList<User>();
+
+		for (User user : users.values()) {
+			if (user.getUserType() == UserTypeEnum.Coach) {
+				trainers.add(user);
+			}
+		}
+		return trainers;
+	}
 }

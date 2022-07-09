@@ -10,7 +10,7 @@
 <body>
 
     <div id="managerObject">
-        <h1>Sportski objekat</h1>
+        <h1>Sport object</h1>
 
         <div class="b">
             <label>Name:</label>
@@ -34,7 +34,7 @@
 
         <div class="b">
             <label>Working hours:</label>
-            <label>{{loggedUser.sportObject.startTime.hour}}:{{loggedUser.sportObject.startTime.minute}} - {{loggedUser.sportObject.endTime.hour}}:{{loggedUser.sportObject.endTime.minute}}</label>
+            <label>{{loggedUser.sportObject.startTime}} - {{loggedUser.sportObject.endTime}}</label>
         </div>
 
         <div class="b">
@@ -43,14 +43,14 @@
         </div>
 
         <div class="b">
-            <button v-on:click="showTrainersForm()">Show trainers</button>
+            <button v-on:click="showTrainersForm()">Show coaches</button>
         </div>
 
         <div class="b">
             <button v-on:click="showBuyersForm()">Show buyers</button>
         </div>
         <div class="b">
-            <button v-on:click="showAllTrainings()">Show buyers</button>
+            <button v-on:click="showAllTrainings()">Show trainings</button>
         </div>
 
         <div id ="trainers" v-if="showTrainers == true">
