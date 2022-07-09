@@ -131,6 +131,7 @@ public class CommentDAO {
 	
 	public Comment change(Comment comment) {
 		comments.put(comment.getId(), comment);
+		saveToFile();
 		return comment;
 	}
 	

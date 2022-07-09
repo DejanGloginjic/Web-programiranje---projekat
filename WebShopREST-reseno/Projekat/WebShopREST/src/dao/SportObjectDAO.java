@@ -213,6 +213,7 @@ public class SportObjectDAO {
 		
 		public SportObject change(SportObject sportobject) {
 			sportObjects.put(sportobject.getId(), sportobject);
+			saveToFile();
 			return sportobject;
 		}
 		

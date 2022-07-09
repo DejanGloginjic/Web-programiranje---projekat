@@ -57,12 +57,21 @@
 				event.preventDefault();
 				return
 			}
+
+			let averageGrade = (parseInt(this.grade) + this.so.objectMark)/2
+			this.so.objectMark = averageGrade
 			
 			axios.post('rest/comments', this.komentar)
 				.then(response=>{
 					alert('Comment succesfuly!');
 				}).catch(() => {
 					alert('Comment unsuccesfuly!')
+				})
+			
+			axios.put('rest/sportobjects/' + this.so.id, this.so)
+				.then(response=>{
+					alert('Grade succesfuly updated!')
+					this.so = response.data
 				})
 
 			this.isCommented = true;

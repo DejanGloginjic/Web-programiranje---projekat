@@ -100,9 +100,11 @@
         display: table;
         table-layout: fixed;
        }
+
+       h1{text-align: center;}
 </style>
 <body>
-    
+        <h1>Manage comments</h1>
         <div id="manageComments" class="content-table">
             <table border="1" id="tabela">
                 <thead>
@@ -118,7 +120,7 @@
                     <td>{{c.buyerComment.username}}</td>
                     <td>{{c.comment }}</td>
                     <td><button type="button" v-on:click="acceptComment(c)">Accept</button></td>
-                    <td><button type="button" v-on:click="rejectComment(t)">Reject</button></td>
+                    <td><button type="button" v-on:click="rejectComment(c)">Reject</button></td>
 
                 </tr>
             </table>
