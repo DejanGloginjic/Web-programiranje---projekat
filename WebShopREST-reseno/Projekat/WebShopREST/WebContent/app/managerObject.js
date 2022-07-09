@@ -22,6 +22,9 @@ var app = new Vue({
 		showBuyersForm: function(){
 			axios.get('rest/users/getBuyers/' + this.loggedUser.sportObject.id).then(response=>(this.buyers = response.data))
 			this.showBuyers = true
+		},
+		showAllTrainings: function(){
+			window.location.href = 'http://localhost:8080/WebShopREST/managerTrainings.html';
 		}
 	}
 });
