@@ -187,7 +187,7 @@ public class TrainingHistoryDAO {
 			for(User u : buyers) {
 				if(u.getId() == requiredId) {
 					th.setBuyer(u);
-					//u.addTrainingToTrainingHistory(th);
+					u.addTrainingToTrainingHistory(th);
 					break;
 				}
 			}

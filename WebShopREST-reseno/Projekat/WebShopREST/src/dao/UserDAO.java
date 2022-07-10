@@ -352,7 +352,7 @@ public class UserDAO {
 			for(TrainingHistory th : u.getTrainingHistory()) {
 				if(th.getTraining().getSportObject().getId() == objectId) {
 					if(!trainers.contains(u)) {
-						trainers.add(u);
+						trainers.add(th.getTraining().getCoach());
 					}
 				}
 			}
