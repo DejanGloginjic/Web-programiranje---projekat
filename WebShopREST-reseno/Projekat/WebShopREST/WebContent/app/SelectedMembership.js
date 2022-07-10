@@ -17,20 +17,11 @@ var app = new Vue({
 	},
 	methods: {
 		bookTraining: function(event) {
-				axios.post('rest/memberships/', this.memberShip)
+			axios.post('rest/memberships/', this.memberShip)
 				.then((response) => {
 					this.membership = response.data;
 				})
-	},
-		applyPromoCode: function(event){
-			axios.post('rest/promoCodes/' + this.promoCode)
-					.then((response)=>{
-						if(response.data === null){
-							alert('Entered promo code is not valid!');
-							event.preventDefault();
-							return;
-						}
-			})
-		}
+				event.preventDefault();
+	}
 }
 });
