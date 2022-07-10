@@ -78,6 +78,15 @@
 		},
 		manageComments: function(){
 			window.location.href = 'http://localhost:8080/WebShopREST/manageComments.html';
+		},
+		bookTraining: function(training) {
+
+		},
+		updateTraining: function(training) {
+		   axios.post('rest/trainings/setSelected', training)
+			.then((response) => {
+				window.location.href = 'http://localhost:8080/WebShopREST/TrainingEdit.html';
+			})
 		}
 		
 	}

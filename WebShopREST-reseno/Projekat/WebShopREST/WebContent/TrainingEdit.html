@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Training edit</title>
+</head>
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+    
+    body {
+        margin: 0;
+        padding: 0;
+        background: linear-gradient(120deg, #58a3d4, #93bfcb);
+        height: 100vh;
+        overflow: hidden;
+        display: inherit;
+    }
+    
+    .center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 400px;
+        background: white;
+        border-radius: 10px;
+        box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.05);
+    }
+    
+    .center form {
+        padding: 0 40px;
+        box-sizing: border-box;
+    }
+    
+    form .txt_field {
+        position: relative;
+        border-bottom: 2px solid #adadad;
+        margin: 30px 0;
+    }
+    
+    .txt_field input {
+        width: 100%;
+        padding: 0 5px;
+        height: 40px;
+        font-size: 16px;
+        border: none;
+        background: none;
+        outline: none;
+    }
+    
+    .txt_field label {
+        position: absolute;
+        top: 50%;
+        left: 5px;
+        color: #adadad;
+        transform: translateY(-50%);
+        font-size: 16px;
+        pointer-events: none;
+        transition: .5s;
+    }
+    
+    .txt_field span::before {
+        content: '';
+        position: absolute;
+        top: 40px;
+        left: 0;
+        width: 0%;
+        height: 2px;
+        background: #2691d9;
+        transition: .5s;
+    }
+    
+    .txt_field input:focus ~ label, .txt_field input:valid ~ label {
+        top: -5px;
+        color: #2691d9;
+    }
+    
+    .txt_field input:focus ~ span::before, .txt_field input:valid ~ span::before
+        {
+        width: 100%;
+    }
+    
+    .pass {
+        margin: -5px 0 20px 5px;
+        color: #a6a6a6;
+        cursor: pointer;
+    }
+    
+    input[type="submit"] {
+        width: 100%;
+        height: 50px;
+        border: 1px solid;
+        background: #2691d9;
+        border-radius: 25px;
+        font-size: 18px;
+        color: #e9f4fb;
+        font-weight: 700;
+        cursor: pointer;
+        outline: none;
+        margin-top: 20px;
+    }
+    
+    input[type="submit"]:hover {
+        border-color: #2691d9;
+        transition: .5s;
+    }
+    
+    label {
+        color: #1a7cbd;
+        margin-left: 5px;
+        margin-right: 40px;
+        font-size: 18px;
+    }
+    
+    .form-wrap {
+        width: 480px;
+        background: #e7edf2;
+        padding: 40px 20px;
+        box-sizing: border-box;
+        position: fixed;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        height: 640px;
+    }
+    
+    h1 {
+        text-align: center;
+        color: #2691d9;
+        font-weight: normal;
+        margin-bottom: 60px;
+    }
+</style>
+
+
+
+<body>
+	<div class="form-wrap" id="trainingEdit" style="overflow-y:scroll;height:700px;">
+		
+		<form @submit='trainingEdit'>
+            <h1>Edit training</h1>
+			
+
+				<div class="txt_field">
+					<span class="details">Name:</span> <input type="text"
+						name="name" required
+						v-model="newTraining.trainingName">
+				</div>
+
+				<div class="txt_field">
+					<span class="details">Object name:</span> <input type="text" disabled
+						name="surname" 
+						v-model="newTraining.sportObject.objectName">
+				</div>
+
+
+
+				<div class="txt_field">
+					<span class="details">Training type:</span> <select type="combobox"
+						class="combobox" v-model="newTraining.trainingType" width="15"
+						required v-model="newTraining.trainingType" size=1
+						style="width: 300px; height: 40px; border-radius: 5px; font-size: 16px">
+						<option value="Group">Group</option>
+                        <option value="Personal">Personal</option>
+                        <option value="Gym">Gym</option>
+					</select>
+				</div>
+
+				<div class="txt_field">
+					<span class="details">Duration:</span> <input type="text"
+						name="duration" required
+						v-model="newTraining.duration">
+				</div>
+
+				<div class="txt_field">
+					<span class="details">Description:</span> <input 
+						name="description" required
+						v-model="newTraining.description">
+				</div>
+
+				<div class="txt_field">
+					<span class="details">Image:</span> <input name="image" required
+						v-model="newTraining.image">
+				</div>
+				
+				<div class="txt_field">
+					<span class="details">Coach name:</span> <input name="coach" disabled
+						v-model="selectedTrainer.name">
+				</div>
+				
+
+				<select v-model="selectedTrainer" 
+					v-bind:hidden="trainers === null || trainers.length == 0">
+					<option v-for="t in trainers" :value="t"  >
+						{{t.name}} {{t.surname}} {{t.id}}</option>
+				</select>
+
+
+
+				<div class="button">
+					<input type="submit" value="Edit">
+
+				</div>
+			</div>
+		</form>
+		
+	</div>
+
+
+	<script src="js/vue.js"></script>
+	<script src="js/axios.js"></script>
+	<script src="app/TrainingEdit.js"></script>
+
+</body>
+</html>

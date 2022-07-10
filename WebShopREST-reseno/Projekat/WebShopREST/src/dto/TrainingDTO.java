@@ -22,6 +22,7 @@ public class TrainingDTO {
 	private LocalDateTime trainingDateAndTime;
 	private LocalDate dateOfApplication;
 	private ScheduledTrainingStatus status;
+	private int coachId;
 	
 	public TrainingDTO(Training training) {
 		this.id = training.getId();
@@ -32,6 +33,7 @@ public class TrainingDTO {
 		this.description = training.getDescription();
 		this.image = training.getImage();
 		this.trainerName = (training.getCoach()==null)?null:(training.getCoach().getName() + " " + training.getCoach().getSurname());
+		this.coachId = training.getCoach().getId();
 	}
 	
 	public TrainingDTO(ScheduledTraining training) {
@@ -167,6 +169,14 @@ public class TrainingDTO {
 
 	public void setTrainerName(String trainerName) {
 		this.trainerName = trainerName;
+	}
+	
+	public int getCoachId() {
+		return coachId;
+	}
+
+	public void setCoachID(int coachId) {
+		this.coachId = coachId;
 	}
 	
 	
