@@ -24,7 +24,7 @@ public class UserDTO {
 	private UserTypeEnum userType;
 
 	//buyer
-	private Membership membership;
+	private MembershipDTO membership;
 	private ArrayList<SportObject> visitedObject;
 	private int points;
 	private BuyerType buyerType;
@@ -47,12 +47,13 @@ public class UserDTO {
 		this.userGender = user.getUserGender();
 		this.dateOfBirth = DateHelper.stringToDate(user.getDateOfBirth());
 		this.userType = user.getUserType();
-		this.membership = user.getMembership();
+		this.membership = (user.getMembership() == null)?null:(new MembershipDTO(user.getMembership()));
 		this.visitedObject = user.getVisitedObject();
 		this.points = user.getPoints();
 		this.buyerType = user.getBuyerType();
 		this.sportObject = user.getSportObject();
 	}
+	
 
 	public int getId() {
 		return id;
@@ -122,11 +123,11 @@ public class UserDTO {
 		this.userType = userType;
 	}
 
-	public Membership getMembership() {
+	public MembershipDTO getMembership() {
 		return membership;
 	}
 
-	public void setMembership(Membership membership) {
+	public void setMembership(MembershipDTO membership) {
 		this.membership = membership;
 	}
 

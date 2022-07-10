@@ -387,4 +387,20 @@ public class UserDAO {
 		}
 		return trainers;
 	}
+	
+	public void setBuyerTypes() {
+		for(User user : users.values()) {
+			int poeni = user.getBuyerType().getPoints();
+			if(poeni < 3000) {
+				user.getBuyerType().setBuyerType(BuyerTypeEnum.Bronze);
+				user.getBuyerType().setDiscount(3);
+			}else if(poeni < 5000) {
+				user.getBuyerType().setBuyerType(BuyerTypeEnum.Silver);
+				user.getBuyerType().setDiscount(5);
+			}else {
+				user.getBuyerType().setBuyerType(BuyerTypeEnum.Gold);
+				user.getBuyerType().setDiscount(10);
+			}
+		}
+	}
 }

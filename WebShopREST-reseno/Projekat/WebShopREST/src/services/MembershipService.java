@@ -22,6 +22,7 @@ import javax.ws.rs.core.Response;
 import beans.Membership;
 import beans.User;
 import beans.Enums.DateHelper;
+import beans.Enums.MembershipStatusEnum;
 import dao.MembershipDAO;
 import dao.StartingProject;
 import dao.UserDAO;
@@ -65,6 +66,9 @@ public class MembershipService {
 		User logged = (User) request.getSession().getAttribute("user");
 		if(logged == null) {
 			return null;
+		}
+		if(logged.getMembership() != null) {
+			logged.getMembership().setMembershipStatus(MembershipStatusEnum.Inactive);
 		}
 		logged.setMembership(membership);
 		membership.setBuyer(logged);

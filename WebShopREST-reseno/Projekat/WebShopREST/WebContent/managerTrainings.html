@@ -118,6 +118,7 @@
                         <th>Duration</th>
                         <th>Coach</th>
                         <th>Description</th>
+                        <th>Edit</th>
                     
                     </tr>
                 </thead>
@@ -131,6 +132,7 @@
                     <td>{{pt.duration }}</td>
                     <td>{{pt.trainerName }}</td>
                     <td>{{pt.description }}</td>
+                    <td><button type="button" v-on:click="updateTraining(pt)">Edit</button></td>
     
                 </tr>
                 </tbody>

@@ -69,12 +69,45 @@ public class MembershipDAO {
 		}else {
 			membership.setExpirationDay(DateHelper.dateToString( membership.getStartDay().plusYears(1)));
 		}
+		membership.setMembershipStatus(MembershipStatusEnum.Active);
 		
 		membership = save(membership);
 		saveToFile();
 		
 		return membership;
 		
+	}
+	
+	public void checkMemberships() {
+		for(Membership membership : memberships.values()) {
+			if(membership.getMembershipStatus() == MembershipStatusEnum.Inactive) {
+				continue;
+			}
+			LocalDate trenutno = LocalDate.now();
+			
+			int kupljenoTermina = 0;
+			if(membership.getMembershipType() == MembershipTypeEnum.Day) {
+				kupljenoTermina = 1;
+			}else if(membership.getMembershipType() == MembershipTypeEnum.Month) {
+				kupljenoTermina = 30;
+			}else {
+				kupljenoTermina = 360;
+			}
+			if(membership.getExpirationDay().isBefore(trenutno)){
+				int iskoristeno = kupljenoTermina - membership.getNumberOfAppointment();
+				double brojDobijenih = (membership.getPrice() / 1000) * (iskoristeno);
+				double izgubljeni = 0;
+				if(iskoristeno <= kupljenoTermina / 3) {
+					izgubljeni = (membership.getPrice() / 1000) * (133 * 4);
+				}
+				int poeni = membership.getBuyer().getBuyerType().getPoints();
+				poeni += (int) Math.round(brojDobijenih - izgubljeni);
+				membership.getBuyer().getBuyerType().setPoints(poeni);
+				membership.setMembershipStatus(MembershipStatusEnum.Inactive);
+			}
+			
+			
+		}
 	}
 	
 	public Membership save(Membership membership) {

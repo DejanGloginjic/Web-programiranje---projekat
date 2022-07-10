@@ -1,5 +1,6 @@
 package services;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -22,8 +23,11 @@ import javax.ws.rs.core.Response;
 import org.apache.catalina.User;
 
 import beans.Training;
+import beans.TrainingHistory;
+import beans.Enums.MembershipStatusEnum;
 import dao.StartingProject;
 import dao.TrainingDAO;
+import dao.TrainingHistoryDAO;
 import dao.UserDAO;
 import dto.TrainingDTO;
 
@@ -186,5 +190,7 @@ public class TrainingService {
 		Training object = (Training)request.getSession().getAttribute("selectedTraining");
 		return new TrainingDTO(object);
 	}
+	
+	
 	
 }

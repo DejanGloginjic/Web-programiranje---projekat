@@ -93,6 +93,7 @@ h1 {
             <th>Membership type</th>
             <th>Price</th>
             <th>Number of appointment</th>
+            <th>Discount</th>
           </tr>
         </thead>
 
@@ -100,6 +101,7 @@ h1 {
           <td>{{m.membershipType }}</td>
           <td>{{m.price }}</td>
           <td>{{m.numberOfAppointment}}</td>
+          <td>{{m.price *(1 - (loggedUser.buyerType.discount)/100) }}</td>
         </tr>
       </table>
 

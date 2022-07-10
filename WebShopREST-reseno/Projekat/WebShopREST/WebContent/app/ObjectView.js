@@ -79,15 +79,14 @@
 		manageComments: function(){
 			window.location.href = 'http://localhost:8080/WebShopREST/manageComments.html';
 		},
-		bookTraining: function(training) {
-
-		},
-		updateTraining: function(training) {
-		   axios.post('rest/trainings/setSelected', training)
-			.then((response) => {
-				window.location.href = 'http://localhost:8080/WebShopREST/TrainingEdit.html';
-			})
-		}
 		
-	}
+		bookTraining: function(training) {
+				axios.post('rest/trainings/addTrainingToUser', training)
+					.then((response) => {
+						alert('booked training')
+					}).catch((response) => {
+						alert('membership expired')
+					})
+			}
+		}
 });

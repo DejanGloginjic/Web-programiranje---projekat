@@ -1,5 +1,7 @@
 package dao;
 
+import sysClock.CheckMembership;
+
 public class StartingProject {
 
 	private static StartingProject instance = null;
@@ -36,6 +38,12 @@ public class StartingProject {
 		
 		ScheduledTrainingDAO.getInstance().linkScheduledTrainingAndBuyer();
 		ScheduledTrainingDAO.getInstance().linkScheduledTrainingAndTraining();
+		
+		CheckMembership thread = new CheckMembership();
+		thread.start();
+		
+		
+		
 	}
 	
 	public static StartingProject getInstance(String contextPath) {

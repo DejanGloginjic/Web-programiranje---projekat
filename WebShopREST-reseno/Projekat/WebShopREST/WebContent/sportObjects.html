@@ -48,8 +48,8 @@ body{
 
 div.a {
 	position: absolute;
-    top: 170px;
-	left: 700px;
+  top: 185px;
+	left: 378px;
 }
 
 div.filter{
@@ -65,6 +65,13 @@ div.b {
     color: rgb(255, 255, 255);
 	font-size: 22px;
     
+}
+
+div.c{
+  position: absolute;
+  top: 55px;
+	left: 580px;
+
 }
 
 .signup_link{
@@ -151,6 +158,8 @@ div.b {
                   border-radius: 3px;  
 }
 
+
+
 </style>
 
 <body>
@@ -166,6 +175,7 @@ div.b {
 
 	<div id ="sportObjects">
 
+    <div class="c">
     <div class="filter">
       <p>
         <select name="searchTypeFilter" placeholder="Type" v-model="searchTypeFilter">
@@ -175,9 +185,10 @@ div.b {
           <option>DanceStudio</option>
         </select>
         <input type="checkbox" value="Open" v-model="searchOpenFilter"><label for="vehicle1">Open</label><br>
-        <button value="Search" v-on:click="filterObject">Search</button>
+        <button value="Search" v-on:click="filterObject">Filter</button>
       </p>
 	    </div>
+    </div>
 
 		<div class="a">
       <p>
@@ -188,9 +199,9 @@ div.b {
           <option>SportCenter</option>
           <option>DanceStudio</option>
         </select>
-        <input type="text" name="searchCity" placeholders="City" v-model="searchCity">
-        <input type="text" name="searchMinGrade" placeholders="From grade" v-model="searchMinGrade">
-        <input type="text" name="searchMaxGrade" placeholders="To grade" v-model="searchMaxGrade">
+        <input type="text" name="searchCity" placeholder="City" v-model="searchCity">
+        <input type="text" name="searchMinGrade" placeholder="From grade" v-model="searchMinGrade">
+        <input type="text" name="searchMaxGrade" placeholder="To grade" v-model="searchMaxGrade">
         <button value="Search" v-on:click="searchObjects">Search</button>
       </p>
 	    </div>
