@@ -148,6 +148,14 @@
 					<span></span>	
 				</div>
 
+				<div style="white-space:nowrap;" v-bind:hidden="loggedUser.userType != 'Administrator'">
+					<label>User type</label>
+					<input type="radio" id="manager" name="type" value="Manager" v-model="newUser.userType">
+						<label for="male">Manager</label>
+						<input type="radio" id="coach" name="type" value="Coach" v-model="newUser.userType">
+	                        <label for="female">Coach</label><br/>
+					<span></span>
+					</div>
 
                 <input type="submit" value="Register">
 

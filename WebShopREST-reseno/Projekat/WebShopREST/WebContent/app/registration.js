@@ -2,6 +2,7 @@ var app = new Vue({
 	el: '#registrationFrom',
 	data: {
 		newUser: {},
+		loggedUser: {},
 		errorName: '',
 		errorSurname: '',
 		errorUsername: '',
@@ -9,6 +10,9 @@ var app = new Vue({
 	},
 	mounted() {
 		this.newUser = { id: '', name: null, surname: null, dateOfBirth: null, userGender: null, username: null, password: null, userType: 'Buyer' }
+		axios.get('rest/currentUser')
+			.then(response=>(this.loggedUser = response.data))
+			.catch({})
 	},
 	methods:{
 		createUser: function (event) {
