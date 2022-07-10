@@ -46,19 +46,35 @@ public class PromoCode {
 		this.code = code;
 	}
 
-	public LocalDate getStartDate() {
+	public LocalDate getStartDate1() {
 		return startDate;
 	}
 
-	public void setStartDate(LocalDate startDate) {
+	public void setStartDate1(LocalDate startDate) {
 		this.startDate = startDate;
 	}
 
-	public LocalDate getEndDate() {
+	public LocalDate getEndDate1() {
 		return endDate;
 	}
+	
+	public String getEndDate() {
+		return DateHelper.dateToString(endDate);
+	}
+	
+	public void setEndDate(String endDate) {
+		this.endDate = DateHelper.stringToDate(endDate);
+	}
+	
+	public String getStartDate() {
+		return DateHelper.dateToString(startDate);
+	}
+	
+	public void setStartDate(String startDate) {
+		this.startDate = DateHelper.stringToDate(startDate);
+	}
 
-	public void setEndDate(LocalDate endDate) {
+	public void setEndDate1(LocalDate endDate) {
 		this.endDate = endDate;
 	}
 

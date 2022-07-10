@@ -74,8 +74,8 @@ public class PromoCodeDAO {
 	
 	public PromoCode isValid(String code) {
 		for(PromoCode pc : codes.values()) {
-			if(pc.getCode().equals(code) && pc.getStartDate().isBefore(LocalDate.now()) 
-					&& pc.getEndDate().isAfter(LocalDate.now()) && pc.getNumberOfUses()>0) {
+			if(pc.getCode().equals(code) && pc.getStartDate1().isBefore(LocalDate.now()) 
+					&& pc.getEndDate1().isAfter(LocalDate.now()) && pc.getNumberOfUses()>0) {
 				pc.setNumberOfUses(pc.getNumberOfUses() - 1);
 				change(pc);
 				return pc;
