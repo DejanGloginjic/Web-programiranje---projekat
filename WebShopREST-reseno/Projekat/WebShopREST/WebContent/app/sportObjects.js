@@ -2,24 +2,28 @@ var app = new Vue({
 	el: '#sportObjects',
 	data: {
 		sportObjects: [],
-		filter: '',
-		criterium: '',
 		loggedUser: {},
+		searchedSportObjects: [],
+		searchName: "",
+		searchType: "",
+		searchCity: "",
+		searchMinGrade: "",
+		searchMaxGrade: "",
 		unsortedSportObject: []
 	},
 	mounted() {
 		axios.get('rest/sportobjects')
 			.then(response => {
-				
+				this.sportObjects = response.data
 				this.unsortedSportObject = response.data;
 				for(let u of this.unsortedSportObject){
 					if(u.objectStatus === 'Open'){
-						this.sportObjects.push(u);
+						this.searchedSportObjects.push(u);
 					}
 				}
 				for(let u of this.unsortedSportObject){
 					if(u.objectStatus === 'Close'){
-						this.sportObjects.push(u);
+						this.searchedSportObjects.push(u);
 					}
 				}
 			})
@@ -29,6 +33,22 @@ var app = new Vue({
 		searchObject: function(){
 			axios.get('rest/sportobjects/search', { params: { searchValue: this.filter, criterion: this.criterium} } )
 				.then(response => (this.sportObjects = response.data))
+		},
+		searchObjects: function(){
+			this.searchedSportObjects = []
+
+			if(this.searchMinGrade === '' || this.searchMaxGrade === ''){
+				this.searchMinGrade = 0
+				this.searchMaxGrade = 5
+			}
+
+			for(let object of this.sportObjects){
+				if(object.objectName.toLowerCase().includes(this.searchName.toLowerCase()) && object.objectType.includes(this.searchType) 
+					&& object.location.place.toLowerCase().includes(this.searchCity.toLowerCase()) && (object.objectMark >= this.searchMinGrade)
+						&& (object.objectMark <= this.searchMaxGrade)){
+					this.searchedSportObjects.push(object)
+				}
+			}
 		},
 		Selected: function(sp) {
 			axios.post('rest/sportobjects/setSelected',  {id: sp.id}).then(response=>{

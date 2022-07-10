@@ -49,7 +49,7 @@ body{
 div.a {
 	position: absolute;
     top: 170px;
-	left: 770px;
+	left: 700px;
 }
 
 div.b {
@@ -162,14 +162,19 @@ div.b {
 
 
 		<div class="a">
-        <input type="text" placeholder="Search" v-model="filter">
-		<select name="criteruim" id="criteruim" v-model="criterium">
-			<option value="Name">Name</option>
-			<option value="Location">Location</option>
-			<option value="Average grade">Average grade</option>
-			<option value="Object type">Object type</option>
-		</select>
-		<button value="search" v-on:click="searchObject">Search</button>
+      <p>
+        <input type="text" name="searchName" placeholder="Name" v-model="searchName">
+        <select name="searchType" placeholder="Type" v-model="searchType">
+          <option>Gym</option>
+          <option>Pool</option>
+          <option>SportCenter</option>
+          <option>DanceStudio</option>
+        </select>
+        <input type="text" name="searchCity" placeholders="City" v-model="searchCity">
+        <input type="text" name="searchMinGrade" placeholders="From grade" v-model="searchMinGrade">
+        <input type="text" name="searchMaxGrade" placeholders="To grade" v-model="searchMaxGrade">
+        <button value="Search" v-on:click="searchObjects">Search</button>
+      </p>
 	    </div>
 
 		<table id="tabela" class="content-table">
@@ -186,7 +191,7 @@ div.b {
 				</tr>
 			</thead>
 			<tbody>
-			<tr v-for="sp in sportObjects"  v-on:click="Selected(sp)">
+			<tr v-for="sp in searchedSportObjects"  v-on:click="Selected(sp)">
 				<td>{{sp.logoPicture }}</td>
                 <td>{{sp.objectName }}</td>
                 <td>{{sp.objectType }}</td>

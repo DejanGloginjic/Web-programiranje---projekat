@@ -58,7 +58,7 @@ public class PromoCodeService {
 	}
 	
 	@POST
-	@Path("/")
+	@Path("/getByCode")
 	@Produces(MediaType.APPLICATION_JSON)
 	public PromoCode getByCode(String code) {
 		PromoCodeDAO dao = (PromoCodeDAO) ctx.getAttribute("promoCodeDAO");
@@ -66,7 +66,7 @@ public class PromoCodeService {
 	}
 	
 	@POST
-	@Path("/newPromo")
+	@Path("/")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public PromoCode newPromoCode(PromoCode code) {
