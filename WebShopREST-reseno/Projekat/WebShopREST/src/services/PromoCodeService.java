@@ -19,10 +19,13 @@ import javax.ws.rs.core.MediaType;
 
 import beans.Comment;
 import beans.PromoCode;
+import beans.ScheduledTraining;
 import dao.CommentDAO;
 import dao.PromoCodeDAO;
+import dao.ScheduledTrainingDAO;
 import dao.StartingProject;
 import dao.TrainingHistoryDAO;
+import dto.TrainingDTO;
 
 @Path("/promoCodes")
 public class PromoCodeService {
@@ -32,6 +35,7 @@ public class PromoCodeService {
 	
 	public PromoCodeService() {
 	}
+
 	
 	@PostConstruct
 	// ctx polje je null u konstruktoru, mora se pozvati nakon konstruktora (@PostConstruct anotacija)
@@ -41,7 +45,7 @@ public class PromoCodeService {
 		if (ctx.getAttribute("promoCodeDAO") == null) {
 	    	String contextPath = ctx.getRealPath("");
 	    	StartingProject.getInstance(contextPath);
-			ctx.setAttribute("promoCodeDAO", CommentDAO.getInstace());
+			ctx.setAttribute("promoCodeDAO", PromoCodeDAO.getInstace());
 		}
 	}
 	
@@ -55,6 +59,14 @@ public class PromoCodeService {
 	
 	@POST
 	@Path("/")
+	@Produces(MediaType.APPLICATION_JSON)
+	public PromoCode getByCode(String code) {
+		PromoCodeDAO dao = (PromoCodeDAO) ctx.getAttribute("promoCodeDAO");
+		return dao.getByCode(code);
+	}
+	
+	@POST
+	@Path("/newPromo")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public PromoCode newPromoCode(PromoCode code) {

@@ -173,6 +173,7 @@ public class TrainingDAO {
 
 	public Training change(Training training) {
 		trainings.put(training.getId(), training);
+		saveToFile();
 		return training;
 	}
 

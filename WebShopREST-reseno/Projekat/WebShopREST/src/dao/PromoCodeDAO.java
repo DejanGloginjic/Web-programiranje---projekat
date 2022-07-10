@@ -72,6 +72,15 @@ public class PromoCodeDAO {
 		return codes.values();
 	}
 	
+	public PromoCode getByCode(String code) {
+		for(PromoCode pc : codes.values()) {
+			if(pc.getCode().equals(code)) {
+				return pc;
+			}
+		}
+		return null;
+	}
+	
 	public PromoCode save(PromoCode code) {
 		Integer maxId = -1;
 		for (int id : codes.keySet()) {

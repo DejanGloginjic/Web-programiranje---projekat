@@ -9,7 +9,7 @@ public class Training {
 	private TrainingTypeEnum trainingType;
 	private SportObject sportObject;
 	private int duration;
-	private User coach;		//moze da bude prazno
+	private beans.User coach;		//moze da bude prazno
 	private String description;
 	private String image;
 	

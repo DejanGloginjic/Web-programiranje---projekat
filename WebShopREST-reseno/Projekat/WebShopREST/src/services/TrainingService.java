@@ -154,6 +154,7 @@ public class TrainingService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public void changeOne(TrainingDTO trainingDTO) {
 		TrainingDAO dao = (TrainingDAO) ctx.getAttribute("trainingDAO");
+		UserDAO userDAO = (UserDAO) ctx.getAttribute("userDAO");
 		Training training = new Training();
 		training.setId(trainingDTO.getId());
 		training.setTrainingName(trainingDTO.getTrainingName());
@@ -162,8 +163,7 @@ public class TrainingService {
 		training.setDuration(trainingDTO.getDuration());
 		training.setDescription(trainingDTO.getDescription());
 		training.setImage(trainingDTO.getImage());
-		User user = UserDAO.getInstance().find(trainingDTO.getCoachId());
-		training.setCoach(user);
+		training.setCoach(userDAO.find(trainingDTO.getCoachId()));
 		
 		dao.change(training);
 	}

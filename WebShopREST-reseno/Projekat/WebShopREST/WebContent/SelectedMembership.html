@@ -174,7 +174,12 @@
 
                 <div class="txt_field">
 					<span class="details">First day</span> <input
-					v-model="memberShip.startDay" type="date" v-bind:min="minDate" name="birthday">
+					v-model="memberShip.startDay" type="date" v-bind:min="minDate">
+				</div>
+
+                <div class="txt_field">
+					<span class="details">Promo code</span> <input
+					v-model="promoCode" placeholder="Enter promo code here...">
 				</div>
                 
                 <div class="button">

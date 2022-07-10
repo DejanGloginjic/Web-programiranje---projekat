@@ -194,8 +194,9 @@
               
             </div>
 
-            <div>
-              <ul v-for="c in buyerComments" v-bind:hidden="loggedUser.userType != 'Buyer'">
+            <div v-bind:hidden="loggedUser.userType != 'Buyer'">
+              <h3>Comments</h3>
+              <ul v-for="c in buyerComments">
                 <li>
 
                   <h5>{{c.buyerComment.username}}</h5>
@@ -205,11 +206,12 @@
               </ul>
             </div>
 
-            <div class="comments">
-              <ul v-for="c in allComments" v-bind:hidden="loggedUser.userType === 'Buyer' && loggedUser.userType === 'Coach'">
+            <div class="comments" v-bind:hidden="loggedUser.userType === 'Buyer' || loggedUser.userType === 'Coach'">
+              <h3>Comments</h3>
+              <ul v-for="c in allComments">
                 <li>
 
-                  <h5>{{c.buyerComment.username}}</h5>
+                  <h5>{{c.buyerComment.username}} <h6>({{c.status}})</h6></h5>
                   <p>{{c.comment}}</p>
 
                 </li>
