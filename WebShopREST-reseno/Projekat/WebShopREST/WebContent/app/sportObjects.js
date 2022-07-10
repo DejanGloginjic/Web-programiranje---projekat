@@ -1,14 +1,28 @@
 var app = new Vue({
 	el: '#sportObjects',
 	data: {
-		sportObjects: null,
+		sportObjects: [],
 		filter: '',
 		criterium: '',
-		loggedUser: {}
+		loggedUser: {},
+		unsortedSportObject: []
 	},
 	mounted() {
 		axios.get('rest/sportobjects')
-			.then(response => (this.sportObjects = response.data))
+			.then(response => {
+				
+				this.unsortedSportObject = response.data;
+				for(let u of this.unsortedSportObject){
+					if(u.objectStatus === 'Open'){
+						this.sportObjects.push(u);
+					}
+				}
+				for(let u of this.unsortedSportObject){
+					if(u.objectStatus === 'Close'){
+						this.sportObjects.push(u);
+					}
+				}
+			})
 		axios.get('rest/currentUser').then(response=>(this.loggedUser = response.data))
 	},
 	methods: {
