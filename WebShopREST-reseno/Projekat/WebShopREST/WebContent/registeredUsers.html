@@ -4,29 +4,113 @@
 <meta charset="ISO-8859-1">
 <title>Registered users</title>
 </head>
+<style>
+    body{
+        margin: 0; padding: 0; background: linear-gradient(120deg,#58a3d4, #93bfcb);  height: 100vh; overflow: hidden;
+      }
+    
+    
+    .content-table {
+        position: absolute;	top: 60%;left: 50%;	transform: translate(-50%, -50%); width: 890px;	background: white;
+        border-radius: 3px; box-shadow: 10px 10px 15px rgba(0,0,0,0.05); height: 450px;
+    }
+    
+    .content-table thead tr {
+      background-color: #2691d9;
+      color: #ffffff;
+      text-align: left;
+      font-weight: bold;
+      border-radius: 10px;
+    }
+    
+    .content-table th,
+    .content-table td {
+      padding: 12px 15px;
+    }
+    
+    .content-table tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+    
+    .content-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+    
+    .content-table tbody tr:last-of-type {
+      border-bottom: 2px solid #2691d9;
+      border-radius: 10px;
+    }
+       
+    
+      table {
+        display: flex;
+        flex-flow: column;
+        height: 100%;
+        width: 100%;
+       }
+    
+       table thead {
+        /* head takes the height it requires, 
+        and it's not scaled when table is resized */
+        flex: 0 0 auto;
+        width: calc(100% - 0.9em);
+       }
+    
+       table tbody {
+        /* body takes all the remaining available space */
+        flex: 1 1 auto;
+        display: block;
+        overflow-y: scroll;
+       }
+    
+       table tbody tr {
+        width: 100%;
+       }
+    
+        table thead, table tbody tr {
+        display: table;
+        table-layout: fixed;
+       }
+
+       h1{ text-align: center; }
+
+    div.c{
+    position: absolute;
+    top: 165px;
+	left: 630px;
+
+    }
+
+
+
+
+
+</style>
 <body>
     
-        <div id="rUsers">
+        <div id="rUsers" style="overflow-y:scroll;height:700px;">
     
-               
+            <div class="c"> 
             <p>
                 <input type="text" name="searchName" placeholder="Name" v-model="searchName">
                 <input type="text" name="searchSurname" placeholder="Surname" v-model="searchSurname">
-                <input type="text" name="searchUsername" placeholders="Username" v-model="searchUsername">
+                <input type="text" name="searchUsername" placeholder="Username" v-model="searchUsername">
                 <button value="Search" v-on:click="findUsers">Search</button>
             </p>
+            </div>  
     
     
     
-            <table border="1" id="tabela">
+            <table border="1" id="tabela" class="content-table">
                 <thead>
                     <tr bgcolor="lightgrey">
-                        <th>Username</th>
-                        <th>Name</th>
-                        <th>Surname</th>
+                        <th v-on:click="Sort(0)">Username</th>
+                        <th v-on:click="Sort(1)">Name</th>
+                        <th v-on:click="Sort(2)">Surname</th>
                         <th>Gender</th>
                         <th>Date of birth</th>
                         <th>User type</th>
+                        <th v-on:click="Sort(6)">Points</th>
                     </tr>
                 </thead>
     
@@ -37,6 +121,7 @@
                     <td>{{u.userGender }}</td>
                     <td>{{u.dateOfBirth}} </td>
                     <td>{{u.userType}}</td>
+                    <td>{{u.points}}</td>
                 </tr>
             </table>
     
