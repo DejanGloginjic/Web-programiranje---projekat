@@ -179,6 +179,7 @@ div.c{
     <div class="filter">
       <p>
         <select name="searchTypeFilter" placeholder="Type" v-model="searchTypeFilter">
+          <option value="" disabled selected>Select type</option>
           <option>Gym</option>
           <option>Pool</option>
           <option>SportCenter</option>
@@ -194,6 +195,7 @@ div.c{
       <p>
         <input type="text" name="searchName" placeholder="Name" v-model="searchName">
         <select name="searchType" placeholder="Type" v-model="searchType">
+          <option value="" disabled selected>Select type</option>
           <option>Gym</option>
           <option>Pool</option>
           <option>SportCenter</option>

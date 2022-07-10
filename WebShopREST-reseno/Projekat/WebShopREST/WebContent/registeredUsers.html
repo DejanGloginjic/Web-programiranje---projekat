@@ -81,6 +81,13 @@
 
     }
 
+    div.d{
+    position: absolute;
+    top: 130px;
+	left: 1058px;
+
+    }
+
 
 
 
@@ -98,6 +105,21 @@
                 <button value="Search" v-on:click="findUsers">Search</button>
             </p>
             </div>  
+
+            <div class="d">
+                <div class="filter">
+                  <p>
+                    <select name="searchTypeFilter" placeholder="Type" v-model="searchTypeFilter">
+                      <option value="" disabled selected>Select type</option>
+                      <option>Administrator</option>
+                      <option>Manager</option>
+                      <option>Coach</option>
+                      <option>Buyer</option>
+                    </select>
+                    <button value="Search" v-on:click="filterUsers">Filter</button>
+                  </p>
+                    </div>
+                </div>
     
     
     

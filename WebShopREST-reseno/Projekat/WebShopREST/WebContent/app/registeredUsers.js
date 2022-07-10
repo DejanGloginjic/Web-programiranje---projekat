@@ -31,6 +31,28 @@ var app = new Vue({
 				}
 			}
 		},
+		filterUsers: function(){
+			this.searchedUser = []
+
+			for(let user of this.users){
+				if(user.userType.includes(this.searchTypeFilter)){
+					if(user.userType.includes('Administrator')){
+						this.searchedUser.push(user)
+					}
+					if(user.userType.includes('Manager')){
+						this.searchedUser.push(user);
+					}
+					if(user.userType.includes('Coach')){
+						this.searchedUser.push(user);
+					}
+					if(user.userType.includes('Buyer')){
+						this.searchedUser.push(user);
+					}
+					
+				}
+
+			}
+		},
 		Sort: function(n) {
 			//function found on site: https://www.w3schools.com/howto/howto_js_sort_table.asp
 			  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
