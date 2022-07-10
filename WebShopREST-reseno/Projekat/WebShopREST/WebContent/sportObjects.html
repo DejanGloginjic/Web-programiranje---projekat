@@ -52,9 +52,15 @@ div.a {
 	left: 700px;
 }
 
+div.filter{
+  position: absolute;
+  top: 130px;
+  left: 700px;
+}
+
 div.b {
 	position: absolute;
-    top: 130px;
+    top: 90px;
 	left: 1000px;
     color: rgb(255, 255, 255);
 	font-size: 22px;
@@ -160,6 +166,18 @@ div.b {
 
 	<div id ="sportObjects">
 
+    <div class="filter">
+      <p>
+        <select name="searchTypeFilter" placeholder="Type" v-model="searchTypeFilter">
+          <option>Gym</option>
+          <option>Pool</option>
+          <option>SportCenter</option>
+          <option>DanceStudio</option>
+        </select>
+        <input type="checkbox" value="Open" v-model="searchOpenFilter"><label for="vehicle1">Open</label><br>
+        <button value="Search" v-on:click="filterObject">Search</button>
+      </p>
+	    </div>
 
 		<div class="a">
       <p>

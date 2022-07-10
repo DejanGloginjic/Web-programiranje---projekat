@@ -9,6 +9,8 @@ var app = new Vue({
 		searchCity: "",
 		searchMinGrade: "",
 		searchMaxGrade: "",
+		searchTypeFilter: "",
+		searchOpenFilter: false,
 		unsortedSportObject: []
 	},
 	mounted() {
@@ -47,6 +49,23 @@ var app = new Vue({
 					&& object.location.place.toLowerCase().includes(this.searchCity.toLowerCase()) && (object.objectMark >= this.searchMinGrade)
 						&& (object.objectMark <= this.searchMaxGrade)){
 					this.searchedSportObjects.push(object)
+				}
+			}
+		},
+		filterObject: function(){
+			this.searchedSportObjects = []
+
+			for(let object of this.sportObjects){
+				if(object.objectType.includes(this.searchTypeFilter) && this.searchOpenFilter === true){
+					if(object.objectStatus.includes('Open')){
+						this.searchedSportObjects.push(object)
+					}
+					
+				}
+
+				if(object.objectType.includes(this.searchTypeFilter) && this.searchOpenFilter === false){
+						this.searchedSportObjects.push(object)
+					
 				}
 			}
 		},
