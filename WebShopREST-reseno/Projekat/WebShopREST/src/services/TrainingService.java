@@ -113,6 +113,35 @@ public class TrainingService {
 		return dao.delete(id);
 	}
 	
+	@POST
+	@Path("/addTrainingToUser")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response addTrainingToUser(TrainingDTO object, @Context HttpServletRequest request) {
+		Training objectfound = TrainingDAO.getInstance().find(object.getId());
+		beans.User logged = (beans.User) request.getSession().getAttribute("user");
+		if(logged == null) {
+			return Response.status(400).entity("invalid ").build();
+		}
+		if(logged.getMembership().getMembershipStatus() == MembershipStatusEnum.Inactive) {
+			return Response.status(400).entity("Invalid username and/or password").build();
+		}
+		if(logged.getMembership().getNumberOfAppointment() < 1) {
+			return Response.status(400).entity("Invalid username and/or password").build();
+		}
+		int ostalih = logged.getMembership().getNumberOfAppointment();
+		logged.getMembership().setNumberOfAppointment(ostalih - 1);
+		
+		TrainingHistory history = new TrainingHistory(0, LocalDateTime.now(), objectfound, logged, objectfound.getCoach());
+		history = TrainingHistoryDAO.getInstace().save(history);
+		if(objectfound.getCoach() != null) {
+			objectfound.getCoach().getTrainingHistory().add(history);
+		}
+		logged.getVisitedObject().add(objectfound.getSportObject());
+		
+		return Response.status(200).build();
+	}
+	
 	@GET
 	@Path("/getTrainingsForObject/{id}")
 	@Produces(MediaType.APPLICATION_JSON)

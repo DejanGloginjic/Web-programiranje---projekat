@@ -91,7 +91,7 @@
         cursor: pointer;
     }
     
-    input[type="submit"] {
+    .submit{
         width: 100%;
         height: 50px;
         border: 1px solid;
@@ -142,8 +142,8 @@
     </style>
     
     <body>
-        <div class="form-wrap" style="overflow-y:scroll;height:700px;">
-            <form id="Membership" @submit='bookTraining'>
+        <div class="form-wrap" style="overflow-y:scroll;height:700px;" id="Membership">
+            <form>
                 <h1>Membership</h1>
     
     
@@ -174,7 +174,7 @@
 
                 <div class="txt_field">
 					<span class="details">First day</span> <input
-					v-model="memberShip.startDay" type="date" v-bind:min="minDate">
+					v-model="memberShip.startDay" type="date" v-bind:min="minDate" required>
 				</div>
 
                 <div class="txt_field">
@@ -182,11 +182,12 @@
 					v-model="promoCode" placeholder="Enter promo code here...">
 				</div>
 
-                <div class="button">
-					<input type="submit" value="Pay">
-				</div>
-
             </form>
+
+            <div class="button" >
+                <button class="submit" v-on:click="bookTraining">Pay</button>
+            </div>
+
         </div>
         <script src="js/vue.js"></script>
 	    <script src="js/axios.js"></script>

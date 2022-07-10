@@ -72,7 +72,6 @@ public class MembershipDAO {
 		membership.setMembershipStatus(MembershipStatusEnum.Active);
 		
 		membership = save(membership);
-		saveToFile();
 		
 		return membership;
 		
@@ -121,6 +120,7 @@ public class MembershipDAO {
 		maxId++;
 		membership.setId(maxId);
 		memberships.put(membership.getId(), membership);
+		saveToFile();
 		return membership;
 	}
 	

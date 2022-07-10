@@ -57,12 +57,12 @@ public class PromoCodeService {
 		return dao.findAll();
 	}
 	
-	@POST
-	@Path("/getByCode")
+	@GET
+	@Path("/isValid")
 	@Produces(MediaType.APPLICATION_JSON)
-	public PromoCode getByCode(String code) {
+	public PromoCode getByCode(@QueryParam("code") String code) {
 		PromoCodeDAO dao = (PromoCodeDAO) ctx.getAttribute("promoCodeDAO");
-		return dao.getByCode(code);
+		return dao.isValid(code);
 	}
 	
 	@POST
