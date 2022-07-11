@@ -16,12 +16,10 @@ var app = new Vue({
 	},
 	methods: {
 		showTrainersForm: function(){
-			axios.get('rest/users/getTrainers/' + this.loggedUser.sportObject.id).then(response=>(this.trainers = response.data))
-			this.showTrainers = true
+			window.location.href = 'http://localhost:8080/WebShopREST/menagerCoaches.html';
 		},
 		showBuyersForm: function(){
-			axios.get('rest/users/getBuyers/' + this.loggedUser.sportObject.id).then(response=>(this.buyers = response.data))
-			this.showBuyers = true
+			window.location.href = 'http://localhost:8080/WebShopREST/menagerBuyers.html';
 		},
 		showAllTrainings: function(){
 			window.location.href = 'http://localhost:8080/WebShopREST/managerTrainings.html';

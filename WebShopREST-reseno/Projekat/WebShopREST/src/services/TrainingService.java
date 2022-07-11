@@ -123,6 +123,9 @@ public class TrainingService {
 		if(logged == null) {
 			return Response.status(400).entity("invalid ").build();
 		}
+		/*if(logged.getMembership() == null) {
+			return Response.status(400).entity("Invalid username and/or password").build();
+		}*/
 		if(logged.getMembership().getMembershipStatus() == MembershipStatusEnum.Inactive) {
 			return Response.status(400).entity("Invalid username and/or password").build();
 		}

@@ -80,65 +80,9 @@
         <div class="c">
             <button v-on:click="showBuyersForm()">Show buyers</button>
         </div>
+        
         <div class="c">
             <button v-on:click="showAllTrainings()">Show trainings</button>
-        </div>
-
-        <div id ="trainers" v-if="showTrainers == true">
-
-            <h2>Coaches</h2>
-
-            <table id="trainers" class="content-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Surmane</th>
-                        <th>Username</th>
-                        <th>Gender</th>
-                        <th>Date of birth</th>
-                        <th>Type</th>
-                        
-                    </tr>
-                </thead>
-    
-                <tr v-for="u in trainers">
-                    <td>{{u.name}}</td>
-                    <td>{{u.surname}}</td>
-                    <td>{{u.username}}</td>
-                    <td>{{u.userGender}}</td>
-                    <td>{{u.dateOfBirth}}</td>
-                    <td>{{u.userType}}</td>
-                </tr>
-            </table>
-
-        </div>
-
-        <div id ="buyers" v-if="showBuyers == true">
-
-            <h2>Buyers</h2>
-
-            <table id="buyers" class="content-table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Surmane</th>
-                        <th>Username</th>
-                        <th>Gender</th>
-                        <th>Date of birth</th>
-                        <th>Type</th>
-                        
-                    </tr>
-                </thead>
-    
-                <tr v-for="u in buyers">
-                    <td>{{u.name}}</td>
-                    <td>{{u.surname}}</td>
-                    <td>{{u.username}}</td>
-                    <td>{{u.userGender}}</td>
-                    <td>{{u.dateOfBirth}}</td>
-                    <td>{{u.userType}}</td>
-                </tr>
-            </table>
         </div>
 
     </div>

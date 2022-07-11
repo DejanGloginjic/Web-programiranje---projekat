@@ -146,5 +146,33 @@ public class UserService {
 		
 		return coachDTOs;
 	}
+	
+	@GET
+	@Path("/getBuyersForObject/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<UserDTO> getPeopleThatVisitedObject(@PathParam("id") int id) {
+		
+		ArrayList<User> usersFound = UserDAO.getInstance().getBuyersForSportObject(id);
+		ArrayList<UserDTO> usersDTO = new ArrayList<UserDTO>();
+		
+		for(User user : usersFound) {
+			usersDTO.add(new UserDTO(user));
+		}
+		return usersDTO;
+	}
+	
+	@GET
+	@Path("/getTrainersForObject/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public ArrayList<UserDTO> getTrainersForObject(@PathParam("id") int id) {
+		
+		ArrayList<User> usersFound = UserDAO.getInstance().getTrainersForSportObject(id);
+		ArrayList<UserDTO> usersDTO = new ArrayList<UserDTO>();
+		
+		for(User user : usersFound) {
+			usersDTO.add(new UserDTO(user));
+		}
+		return usersDTO;
+	}
 
 } 

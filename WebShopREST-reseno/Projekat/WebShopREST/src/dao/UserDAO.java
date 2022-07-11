@@ -15,6 +15,7 @@ import java.util.StringTokenizer;
 import beans.BuyerType;
 import beans.Membership;
 import beans.SportObject;
+import beans.Training;
 import beans.TrainingHistory;
 import beans.User;
 import beans.Enums.UserGenderEnum;
@@ -345,35 +346,42 @@ public class UserDAO {
 		
 	}
 	
-	public ArrayList<User> getTrainersForSportObject(int objectId){
-		ArrayList<User> trainers = new ArrayList<>();
-		
-		for(User u : users.values()) {
-			for(TrainingHistory th : u.getTrainingHistory()) {
-				if(th.getTraining().getSportObject().getId() == objectId) {
-					if(!trainers.contains(u)) {
-						trainers.add(th.getTraining().getCoach());
-					}
-				}
+	public boolean existsInList(int id, ArrayList<User> usersL) {
+		for (User user : usersL) {
+			if (user.getId() == id) {
+				return true;
 			}
 		}
-		
-		return trainers;
+		return false;
 	}
-	
-	public ArrayList<User> getBuyersForSportObject(int objectId){
-		ArrayList<User> trainers = new ArrayList<>();
-		
-		for(User u : users.values()) {
-			for(SportObject so : u.getVisitedObject()) {
-				if(so.getId() == objectId) {
-					if(!trainers.contains(u)) {
-						trainers.add(u);
+
+	public ArrayList<User> getBuyersForSportObject(int id) {
+		ArrayList<User> usersVisited = new ArrayList<User>();
+
+		for (User user : users.values()) {
+			for (SportObject object : user.getVisitedObject()) {
+				if (object.getId() == id) {
+					if (!existsInList(user.getId(), usersVisited)) {
+						usersVisited.add(user);
 					}
 				}
 			}
 		}
-		
+		return usersVisited;
+	}
+
+	public ArrayList<User> getTrainersForSportObject(int id) {
+		ArrayList<User> trainers = new ArrayList<User>();
+
+		for (Training training : TrainingDAO.getInstance().findAll()) {
+			if (training.getSportObject().getId() == id) {
+				if (training.getCoach() != null) {
+					if (!existsInList(training.getCoach().getId(), trainers)) {
+						trainers.add(training.getCoach());
+					}
+				}
+			}
+		}
 		return trainers;
 	}
 	
