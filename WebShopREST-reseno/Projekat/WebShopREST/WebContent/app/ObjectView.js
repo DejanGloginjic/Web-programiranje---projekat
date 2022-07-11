@@ -13,7 +13,8 @@
 		grade: '',
 		isEmpty: false,
 		buyerComments: null,
-		allComments: null
+		allComments: null,
+		mapVisible: false
 	},
 	mounted() {
 
@@ -87,6 +88,22 @@
 					}).catch((response) => {
 						alert('membership expired')
 					})
+			},
+			showMap: function(){
+				this.mapVisible = true
+
+				var map = new ol.Map({
+					target: 'map',
+					layers: [
+						new ol.layer.Tile({
+							source: new ol.source.OSM()
+						})
+					],
+					view: new ol.View({
+						center: ol.proj.fromLonLat([19.847088, 45.247368]),
+						zoom: 18
+					})
+				});
 			}
 		}
 });

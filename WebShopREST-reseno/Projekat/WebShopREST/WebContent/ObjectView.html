@@ -2,7 +2,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Object view</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/css/ol.css" type="text/css">
+<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.14.1/build/ol.js"></script>
 </head>
 
 <style>
@@ -87,6 +89,15 @@
 
   .comments{margin-top: 30px;}
 
+  .map{
+    height: 400px;
+    width: 400px;
+  }
+
+  .mapa{
+    margin-top: 30px;
+  }
+
 </style>
 
 <body>
@@ -138,7 +149,7 @@
                             v-model="so.location.place" width="15" disabled>
     
                     </div>
-    
+
                     <div class="txt_field">
                         <span class="details">Average grade</span> <input type="text"
                             name="grade" 
@@ -168,6 +179,12 @@
                     
                 </div>
             </form>
+
+            <div class="mapa">
+              <button v-on:click="showMap()">Show map</button>
+              <div id="map" class="map" v-bind:hidden="mapVisible === false"></div>
+            </div>
+
     
             <div class="comment" v-bind:hidden="loggedUser.userType != 'Buyer'">
               <div v-bind:hidden="isVisited === false || isCommented === true">
@@ -224,7 +241,6 @@
         <script src="js/vue.js"></script>
         <script src="js/axios.js"></script>
         <script src="app/ObjectView.js"></script>
-    
     
 
 </body>
