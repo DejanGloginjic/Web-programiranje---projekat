@@ -196,8 +196,10 @@ h1 {
 			<table border="1" id="tabela" align="center" width="100%">
 				<thead>
 					<tr bgcolor="lightgrey">
-						<th>Training</th>
-						<th>Sport object</th>
+						<th v-on:click="Sort(0)">Training</th>
+						<th v-on:click="Sort(1)">Sport object</th>
+						<th>Object type</th>
+						<th>Training type</th>
 						<th>Date and time</th>
 					</tr>
 				</thead>
@@ -205,6 +207,8 @@ h1 {
 				<tr v-for="ht in historyTraining">
 					<td>{{ht.training.trainingName }}</td>
 					<td>{{ht.training.sportObject.objectName }}</td>
+					<td>{{ht.training.sportObject.objectType }}</td>
+					<th>{{ht.training.trainingType }}</th>
 					<td>{{ht.treningEntrance.dayOfMonth }}.
 						{{ht.treningEntrance.monthValue}}. {{ht.treningEntrance.year}}.
 						{{ht.treningEntrance.hour}}:{{ht.treningEntrance.minute}}</td>
