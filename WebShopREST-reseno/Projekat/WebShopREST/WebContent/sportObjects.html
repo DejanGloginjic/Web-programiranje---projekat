@@ -163,50 +163,58 @@ div.c{
 </style>
 
 <body>
-    <nav class = "navbar">
-		<ul>
-		  <li>Sport Objects</li><li>|</li>
-		  <li><a href="http://localhost:8080/WebShopREST/profile.html">Profile</a></li>
-		  <li><a href="http://localhost:8080/WebShopREST/login.html">Log in</a></li>
-		  <li><a href="http://localhost:8080/WebShopREST/Registration.html">Create account</a></li>
-		  <li><a href="" class ="logout">Log Out</a></li>
-		</ul>
-	  </nav>
+	<div id="sportObjects">
+		<nav class="navbar">
+			<ul>
+				<li>Sport Objects</li>
+				<li>|</li>
+				<li><a href="http://localhost:8080/WebShopREST/profile.html">Profile</a></li>
+				<li><a href="http://localhost:8080/WebShopREST/login.html">Log
+						in</a></li>
+				<li><a
+					href="http://localhost:8080/WebShopREST/Registration.html">Create
+						account</a></li>
+				<li><button type="button" class="logout" v-on:click="logout">Log out</button></li>
+			</ul>
+		</nav>
 
-	<div id ="sportObjects">
 
-    <div class="c">
-    <div class="filter">
-      <p>
-        <select name="searchTypeFilter" placeholder="Type" v-model="searchTypeFilter">
-          <option value="" disabled selected>Select type</option>
-          <option>Gym</option>
-          <option>Pool</option>
-          <option>SportCenter</option>
-          <option>DanceStudio</option>
-        </select>
-        <input type="checkbox" value="Open" v-model="searchOpenFilter"><label for="vehicle1">Open</label><br>
-        <button value="Search" v-on:click="filterObject">Filter</button>
-      </p>
-	    </div>
-    </div>
+		<div class="c">
+			<div class="filter">
+				<p>
+					<select name="searchTypeFilter" placeholder="Type"
+						v-model="searchTypeFilter">
+						<option value="" disabled selected>Select type</option>
+						<option>Gym</option>
+						<option>Pool</option>
+						<option>SportCenter</option>
+						<option>DanceStudio</option>
+					</select> <input type="checkbox" value="Open" v-model="searchOpenFilter"><label
+						for="vehicle1">Open</label><br>
+					<button value="Search" v-on:click="filterObject">Filter</button>
+				</p>
+			</div>
+		</div>
 
 		<div class="a">
-      <p>
-        <input type="text" name="searchName" placeholder="Name" v-model="searchName">
-        <select name="searchType" placeholder="Type" v-model="searchType">
-          <option value="" disabled selected>Select type</option>
-          <option>Gym</option>
-          <option>Pool</option>
-          <option>SportCenter</option>
-          <option>DanceStudio</option>
-        </select>
-        <input type="text" name="searchCity" placeholder="City" v-model="searchCity">
-        <input type="text" name="searchMinGrade" placeholder="From grade" v-model="searchMinGrade">
-        <input type="text" name="searchMaxGrade" placeholder="To grade" v-model="searchMaxGrade">
-        <button value="Search" v-on:click="searchObjects">Search</button>
-      </p>
-	    </div>
+			<p>
+				<input type="text" name="searchName" placeholder="Name"
+					v-model="searchName"> <select name="searchType"
+					placeholder="Type" v-model="searchType">
+					<option value="" disabled selected>Select type</option>
+					<option>Gym</option>
+					<option>Pool</option>
+					<option>SportCenter</option>
+					<option>DanceStudio</option>
+				</select> <input type="text" name="searchCity" placeholder="City"
+					v-model="searchCity"> <input type="text"
+					name="searchMinGrade" placeholder="From grade"
+					v-model="searchMinGrade"> <input type="text"
+					name="searchMaxGrade" placeholder="To grade"
+					v-model="searchMaxGrade">
+				<button value="Search" v-on:click="searchObjects">Search</button>
+			</p>
+		</div>
 
 		<table id="tabela" class="content-table">
 			<thead>
@@ -217,39 +225,47 @@ div.c{
 					<th v-on:click="Sort(3)">Location</th>
 					<th>Working hours</th>
 					<th v-on:click="Sort(5)">Mark</th>
-					
-				
+
+
 				</tr>
 			</thead>
 			<tbody>
-			<tr v-for="sp in searchedSportObjects"  v-on:click="Selected(sp)">
-				<td>{{sp.logoPicture }}</td>
-                <td>{{sp.objectName }}</td>
-                <td>{{sp.objectType }}</td>
-				<td>{{sp.location.place}}, {{sp.location.street}}  {{sp.location.number}}  </td>
-				<td>{{sp.startTime}} - {{sp.endTime}}</td>
-				<td>{{sp.objectMark }}</td>
-				
-                
+				<tr v-for="sp in searchedSportObjects" v-on:click="Selected(sp)">
+					<td><img width="90" height="90"
+						v-bind:src="'images/' + sp.logoPicture" alt="No picture found"></td>
+					<td>{{sp.objectName }}</td>
+					<td>{{sp.objectType }}</td>
+					<td>{{sp.location.place}}, {{sp.location.street}}
+						{{sp.location.number}}</td>
+					<td>{{sp.startTime}} - {{sp.endTime}}</td>
+					<td>{{sp.objectMark }}</td>
 
-			</tr>
+
+
+				</tr>
 			</tbody>
 		</table>
-		
+
 		<div class="b">
-		<label>User:</label>
-		<label v-bind:hidden="loggedUser=='{}'">{{loggedUser.username}}</label>
-		<a href="http://localhost:8080/WebShopREST/registeredUsers.html" v-if="loggedUser.userType === 'Administrator'">All users</a>
-		<a href="http://localhost:8080/WebShopREST/createObject.html" v-if="loggedUser.userType === 'Administrator'">Create object</a>
-    <a href="http://localhost:8080/WebShopREST/Registration.html" v-if="loggedUser.userType === 'Administrator'">Registration</a>
-    <a href="http://localhost:8080/WebShopREST/addPromoCode.html" v-if="loggedUser.userType === 'Administrator'">Add promo code</a>
-    <a href="http://localhost:8080/WebShopREST/coachTrainings.html" v-if="loggedUser.userType === 'Coach'">All trainings</a>
-    <a href="http://localhost:8080/WebShopREST/menagerObject.html" v-if="loggedUser.userType === 'Manager'">My sport object</a>
-    <a href="http://localhost:8080/WebShopREST/MembershipView.html" v-if="loggedUser.userType === 'Buyer'">Pay membership</a>
-	    </div>
+			<label>User:</label> <label v-bind:hidden="loggedUser=='{}'">{{loggedUser.username}}</label>
+			<a href="http://localhost:8080/WebShopREST/registeredUsers.html"
+				v-if="loggedUser.userType === 'Administrator'">All users</a> <a
+				href="http://localhost:8080/WebShopREST/createObject.html"
+				v-if="loggedUser.userType === 'Administrator'">Create object</a> <a
+				href="http://localhost:8080/WebShopREST/Registration.html"
+				v-if="loggedUser.userType === 'Administrator'">Registration</a> <a
+				href="http://localhost:8080/WebShopREST/addPromoCode.html"
+				v-if="loggedUser.userType === 'Administrator'">Add promo code</a> <a
+				href="http://localhost:8080/WebShopREST/coachTrainings.html"
+				v-if="loggedUser.userType === 'Coach'">All trainings</a> <a
+				href="http://localhost:8080/WebShopREST/menagerObject.html"
+				v-if="loggedUser.userType === 'Manager'">My sport object</a> <a
+				href="http://localhost:8080/WebShopREST/MembershipView.html"
+				v-if="loggedUser.userType === 'Buyer'">Pay membership</a>
+		</div>
 
 
-		
+
 	</div>
 	<script src="js/vue.js"></script>
 	<script src="js/axios.js"></script>

@@ -175,8 +175,8 @@ h1 {
 
 
 						<div class="input-box">
-							<span class="details">Logo</span> <input type="text" name="logo"
-								placeholder="Insert logo" required v-model="newSO.logoPicture">
+							<span class="details">Logo</span> <input type="file"
+								accept="image/*" @change="uploadImage($event)">
 						</div>
 
 						<div class="input-box">

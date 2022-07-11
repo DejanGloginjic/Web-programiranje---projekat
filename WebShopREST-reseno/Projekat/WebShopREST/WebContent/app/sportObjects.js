@@ -75,6 +75,12 @@ var app = new Vue({
 			})
 			
 		},
+		logout: function(event) {
+			axios.post('rest/logout').
+				then((response) => {
+					window.location.href = 'http://localhost:8080/WebShopREST/sportObjects.html'
+				})
+		},
 		Sort: function(n) {
 			//function found on site: https://www.w3schools.com/howto/howto_js_sort_table.asp
 			  var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;

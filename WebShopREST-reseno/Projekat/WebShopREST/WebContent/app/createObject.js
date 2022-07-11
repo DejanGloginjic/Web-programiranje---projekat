@@ -75,7 +75,7 @@ var app = new Vue({
 				event.preventDefault();
 				return;
 			}
-		   this.selectedManager.userType = 'Manager';
+			this.selectedManager.userType = 'Manager';
 			axios.post('rest/users/', this.selectedManager)
 				.then((response) => {
 					alert('New user registered.')
@@ -88,6 +88,11 @@ var app = new Vue({
 					return;
 				})
 			event.preventDefault();
+		},
+		uploadImage: function(event) {
+			var fileData = event.target.files[0];
+			this.newSO.logoPicture = fileData.name;
+
 		}
 	}
 });
