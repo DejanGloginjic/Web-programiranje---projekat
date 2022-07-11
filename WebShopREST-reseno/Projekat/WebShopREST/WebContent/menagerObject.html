@@ -7,9 +7,40 @@
 	<link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
+<style>
+    body{
+	margin: 0; padding: 0; background: linear-gradient(120deg,#58a3d4, #93bfcb);  height: 100vh; overflow: hidden;
+  }
+
+  h1{text-align: center; color: white; font-weight: bold; margin-bottom: 60px;}
+
+  div.b{
+    text-align: center; color: white; font-weight: normal; margin-bottom: 10px; font-size: 20px;
+
+  }
+
+  div.c {
+    text-align: center; font-weight: normal;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+
+  }
+
+
+
+  
+
+
+</style>
+
 <body>
 
-    <div id="managerObject">
+    <div  id="managerObject" >
         <h1>Sport object</h1>
 
         <div class="b">
@@ -42,14 +73,14 @@
             <label>{{loggedUser.sportObject.objectMark}}</label>
         </div>
 
-        <div class="b">
+        <div class="c">
             <button v-on:click="showTrainersForm()">Show coaches</button>
         </div>
 
-        <div class="b">
+        <div class="c">
             <button v-on:click="showBuyersForm()">Show buyers</button>
         </div>
-        <div class="b">
+        <div class="c">
             <button v-on:click="showAllTrainings()">Show trainings</button>
         </div>
 
