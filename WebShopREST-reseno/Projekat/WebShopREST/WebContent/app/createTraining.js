@@ -34,7 +34,7 @@ var app = new Vue({
 			this.newTraining.coach = this.selectedTrainer;
 			axios.post('rest/trainings/', this.newTraining)
 				.then((response) => {
-
+					window.location.href = 'http://localhost:8080/WebShopREST/managerTrainings.html'
 				})
 			event.preventDefault();
 		},

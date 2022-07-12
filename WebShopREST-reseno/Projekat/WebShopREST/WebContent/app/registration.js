@@ -61,6 +61,7 @@ var app = new Vue({
 						alert('Username already exists!')
 					}else{
 						alert('User created successfully!')
+						window.location.href = 'http://localhost:8080/WebShopREST/sportObjects.html'
 					}
                 }).catch()
 			event.preventDefault();
