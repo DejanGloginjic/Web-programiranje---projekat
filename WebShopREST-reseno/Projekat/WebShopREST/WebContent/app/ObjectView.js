@@ -14,7 +14,8 @@
 		isEmpty: false,
 		buyerComments: null,
 		allComments: null,
-		mapVisible: false
+		mapVisible: false,
+		buttonText: 'Show map'
 	},
 	mounted() {
 
@@ -58,9 +59,15 @@
 				event.preventDefault();
 				return
 			}
-
-			let averageGrade = (parseInt(this.grade) + this.so.objectMark)/2
-			this.so.objectMark = averageGrade
+			if(this.so.objectMark === 0){
+				let averageGrade = (parseInt(this.grade) + this.so.objectMark)
+				this.so.objectMark = averageGrade
+			}else{
+				let averageGrade = (parseInt(this.grade) + this.so.objectMark)/2
+				this.so.objectMark = averageGrade
+			}
+			
+			
 			
 			axios.post('rest/comments', this.komentar)
 				.then(response=>{
@@ -90,7 +97,13 @@
 					})
 			},
 			showMap: function(){
-				this.mapVisible = true
+				if(this.mapVisible === true){
+					this.mapVisible = false
+					this.buttonText = "Show map"
+				}else{
+					this.mapVisible = true
+					this.buttonText = "Hide map"
+				}
 
 				var map = new ol.Map({
 					target: 'map',
@@ -100,7 +113,7 @@
 						})
 					],
 					view: new ol.View({
-						center: ol.proj.fromLonLat([19.847088, 45.247368]),
+						center: ol.proj.fromLonLat([this.so.location.latitude, this.so.location.longitude]),
 						zoom: 18
 					})
 				});

@@ -70,6 +70,30 @@ public class TrainingHistoryDAO {
 		return trainings.values();
 	}
 	
+	public void saveToFile() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/Baza/trainingHistory.txt");
+			out = new BufferedWriter(new FileWriter(file));
+			String line;
+			StringTokenizer st;
+			for(TrainingHistory th : trainings.values()) {
+				out.write(th.fileLine() + '\n');
+			}
+			
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();             
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				}
+				catch (Exception e) { }
+			}
+		}
+	}
+	
 	public TrainingHistory save(TrainingHistory trainingHistory) {
 		Integer maxId = -1;
 		for (int id : trainings.keySet()) {
@@ -81,6 +105,7 @@ public class TrainingHistoryDAO {
 		maxId++;
 		trainingHistory.setId(maxId);
 		trainings.put(trainingHistory.getId(), trainingHistory);
+		saveToFile();
 		return trainingHistory;
 	}
 	
@@ -124,30 +149,6 @@ public class TrainingHistoryDAO {
 			if (in != null) {
 				try {
 					in.close();
-				}
-				catch (Exception e) { }
-			}
-		}
-	}
-	
-	public void saveToFile() {
-		BufferedWriter out = null;
-		try {
-			File file = new File(contextPath + "/Baza/trainingHistory.txt");
-			out = new BufferedWriter(new FileWriter(file));
-			String line;
-			StringTokenizer st;
-			for(TrainingHistory th : trainings.values()) {
-				out.write(th.fileLine() + '\n');
-			}
-			
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();             
-		} finally {
-			if (out != null) {
-				try {
-					out.close();
 				}
 				catch (Exception e) { }
 			}

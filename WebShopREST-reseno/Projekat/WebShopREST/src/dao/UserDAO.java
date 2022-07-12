@@ -217,6 +217,30 @@ public class UserDAO {
 		}
 	}
 	
+	public void saveVisitedObjectBuyerBoundToFile() {
+		BufferedWriter out = null;
+		try {
+			File file = new File(contextPath + "/Baza/UserVisitedObjectBound.txt");
+			out = new BufferedWriter(new FileWriter(file));
+			String line;
+			StringTokenizer st;
+			for(User user : users.values()) {
+				for(SportObject so : user.getVisitedObject()) {
+					out.write(user.getId() + ";" + so.getId() + '\n');
+				}
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();             
+		} finally {
+			if (out != null) {
+				try {
+					out.close();
+				}
+				catch (Exception e) { }
+			}
+		}
+	}
+	
 	public boolean existsUsername(String username) {
 		for(User user : users.values()) {
 			if(user.getUsername().equals(username)) {
@@ -331,6 +355,7 @@ public class UserDAO {
 			}
 		}
 	}
+	
 	
 	public ArrayList<User> getAllFreeManagers(){
 		ArrayList<User> freeManagers = new ArrayList<User>();

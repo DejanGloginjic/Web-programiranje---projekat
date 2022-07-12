@@ -140,8 +140,10 @@ public class TrainingService {
 		if(objectfound.getCoach() != null) {
 			objectfound.getCoach().getTrainingHistory().add(history);
 		}
-		logged.getVisitedObject().add(objectfound.getSportObject());
-		
+		if(!logged.getVisitedObject().contains(objectfound.getSportObject())) {
+			logged.getVisitedObject().add(objectfound.getSportObject());
+			UserDAO.getInstance().saveVisitedObjectBuyerBoundToFile();
+		}
 		return Response.status(200).build();
 	}
 	

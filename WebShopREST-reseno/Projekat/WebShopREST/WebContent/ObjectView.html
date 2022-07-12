@@ -162,7 +162,6 @@
                           <th>Picture</th>
                           <th>Description</th>
                           <th>Coach</th>
-                          <th>Price</th>
                           <th v-bind:hidden="loggedUser.userType !== 'Buyer'">Option</th>
                         </tr>
                       </thead>
@@ -171,7 +170,6 @@
                         <td>{{t.image }}</td>
                         <td>{{t.description }}</td>
                         <td>{{t.trainerName}}</td>
-                        <td>0</td>
                         <td v-bind:hidden="loggedUser.userType !== 'Buyer'"><button type="button"  v-on:click="bookTraining(t)">Sign in</button></td>
                       </tr>
                     </table>
@@ -181,7 +179,7 @@
             </form>
 
             <div class="mapa">
-              <button v-on:click="showMap()">Show map</button>
+              <button v-on:click="showMap()">{{buttonText}}</button>
               <div id="map" class="map" v-bind:hidden="mapVisible === false"></div>
             </div>
 
