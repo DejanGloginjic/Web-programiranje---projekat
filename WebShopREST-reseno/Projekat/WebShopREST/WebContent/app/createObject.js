@@ -46,6 +46,7 @@ var app = new Vue({
 					axios.put('rest/users/', this.selectedManager)
 						.then((response) => {
 							alert('Sport object added to manager')
+							window.location.href = 'http://localhost:8080/WebShopREST/sportObjects.html'
 						}).catch(() => {
 							alert('This sport object already exists.USER');
 							this.error = "This sport object already exists.";

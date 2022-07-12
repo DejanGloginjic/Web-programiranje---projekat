@@ -22,6 +22,7 @@ var app = new Vue({
 					.then((response) => {
 						this.memberShip = response.data;
 						alert('Membership successfuly paid!')
+						window.location.href = 'http://localhost:8080/WebShopREST/sportObjects.html'
 					})
 					event.preventDefault();
 					return;

@@ -260,6 +260,8 @@ div.c{
 				v-if="loggedUser.userType === 'Coach'">All trainings</a> <a
 				href="http://localhost:8080/WebShopREST/menagerObject.html"
 				v-if="loggedUser.userType === 'Manager'">My sport object</a> <a
+				href="http://localhost:8080/WebShopREST/createTraining.html"
+				v-if="loggedUser.userType === 'Manager'">Create training</a> <a
 				href="http://localhost:8080/WebShopREST/MembershipView.html"
 				v-if="loggedUser.userType === 'Buyer'">Pay membership</a>
 		</div>

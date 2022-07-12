@@ -27,7 +27,7 @@ var app = new Vue({
         trainingEdit: function(event) {
            axios.put('rest/trainings/', this.newTraining)
             .then((response) => {
-                
+                window.location.href = 'http://localhost:8080/WebShopREST/managerTrainings.html'
             })
             event.preventDefault()
         },

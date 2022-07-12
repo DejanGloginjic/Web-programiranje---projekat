@@ -18,6 +18,7 @@ var app = new Vue({
             axios.post('rest/promoCodes', this.newPromoCode)
 			    .then((response) => {
 				    alert('Promo code succesfuly created!')
+					window.location.href = 'http://localhost:8080/WebShopREST/sportObjects.html'
 			    })
         }
 	}
