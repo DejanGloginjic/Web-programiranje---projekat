@@ -30,6 +30,11 @@ var app = new Vue({
                 
             })
             event.preventDefault()
+        },
+        uploadImage: function(event) {
+            var fileData = event.target.files[0];
+            this.newTraining.image= fileData.name;
+    
         }
     }
 });

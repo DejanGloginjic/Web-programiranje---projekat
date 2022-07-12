@@ -10,7 +10,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/hk2-utils-2.4.0-b31.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-annotations-2.5.4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-core-2.5.4.jar"/>
-	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-databind-2.5.4.jar" sourcepath="WebContent/WEB-INF/lib/jackson-databind-2.5.4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-jaxrs-base-2.5.4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-jaxrs-json-provider-2.5.4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-module-jaxb-annotations-2.5.4.jar"/>
@@ -35,6 +34,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/validation-api-1.1.0.Final.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
 		<attributes>
+			<attribute name="module" value="true"/>
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
@@ -43,5 +43,6 @@
 			<attribute name="owner.project.facets" value="jst.web"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/jackson-databind-2.5.4.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

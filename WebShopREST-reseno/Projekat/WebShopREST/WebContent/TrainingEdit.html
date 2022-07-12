@@ -185,9 +185,9 @@
 				</div>
 
 				<div class="txt_field">
-					<span class="details">Image:</span> <input name="image" required
-						v-model="newTraining.image">
-				</div>
+                    <span class="details">Image</span> <input type="file"
+                        accept="image/*" @change="uploadImage($event)">
+                </div>
 				
 				<div class="txt_field">
 					<span class="details">Coach name:</span> <input name="coach" disabled

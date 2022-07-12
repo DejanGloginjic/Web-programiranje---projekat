@@ -167,7 +167,8 @@
                       </thead>
               
                       <tr v-for="t in trainings">
-                        <td>{{t.image }}</td>
+                        <td><img width="40" height="40"
+                          v-bind:src="'images/' + t.image" alt="No picture found"></td>
                         <td>{{t.description }}</td>
                         <td>{{t.trainerName}}</td>
                         <td v-bind:hidden="loggedUser.userType !== 'Buyer'"><button type="button"  v-on:click="bookTraining(t)">Sign in</button></td>
