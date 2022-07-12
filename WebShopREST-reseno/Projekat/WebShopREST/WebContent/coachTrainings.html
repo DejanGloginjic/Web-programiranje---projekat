@@ -127,7 +127,8 @@
                     </thead>
                     <tbody>
                     <tr v-for="pt in personalTrainings">
-                        <td>{{pt.image }}</td>
+                      <td><img width="50" height="50"
+                        v-bind:src="'images/' + pt.image" alt="No picture found"></td>
                         <td>{{pt.trainingName }}</td>
                         <td>{{pt.trainingType }}</td>
                         <td>{{pt.sportObject.objectName }}</td>
